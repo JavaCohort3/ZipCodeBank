@@ -9,10 +9,19 @@ public class Accounts {
     private Double balance;
     private Customer customer;
 
-    public Accounts(){
+    public  Accounts(){
 
     }
-    
+
+    public Accounts(Long id, Enum type, String nickname, Integer rewards, Double balance, Customer customer) {
+        this.id = id;
+        this.type = type;
+        this.nickname = nickname;
+        this.rewards = rewards;
+        this.balance = balance;
+        this.customer = customer;
+    }
+
     public Long getId() {
         return id;
     }
