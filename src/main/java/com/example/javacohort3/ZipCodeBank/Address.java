@@ -9,6 +9,8 @@ public class Address {
     private String state;
     private String zip;
 
+    public Address(){};
+
     public Address(Long id, String street_number, String street_name, String city, String state, String zip) {
         this.id = id;
         this.street_number = street_number;
