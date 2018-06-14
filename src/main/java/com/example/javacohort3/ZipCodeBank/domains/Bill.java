@@ -1,4 +1,4 @@
-package com.example.javacohort3.ZipCodeBank.domain;
+package com.example.javacohort3.ZipCodeBank.domains;
 
 public class Bill {
     private Long id;
