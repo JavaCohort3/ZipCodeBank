@@ -1,65 +1,62 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
+import com.example.javacohort3.ZipCodeBank.domains.Customer;
 import com.example.javacohort3.ZipCodeBank.service.AccountService;
+import com.example.javacohort3.ZipCodeBank.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
+import java.util.ArrayList;
 
 @RestController
 public class AccountController {
-    private AccountService accountService ;
+    private AccountService accountService;
 
     @Autowired
-    public AccountController(AccountService accountService) { this.accountService = accountService;}
+    public AccountController(AccountService accountService) { this.accountService = accountService; }
 
+    // Get All Accounts
+    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllAccounts() {
+        ArrayList<Account> accounts = accountService.getAllAccounts();
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
+
+    // Get Account By ID
+    @RequestMapping(value = "/accounts{accountId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAccount(@PathVariable Long accountId) {
+        Account account = accountService.getAccountById(accountId);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
+    // [Incomplete] todo - Get Accounts By Customer ID
+    @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
+    public ResponseEntity<?> getCustomerAccounts(@RequestBody @PathVariable Long customerId) {
+        Account account = new Account(); // accountService.createAccount(customerId);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
+    // [Incomplete] todo - Create Account By Customer ID
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
-    public ResponseEntity<?> createAccount(@RequestBody Account account) {
-        HttpStatus status = HttpStatus.CREATED;
-        Account a = accountService.createAccount(account);
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        URI newUri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{}")
-                .buildAndExpand(a.getId())
-                .toUri();
-
-        httpHeaders.setLocation(newUri);
-
-
-        return new ResponseEntity<>(a, httpHeaders, status);
+    public ResponseEntity<?> createAccount(@RequestBody @PathVariable Long customerId) {
+        Account account = new Account(); // accountService.createAccount(customerId);
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/people/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long id) {
-        HttpStatus status;
-
-        Account old_value = accountService.getAccountById(id);
-        accountService.createAccount(account);
-
-        if (old_value != null) {
-            status = HttpStatus.OK;
-        } else {
-            status = HttpStatus.CREATED;
-        }
-
-        return new ResponseEntity<>(account, status);
+    // Update Account By ID
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateAccount(@RequestBody @PathVariable Long accountId) {
+        Account account = accountService.updateAccount(accountId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/people/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deletePerson(@PathVariable Long id) {
-        HttpStatus status = HttpStatus.NO_CONTENT;
-        Account account = accountService.getAccountById(id);
-
-        accountService.verifyByAccount(id);
-        accountService.deleteAccount(id);
-
-        return new ResponseEntity<>(account, status);
+    //
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAccount(@PathVariable Long accountId) {
+        Account account = accountService.deleteAccount(accountId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
