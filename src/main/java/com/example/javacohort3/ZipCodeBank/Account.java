@@ -1,6 +1,6 @@
 package com.example.javacohort3.ZipCodeBank;
 
-public class Accounts {
+public class Account {
 
     private Long id;
     private Enum type;
@@ -9,11 +9,11 @@ public class Accounts {
     private Double balance;
     private Customer customer;
 
-    public  Accounts(){
+    public Account(){
 
     }
 
-    public Accounts(Long id, Enum type, String nickname, Integer rewards, Double balance, Customer customer) {
+    public Account(Long id, Enum type, String nickname, Integer rewards, Double balance, Customer customer) {
         this.id = id;
         this.type = type;
         this.nickname = nickname;
@@ -72,7 +72,7 @@ public class Accounts {
 
     @Override
     public String toString() {
-        return "Accounts{" +
+        return "Account{" +
                 "id=" + id +
                 ", type=" + type +
                 ", nickname='" + nickname + '\'' +
