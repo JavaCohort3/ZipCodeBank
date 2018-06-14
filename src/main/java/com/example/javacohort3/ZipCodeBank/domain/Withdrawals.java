@@ -1,4 +1,4 @@
-package com.example.javacohort3.ZipCodeBank;
+package com.example.javacohort3.ZipCodeBank.domain;
 
 public class Withdrawals {
 

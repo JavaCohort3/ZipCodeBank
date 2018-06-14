@@ -1,4 +1,6 @@
-package com.example.javacohort3.ZipCodeBank;
+package com.example.javacohort3.ZipCodeBank.domain;
+
+import com.example.javacohort3.ZipCodeBank.domain.Address;
 
 import java.util.Set;
 
