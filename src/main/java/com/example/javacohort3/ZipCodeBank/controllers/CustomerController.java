@@ -19,12 +19,6 @@ public class CustomerController {
     @Autowired
     public AccountController(CustomerRepository customerRepository) { this.customerRepository = customerRepository; }
 
-    /*
-    Method: GET /accounts/{accountId}/customer Get customer that owns the specified account
-    Method: GET /customers Get all customers
-    Method: GET /customers/{id} Get customer by id
-     */
-
     // Get Customer By ID
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
@@ -45,7 +39,7 @@ public class CustomerController {
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ResponseEntity<?> getAllCustomers() {
         ArrayList<Customer> customers = customerRepository.getCustomers();
-        
+
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 }
