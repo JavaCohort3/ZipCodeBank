@@ -1,6 +1,10 @@
 package com.example.javacohort3.ZipCodeBank.service;
 
+
+import com.example.javacohort3.ZipCodeBank.Account;
+
 import com.example.javacohort3.ZipCodeBank.Customer;
+
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +15,12 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    @Autowired
-    CustomerRepository customerRepository;
-
-    public Customer getCustomerById(Long id) {
-        return customerRepository.findById(id).orElse(null);
+    public Account createAccount(Account account){
+        return account;
     }
 }
+    public Customer getAccountById(Long id) {
+        return accountRepository.findById(id).orElse(null);
+    }
+}
+
