@@ -19,7 +19,7 @@ public class AccountService {
         return account;
     }
 }
-    public Customer getAccountById(Long id) {
+    public Account getAccountById(Long id) {
         return accountRepository.findById(id).orElse(null);
     }
 }
