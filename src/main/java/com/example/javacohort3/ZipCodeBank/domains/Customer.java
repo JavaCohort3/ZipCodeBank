@@ -42,11 +42,11 @@ public class Customer {
         this.last_name = last_name;
     }
 
-    public LinkedHashSetSet<Address> getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(LinkedHashSetSet<Address> address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
