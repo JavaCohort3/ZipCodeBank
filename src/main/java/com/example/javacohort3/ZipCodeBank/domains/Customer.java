@@ -7,11 +7,11 @@ public class Customer {
     private Long id;
     private String first_name;
     private String last_name;
-    private LinkedHashSetSet<Address> address;
+    private Address address;
 
     public Customer() { }
 
-    public Customer(Long id, String first_name, String last_name, LinkedHashSet<Address> address) {
+    public Customer(Long id, String first_name, String last_name, Address address) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
