@@ -1,7 +1,5 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
-import java.util.LinkedHashSet;
-
 public class Customer {
 
     private Long id;
