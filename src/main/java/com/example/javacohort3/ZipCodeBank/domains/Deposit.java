@@ -9,6 +9,7 @@ public class Deposit {
     private Enum medium;
     private Double amount;
     private String description;
+    private Long account_id;
 
     public Deposit() {}
 
@@ -46,4 +47,7 @@ public class Deposit {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
+    public Long getAccount_id() { return account_id; }
+    public void setAccount_id(Long account_id) { this.account_id = account_id; }
 }
