@@ -46,7 +46,7 @@ public class WithdrawalService {
     public ArrayList<Withdrawal> getAllWithdrawalsForAccountId (Long accountId){
         ArrayList<Withdrawal> withdrawals = new ArrayList<>();
         withdrawalRepository.findAll().forEach(withdrawals::add);
-        return new ArrayList<>();
+        return withdrawals;
     }
 
     public Withdrawal updateWIthdrawal (Withdrawal withdrawal){
