@@ -2,6 +2,7 @@ package com.example.javacohort3.ZipCodeBank.services;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Deposit;
+import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.DepositRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class DepositService {
     }
 
     public Deposit createDepositByFromAccountId(Deposit deposit, Long accountId) {
-        Account account = accountRepository.findById(accountId);
+        Account account = accountRepository.findById(accountId).orElse(null);
         account.setBalance(account.getBalance() + deposit.getAmount());
         accountRepository.save(account);
 
@@ -43,7 +44,8 @@ public class DepositService {
     }
 
     public ArrayList<Deposit> getAllDepositsForAccountId(Long accountId) {
-        ArrayList<Deposit>
+        ArrayList<Deposit> deposits = new ArrayList<>();
+        depositRepository.findAll().forEach(deposits::add);
         return new ArrayList<>();
     }
 
