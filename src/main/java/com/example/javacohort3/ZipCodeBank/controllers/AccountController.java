@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
+import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.services.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 
 @RestController
@@ -29,7 +31,7 @@ public class AccountController {
     public ResponseEntity<?> getAllAccounts() {
         HttpStatus status = HttpStatus.OK;
 
-        Account account = accountService.getAllAccounts();
+        ArrayList<Account> account = accountService.getAllAccounts();
 
         log.info("Get accounts");
         return new ResponseEntity<>(account, status);
@@ -40,7 +42,7 @@ public class AccountController {
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
         HttpStatus status;
         Object response;
-        Account account = accountService.getAccountByID(accountId);
+        Account account = accountService.getAccountById(accountId);
 
         accountService.verifyAccountById(accountId);
 
@@ -52,13 +54,10 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
-    public ResponseEntity<?> getAccountsByCustomerId(@PathVariable Long customerId) {
+    public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
         HttpStatus status = HttpStatus.OK;
-
-        accountService.getAccountsByCustomerId(customerId);
-
+        accountService.getAllAccountsByCustomerId(customerId);
             log.info("[Get]" + customerId);
-
         return new ResponseEntity<>(customerId, status);
     }
 
@@ -85,7 +84,7 @@ public class AccountController {
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {
         HttpStatus status;
 
-        Account oldAccount = accountService.getAccount(accountId);
+        Account oldAccount = accountService.updateAccount(account, accountId);
         accountService.updateAccount(account, accountId);
 
         if(oldAccount != null){
@@ -93,7 +92,7 @@ public class AccountController {
             status = HttpStatus.OK;
         }else{
             log.info("[created]" + account);
-            status = HttpStatus.CREATED;
+            throw new ResourceNotFoundException();
         }
 
         return new ResponseEntity<>(account, status);
@@ -104,7 +103,6 @@ public class AccountController {
         HttpStatus status = HttpStatus.NO_CONTENT;
         Account account = accountService.getAccount(accountId);
 
-        accountService.verifyAccountByID(accountId);
         accountService.deleteAccountById(accountId);
         log.info("Deleted" + accountId);
 
