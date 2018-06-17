@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
+import com.example.javacohort3.ZipCodeBank.services.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class AccountController {
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
         HttpStatus status = HttpStatus.CREATED;
 
-        Account a = accountService.createAccountFromCustomerId(account);
+        Account a = accountService.createAccountFromCustomerId(account, customerId);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         URI newUri = ServletUriComponentsBuilder
@@ -85,7 +86,7 @@ public class AccountController {
         HttpStatus status;
 
         Account oldAccount = accountService.getAccount(accountId);
-        accountService.updateAccount(account);
+        accountService.updateAccount(account, accountId);
 
         if(oldAccount != null){
             log.info("[updated]" + account);
