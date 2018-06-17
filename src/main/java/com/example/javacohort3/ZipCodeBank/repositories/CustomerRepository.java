@@ -14,5 +14,6 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
     Customer getCustomerById(Long id);
     Customer updateCustomer(Customer customer);
     void deleteCustomer(Long id);
+    
 
 }
