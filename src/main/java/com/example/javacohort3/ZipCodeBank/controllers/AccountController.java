@@ -1,4 +1,4 @@
-package com.example.javacohort3.ZipCodeBank.controller;
+package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
 import org.slf4j.Logger;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.time.Period;
 
 
 @RestController
