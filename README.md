@@ -11,7 +11,7 @@ Simple Restful Bank Application
 
 - __Task 1__: Create the restful endpoint for **Account** objects.
 - __Task 2__: Create the restful endpoint for **Customer** objects.
-- __Task 3__: Create the restful endpoint for **Bills** object.
+- __Task 3__: Create the restful endpoint for **Bill** objects.
 - __Task 4__: Create the restful endpoint for **Deposit** objects.
 - __Task 5__: Create the restful endpoint for **Withdrawal** objects.
 
