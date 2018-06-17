@@ -30,7 +30,7 @@ public class AccountService {
     }
     public ArrayList<Account> getAllAccountsByCustomerId(Long customerId){
         ArrayList<Account> accounts = accountRepository.getAccounsByCustomerId(customerId);
-        return new ArrayList<>();
+        return accounts;
     }
 
     public ArrayList<Account> getAllaccounts(){
