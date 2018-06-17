@@ -2,7 +2,6 @@ package com.example.javacohort3.ZipCodeBank.repositories;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
 import org.springframework.data.repository.CrudRepository;
-
 import java.util.ArrayList;
 
 public interface AccountRepository extends CrudRepository<Account, Long> {
