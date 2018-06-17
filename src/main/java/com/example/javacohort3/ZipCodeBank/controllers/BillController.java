@@ -28,21 +28,25 @@ public class BillController {
 
     @RequestMapping(value = "/accounts/{accountId}/bills",method = RequestMethod.GET)
     public ResponseEntity<?> getBillByAccountId(@PathVariable Long id) {
+        log.info("Getting Bill By Account Id : " + id);
         return new ResponseEntity<>(billService.getAllBillByAccountId(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customers/{customerId}/bills",method = RequestMethod.GET)
     public ResponseEntity<?> getBillByCustomerId(@PathVariable Long id) {
+        log.info("Getting Bill By Customer Id : " + id);
         return new ResponseEntity<>(billService.getBillsByCustomerId(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.GET)
     public ResponseEntity<?> getBillById(@PathVariable Long id){
+        log.info("Getting Bill By Bill Id : " + id);
         return new ResponseEntity<>(billService.getBillById(id),HttpStatus.OK);
     }
 
     @RequestMapping(value = "/accounts/{accountId}/bills",method = RequestMethod.POST)
     public ResponseEntity<?> createBill (@RequestBody Bill bill,@PathVariable Long id){
+
         bill = billService.createBill(bill,id);
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -53,7 +57,7 @@ public class BillController {
                 .toUri();
 
         httpHeaders.setLocation(newUri);
-
+        log.info("Creating a bill : " + bill);
         return new ResponseEntity<>(bill,httpHeaders,HttpStatus.OK);
 
     }
@@ -72,7 +76,7 @@ public class BillController {
             log.info("Bill didn't exist so created");
             status = HttpStatus.CREATED;
         }
-
+        log.info("Creating a updating Bill : " + bill);
         return new ResponseEntity<>(bill,status);
     }
 
@@ -82,6 +86,7 @@ public class BillController {
 
         billService.deleteBill(id);
         status = HttpStatus.NO_CONTENT;
+        log.info("deleted bill : " + id);
         return new ResponseEntity<>(status);
     }
 
