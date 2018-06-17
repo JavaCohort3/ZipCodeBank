@@ -11,5 +11,4 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     ArrayList<Account> getAllAccounts();
     Account updateAccount(Account account);
     void deleteAccountById(Long accountId);
-
 }
