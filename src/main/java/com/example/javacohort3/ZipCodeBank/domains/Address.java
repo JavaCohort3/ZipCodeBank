@@ -1,7 +1,12 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Address {
 
+    @Id
     private Long id;
     private String street_number;
     private String street_name;
