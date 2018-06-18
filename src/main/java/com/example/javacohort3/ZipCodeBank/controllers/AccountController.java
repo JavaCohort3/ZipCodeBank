@@ -27,6 +27,8 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+
+
     @RequestMapping(value = "/accounts", method = RequestMethod.GET)
     public ResponseEntity<?> getAllAccounts() {
         HttpStatus status = HttpStatus.OK;
@@ -40,17 +42,10 @@ public class AccountController {
 
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
-        HttpStatus status;
-        Object response;
-        Account account = accountService.getAccountById(accountId);
 
-        accountService.verifyAccountById(accountId);
+        log.info("[Get]" + accountId);
 
-        log.info("[Get]" + account);
-        status = HttpStatus.OK;;
-        response = account;
-
-        return new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
@@ -82,24 +77,13 @@ public class AccountController {
 
     @RequestMapping(value = "accounts/{accountId}", method = RequestMethod.PUT)
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {
-        HttpStatus status;
-
-        Account oldAccount = accountService.updateAccount(account, accountId);
-        accountService.updateAccount(account, accountId);
-
-        if(oldAccount != null){
-            log.info("[updated]" + account);
-            status = HttpStatus.OK;
-        }else{
-            log.info("[created]" + account);
-            throw new ResourceNotFoundException();
-        }
-
-        return new ResponseEntity<>(account, status);
+        Account old_account = accountService.getAccountById(accountId);
+        Account new_account = accountService.updateAccount(account);
+        return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/accounts/{accountId", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
+    public ResponseEntity<?> deleteAccountById(@PathVariable Long accountId){
         HttpStatus status = HttpStatus.NO_CONTENT;
         Account account = accountService.getAccountById(accountId);
 
