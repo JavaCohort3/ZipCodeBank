@@ -19,13 +19,6 @@ import java.util.ArrayList;
 @RestController
 public class CustomerController {
 
-    /**
-     * Be sure to add proper request mapping and URI endpoints.
-     * Follow UML.
-     * Feel free to implement Logger
-     * Be sure to add to "controller" package.
-     */
-
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private CustomerService customerService;
 
@@ -91,22 +84,11 @@ public class CustomerController {
     // Update a Customer by their ID
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
-        HttpStatus status;
-
-        Customer oldCustomer = customerService.getCustomerById(id);
+        HttpStatus status = HttpStatus.OK;
         customerService.updateCustomer(customer, id);
+        customerService.verifyCustomer(id);
 
-        if(oldCustomer != null) {
-            // customer existed prior to this
-            log.info("[PUT-UPDATE]: " + customer);
-            status = HttpStatus.OK;
-        } else {
-            // if person did not exist prior
-            // DO NOT CREATE A CUSTOMER
-            // Add more code if needed
-            log.info("[BAD REQUEST] Request cannot be completed ID: " + id + " - does not exist ");
-            throw new ResourceNotFoundException();
-        }
+        log.info("[PUT-UPDATE]: " + customer);
         return new ResponseEntity<>(customer, status);
     }
 
