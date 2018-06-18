@@ -39,6 +39,9 @@ public class AccountService {
         return new ArrayList<>();
     }
 
+    public Account getAccountById(Long accountId){
+        return accountRepository.getAccountById(accountId);
+    }
 
     public Account updateAccount(Account account, Long accountId){
         return accountRepository.save(account);
