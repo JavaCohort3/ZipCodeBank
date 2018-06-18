@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface AccountRepository extends CrudRepository<Account, Long> {
     Account createAccountFromCustomerId(Account account, Long customerId);
-    ArrayList<Account> getAccountsByCustomerIds(Long customerId);
+    ArrayList<Account> getAccountsByCustomerId(Long customerId);
     ArrayList<Account> getAllAccounts();
     Account getAccountById(Long accountId);
     Account updateAccount(Account account);

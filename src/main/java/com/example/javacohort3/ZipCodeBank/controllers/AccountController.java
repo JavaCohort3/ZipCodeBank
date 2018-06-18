@@ -44,7 +44,7 @@ public class AccountController {
         Object response;
         Account account = accountService.getAccountById(accountId);
 
-        accountService.verifyAccountById(accountId);
+        accountService.verifyAccountId(accountId);
 
         log.info("[Get]" + account);
         status = HttpStatus.OK;;
@@ -56,7 +56,7 @@ public class AccountController {
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
         HttpStatus status = HttpStatus.OK;
-        accountService.getAllAccountsByCustomerId(customerId);
+        accountService.getAccountsByCustomerId(customerId);
             log.info("[Get]" + customerId);
         return new ResponseEntity<>(customerId, status);
     }
@@ -81,7 +81,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "accounts/{accountId}", method = RequestMethod.PUT)
-    public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {
+    public  ResponseEntity<?> updateAccountById(@RequestBody Account account, @PathVariable Long accountId) {
         HttpStatus status;
 
         Account oldAccount = accountService.updateAccount(account, accountId);
