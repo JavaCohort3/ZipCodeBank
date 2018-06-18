@@ -14,12 +14,10 @@ import java.util.ArrayList;
 
 @RestController
 public class DepositController {
+    @Autowired
     private DepositService depositService;
 
-    @Autowired
-    public DepositController(DepositService depositService) {
-        this.depositService = depositService;
-    }
+    public DepositController () {}
 
     // Get All (For Account ID)
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
@@ -48,10 +46,10 @@ public class DepositController {
 
     // Update Deposit
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateDepositFromAccountId(@RequestBody Deposit deposit, @PathVariable Long depositId) {
+    public ResponseEntity<?> updateDeposit(@RequestBody Deposit deposit, @PathVariable Long depositId) {
         Deposit old_deposit = depositService.getDepositById(depositId);
         Deposit new_deposit = depositService.updateDeposit(deposit);
-        return new ResponseEntity<>(deposit, HttpStatus.CREATED);
+        return new ResponseEntity<>(deposit, HttpStatus.OK);
     }
 
     // Delete Deposit
@@ -59,8 +57,8 @@ public class DepositController {
     public ResponseEntity<?> deleteDepositById(@PathVariable Long depositId) {
         depositService.verifyDeposit(depositId);
 
-        Deposit deposit = depositService.getDepositById(depositId);
+        // Deposit deposit = depositService.getDepositById(depositId);
         depositService.deleteDeposit(depositId);
-        return new ResponseEntity<>(deposit, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -45,8 +45,13 @@ public class DepositService {
 
     public ArrayList<Deposit> getAllDepositsForAccountId(Long accountId) {
         ArrayList<Deposit> deposits = new ArrayList<>();
-        depositRepository.findAll().forEach(deposits::add);
-        return new ArrayList<>();
+        depositRepository.findAll().forEach(deposit -> {
+            if (deposit.getAccount_id() == accountId) {
+                // adds deposit to list if account is the account specified
+                deposits.add(deposit);
+            }
+        });
+        return deposits;
     }
 
     public Deposit updateDeposit(Deposit deposit) {
