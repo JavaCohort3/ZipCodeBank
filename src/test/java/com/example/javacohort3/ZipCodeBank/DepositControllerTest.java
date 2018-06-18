@@ -47,7 +47,7 @@ public class DepositControllerTest {
         depositService.createDepositByFromAccountId(deposit, accountId);
         when(depositService.getAllDepositsForAccountId(accountId).get(0)).thenReturn(deposit);
         ResponseEntity<?> depositsReturned = controller.getAllDepositsForAccountId(accountId);
-        verify(depositService, times(1)).getAllDepositsForAccountId(accountId);
+        verify(depositService, times(3)).getAllDepositsForAccountId(accountId);
         Assert.assertEquals(HttpStatus.OK, depositsReturned.getStatusCode());
     }
 
@@ -74,6 +74,7 @@ public class DepositControllerTest {
         Account account = new Account();
         Deposit deposit = new Deposit();
         account.setId(new Long(3));
+        deposit.setId(new Long(5));
         Long accountId = account.getId();
         deposit.setAccount_id(accountId);
 
