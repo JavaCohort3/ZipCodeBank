@@ -30,7 +30,7 @@ public class WithdrawalController {
 
     // Get Withdrawal (By ID)
     @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getDepositById(@PathVariable Long withdrawalId) {
+    public ResponseEntity<?> getWithdrawalById(@PathVariable Long withdrawalId) {
         withdrawalService.verifyWithdrawal(withdrawalId);
 
         Withdrawal withdrawal = withdrawalService.getWithdrawalById(withdrawalId);
@@ -48,8 +48,8 @@ public class WithdrawalController {
 
     // Update Withdrawal
     @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateDWithdrawalFromAccountId(@RequestBody Withdrawal withdrawal, @PathVariable Long withsrawalId) {
-        Withdrawal old_withdrawal = withdrawalService.getWithdrawalById(withsrawalId);
+    public ResponseEntity<?> updateDWithdrawalFromAccountId(@RequestBody Withdrawal withdrawal, @PathVariable Long withdrawalId) {
+        Withdrawal old_withdrawal = withdrawalService.getWithdrawalById(withdrawalId);
         Withdrawal new_withdrawal = withdrawalService.updateWIthdrawal(withdrawal);
         return new ResponseEntity<>(withdrawal, HttpStatus.CREATED);
     }
