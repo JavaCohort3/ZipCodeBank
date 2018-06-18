@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 @Service
 public class WithdrawalService {
-    private AccountRepository accountRepository;
     private WithdrawalRepository withdrawalRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
     public WithdrawalService(AccountRepository accountRepository, WithdrawalRepository withdrawalRepository) {
@@ -21,12 +21,12 @@ public class WithdrawalService {
         this.withdrawalRepository = withdrawalRepository;
     }
 
-    public void verifyAccount(Long accountId){
-        if(accountRepository.findById(accountId).orElse(null) == null) throw new ResourceNotFoundException();
-    }
-
     public void verifyWithdrawal(Long withdrawalId){
         if(withdrawalRepository.findById(withdrawalId).orElse(null) == null) throw new ResourceNotFoundException();
+    }
+
+    public void verifyAccount(Long accountId){
+        if(accountRepository.findById(accountId).orElse(null) == null) throw new ResourceNotFoundException();
     }
 
     public Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Long accountId) {
@@ -45,11 +45,16 @@ public class WithdrawalService {
 
     public ArrayList<Withdrawal> getAllWithdrawalsForAccountId (Long accountId){
         ArrayList<Withdrawal> withdrawals = new ArrayList<>();
-        withdrawalRepository.findAll().forEach(withdrawals::add);
+        withdrawalRepository.findAll().forEach(withdrawal -> {
+            if (withdrawal.getAccount_id() == accountId) {
+                //adds withdrawal to the list if account is the account specified
+                withdrawals.add(withdrawal);
+            }
+        });
         return withdrawals;
     }
 
-    public Withdrawal updateWIthdrawal (Withdrawal withdrawal){
+    public Withdrawal updateWithdrawal (Withdrawal withdrawal){
         return withdrawalRepository.save(withdrawal);
     }
 
