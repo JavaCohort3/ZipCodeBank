@@ -21,16 +21,17 @@ public class WithdrawalService {
         this.withdrawalRepository = withdrawalRepository;
     }
 
-    public void verifyAccount(Account account){
-        if(accountRepository.findAccount(account) == null) throw new ResourceNotFoundException();
+    public void verifyAccount(
+            Long account_Id){
+        if(accountRepository.findById(account_Id).equals(null)) throw new ResourceNotFoundException();
     }
 
     public void verifyWithdrawal(Long withdrawalId){
         if(withdrawalRepository.findById(withdrawalId).orElse(null) == null) throw new ResourceNotFoundException();
     }
 
-    public Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Account accountId) {
-        Account account = accountRepository.findAccount(accountId);
+    public Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Long accountId) {
+        Account account = accountRepository.findById(accountId).orElse(null);
         account.setBalance(account.getBalance() - withdrawal.getAmount());
         accountRepository.save(account);
 
@@ -47,7 +48,7 @@ public class WithdrawalService {
         return withdrawals;
     }
 
-    public Withdrawal updateWIthdrawal (Withdrawal withdrawal){
+    public Withdrawal updateWithdrawal (Withdrawal withdrawal){
         return withdrawalRepository.save(withdrawal);
     }
 

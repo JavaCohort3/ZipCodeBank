@@ -14,6 +14,6 @@ public interface WithdrawalRepository extends CrudRepository<Withdrawal, Long> {
 //    Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Long accountId);
 //    Withdrawal updateWithdrawal(Withdrawal withdrawal, Long id);
 //    void deleteWithdrawal (Long id);
-    Account findAccount(Account account);
+
 
 }

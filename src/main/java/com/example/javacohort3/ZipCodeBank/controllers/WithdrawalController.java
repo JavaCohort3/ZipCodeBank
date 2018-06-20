@@ -40,7 +40,7 @@ public class WithdrawalController {
 
     // Create Withdrawal
     @RequestMapping(value = "/accounts/{accountId}/withdrawals", method = RequestMethod.POST)
-    public ResponseEntity<?> createWithdrawalFromAccount(@RequestBody Withdrawal withdrawal, @PathVariable Account accountId) {
+    public ResponseEntity<?> createWithdrawalFromAccount(@RequestBody Withdrawal withdrawal, @PathVariable Long accountId) {
         withdrawalService.verifyAccount(accountId);
 
         Withdrawal w = withdrawalService.createWithdrawalFromAccount(withdrawal, accountId);
@@ -51,7 +51,7 @@ public class WithdrawalController {
     @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDWithdrawalFromAccountId(@RequestBody Withdrawal withdrawal, @PathVariable Long withdrawalId) {
         Withdrawal old_withdrawal = withdrawalService.getWithdrawalById(withdrawalId);
-        Withdrawal new_withdrawal = withdrawalService.updateWIthdrawal(withdrawal);
+        Withdrawal new_withdrawal = withdrawalService.updateWithdrawal(withdrawal);
         return new ResponseEntity<>(withdrawal, HttpStatus.CREATED);
     }
 
