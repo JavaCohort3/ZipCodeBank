@@ -1,26 +1,28 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Withdrawal {
+public class Withdrawal implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String type;
+    private TransactionType type;
     private String transaction_date;
     private String status;
     private Long payer_id;
     private String medium;
     private Double amount;
     private String description;
-    @Column(name = "Account_Id")
-    private Long account_id;
+    @ManyToOne
+    private Account account_id;
 
     public Withdrawal(){ }
 
-    public Withdrawal(Long id, String type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description, Long account_id) {
+    public Withdrawal(Long id, TransactionType type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description, Account account_id) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -40,11 +42,11 @@ public class Withdrawal {
         this.id = id;
     }
 
-    public String getType() {
+    public TransactionType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TransactionType type) {
         this.type = type;
     }
 
@@ -96,11 +98,11 @@ public class Withdrawal {
         this.description = description;
     }
 
-    public Long getAccount_id() {
+    public Account getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(Long account_id) {
+    public void setAccount_id(Account account_id) {
         this.account_id = account_id;
     }
 

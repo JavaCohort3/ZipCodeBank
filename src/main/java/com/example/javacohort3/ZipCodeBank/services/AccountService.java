@@ -27,7 +27,7 @@ public class AccountService {
     }
     public ArrayList<Account> getAllAccountsByCustomerId(Long customerId){
         ArrayList<Account> accounts = new ArrayList<>();
-        accountRepository.findAllAccountsByCustomerId(customerId).forEach(accounts::add);
+        accountRepository.findAllById(customerId).forEach(accounts);
         return accounts;
     }
 

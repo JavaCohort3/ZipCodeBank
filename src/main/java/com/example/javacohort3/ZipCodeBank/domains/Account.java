@@ -4,9 +4,10 @@ package com.example.javacohort3.ZipCodeBank.domains;
 import com.example.javacohort3.ZipCodeBank.enums.AccountType;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Account {
+public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

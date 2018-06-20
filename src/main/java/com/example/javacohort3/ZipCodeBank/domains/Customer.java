@@ -4,10 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     private Long id;
@@ -67,6 +68,7 @@ public class Customer {
     public void setAddress(Set<Address> address) {
         this.address = address;
     }
+
 
     @Override
     public String toString() {

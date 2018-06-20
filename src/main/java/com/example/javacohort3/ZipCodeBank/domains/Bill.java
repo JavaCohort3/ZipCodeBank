@@ -3,10 +3,11 @@ package com.example.javacohort3.ZipCodeBank.domains;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 
 @Entity
-public class Bill {
+public class Bill implements Serializable {
 
     @Id
     private Long id;

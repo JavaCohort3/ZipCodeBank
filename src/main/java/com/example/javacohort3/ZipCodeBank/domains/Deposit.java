@@ -5,10 +5,11 @@ import com.example.javacohort3.ZipCodeBank.enums.Medium;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Entity
-
-public class Deposit {
+public class Deposit implements Serializable  {
     @Id
     private Long id;
     private String type;
@@ -18,12 +19,14 @@ public class Deposit {
     private Medium medium;
     private Double amount;
     private String description;
-    @Column(name = "Account_Id")
-    private Long account_id;
+    @ManyToOne
+    private Account account_id;
 
     public Deposit() {}
 
-    public Deposit(Long id, String type, String transaction_date, String status, Long payee_id, Medium medium, Double amount, String description) {
+    public Deposit(Long id, String type, String transaction_date,
+                   String status, Long payee_id, Medium medium,
+                   Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -58,6 +61,6 @@ public class Deposit {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Long getAccount_id() { return account_id; }
-    public void setAccount_id(Long account_id) { this.account_id = account_id; }
+    public Account getAccount_id() { return account_id; }
+    public void setAccount_id(Account account_id) { this.account_id = account_id; }
 }

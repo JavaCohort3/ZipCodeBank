@@ -58,7 +58,7 @@ public class AccountController {
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
         HttpStatus status = HttpStatus.OK;
         accountService.getAllAccountsByCustomerId(customerId);
-            log.info("[Get]" + customerId);
+        log.info("[Get]" + customerId);
         return new ResponseEntity<>(customerId, status);
     }
 
