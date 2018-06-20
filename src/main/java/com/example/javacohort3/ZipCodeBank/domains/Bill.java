@@ -1,11 +1,13 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 
 @Entity
 public class Bill {
+
     @Id
     private Long id;
     private String payee;
@@ -15,6 +17,7 @@ public class Bill {
     private Integer recurring_date;
     private String upcoming_payment_date;
     private Double payment_amount;
+    @Column(name = "Account_Id")
     private Long account_id;
 
 

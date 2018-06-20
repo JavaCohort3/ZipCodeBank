@@ -1,19 +1,29 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import com.example.javacohort3.ZipCodeBank.enums.Medium;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+
 public class Deposit {
+    @Id
     private Long id;
-    private Enum type;
+    private String type;
     private String transaction_date;
     private String status;
     private Long payee_id;
-    private Enum medium;
+    private Medium medium;
     private Double amount;
     private String description;
+    @Column(name = "Account_Id")
     private Long account_id;
 
     public Deposit() {}
 
-    public Deposit(Long id, Enum type, String transaction_date, String status, Long payee_id, Enum medium, Double amount, String description) {
+    public Deposit(Long id, String type, String transaction_date, String status, Long payee_id, Medium medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -27,8 +37,8 @@ public class Deposit {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Enum getType() { return type; }
-    public void setType(Enum type) { this.type = type; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 
     public String getTransaction_date() { return transaction_date; }
     public void setTransaction_date(String transaction_date) { this.transaction_date = transaction_date; }
@@ -40,7 +50,7 @@ public class Deposit {
     public void setPayee_id(Long payee_id) { this.payee_id = payee_id; }
 
     public Enum getMedium() { return medium; }
-    public void setMedium(Enum medium) { this.medium = medium; }
+    public void setMedium(Medium medium) { this.medium = medium; }
 
     public Double getAmount() { return amount; }
     public void setAmount(Double amount) { this.amount = amount; }

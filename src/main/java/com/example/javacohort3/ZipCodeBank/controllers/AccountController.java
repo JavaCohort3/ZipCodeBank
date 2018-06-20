@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 @RestController
 public class AccountController {
+
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private AccountService accountService;
 
@@ -101,9 +102,9 @@ public class AccountController {
     @RequestMapping(value = "/accounts/{accountId", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
         HttpStatus status = HttpStatus.NO_CONTENT;
-        Account account = accountService.getAccount(accountId);
+        Account account = accountService.getAccountById(accountId);
 
-        accountService.deleteAccountById(accountId);
+        accountService.deleteAccount(accountId);
         log.info("Deleted" + accountId);
 
         return new ResponseEntity<>(account, status);

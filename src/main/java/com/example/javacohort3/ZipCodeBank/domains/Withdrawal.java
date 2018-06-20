@@ -1,7 +1,12 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
-public class Withdrawal {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Withdrawal {
+    @Id
     private Long id;
     private String type;
     private String transaction_date;
@@ -10,11 +15,10 @@ public class Withdrawal {
     private String medium;
     private Double amount;
     private String description;
+    @Column(name = "Account_Id")
     private Long account_id;
 
-    public Withdrawal(){
-
-    }
+    public Withdrawal(){ }
 
     public Withdrawal(Long id, String type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description, Long account_id) {
         this.id = id;

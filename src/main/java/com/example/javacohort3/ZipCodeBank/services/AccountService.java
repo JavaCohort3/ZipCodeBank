@@ -23,24 +23,22 @@ public class AccountService {
     }
 
     public Account createAccountFromCustomerId(Account account, Long costumerId){
-        Account account1 = accountRepository.findById(costumerId).orElse(null);
-        account.setCustomer(account.getCustomer());
-       //binds customerId to account
-        account.setId(costumerId);
-        return accountRepository.save(account);
+       return accountRepository.save(account);
     }
     public ArrayList<Account> getAllAccountsByCustomerId(Long customerId){
-        ArrayList<Account> accounts = accountRepository.getAccountsByCustomerIds(customerId);
+        ArrayList<Account> accounts = new ArrayList<>();
+        accountRepository.findAllAccountsByCustomerId(customerId).forEach(accounts::add);
         return accounts;
     }
 
     public ArrayList<Account> getAllAccounts(){
-        ArrayList<Account> accounts = accountRepository.getAllAccounts();
-        return new ArrayList<>();
+        ArrayList<Account> accounts = new ArrayList<>();
+        accountRepository.findAll().forEach(accounts::add);
+        return accounts;
     }
 
     public Account getAccountById(Long accountId){
-        return accountRepository.getAccountById(accountId);
+        return accountRepository.findById(accountId).orElse(null);
     }
 
     public Account updateAccount(Account account, Long accountId){
@@ -48,7 +46,7 @@ public class AccountService {
     }
 
     public void deleteAccount(Long accountId){
-        accountRepository.deleteAccountById(accountId);
+        accountRepository.deleteById(accountId);
     }
 
 }

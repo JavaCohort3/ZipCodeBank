@@ -7,14 +7,10 @@ import java.util.ArrayList;
 
 public interface WithdrawalRepository extends CrudRepository<Withdrawal, Long> {
 
-    Withdrawal getWithdrawalById (Withdrawal withdrawal, Long id);
-
-    ArrayList<Withdrawal> getAllWithdrawalsForAccountId (Long accountId);
-
-    Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Long accountId);
-
-    Withdrawal updateWithdrawal (Withdrawal withdrawal, Long id);
-
-    void deleteWithdrawal (Long id);
+//    Withdrawal getWithdrawalById (Withdrawal withdrawal, Long id);
+//    ArrayList<Withdrawal> getAllWithdrawalsForAccountId (Long accountId);
+//    Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Long accountId);
+//    Withdrawal updateWithdrawal (Withdrawal withdrawal, Long id);
+//    void deleteWithdrawal (Long id);
 
 }
