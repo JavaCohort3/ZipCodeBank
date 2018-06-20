@@ -5,6 +5,7 @@ import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Deposit {
@@ -18,7 +19,8 @@ public class Deposit {
     private Double amount;
     private String description;
 
-    private Long account_id;
+    @ManyToOne
+    private Account account;
 
     public Deposit() {}
 
@@ -57,6 +59,21 @@ public class Deposit {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Long getAccount_id() { return account_id; }
-    public void setAccount_id(Long account_id) { this.account_id = account_id; }
+    public Account getAccount() { return account; }
+    public void setAccount(Account account) { this.account = account; }
+
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "id=" + id +
+                ", type=" + type +
+                ", transaction_date='" + transaction_date + '\'' +
+                ", status='" + status + '\'' +
+                ", payee_id=" + payee_id +
+                ", medium=" + medium +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", account=" + account +
+                '}';
+    }
 }

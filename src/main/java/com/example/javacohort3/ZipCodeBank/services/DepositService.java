@@ -1,6 +1,5 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
-import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Deposit;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
@@ -30,35 +29,30 @@ public class DepositService {
     }
 
     public Deposit createDepositByFromAccountId(Deposit deposit, Long accountId) {
-        Account account = accountRepository.findById(accountId).orElse(null);
-        account.setBalance(account.getBalance() + deposit.getAmount());
-        accountRepository.save(account);
-
-        // binds account ID to deposit
-        deposit.setAccount_id(accountId);
-        return depositRepository.save(deposit);
+        return depositRepository.saveDepositByAccountId(deposit, accountId);
     }
 
     public Deposit getDepositById(Long id) {
-        return depositRepository.findById(id).orElse(null);
+        return depositRepository.findDepositById(id);
     }
 
     public ArrayList<Deposit> getAllDepositsForAccountId(Long accountId) {
-        ArrayList<Deposit> deposits = new ArrayList<>();
-        depositRepository.findAll().forEach(deposit -> {
-            if (deposit.getAccount_id() == accountId) {
-                // adds deposit to list if account is the account specified
-                deposits.add(deposit);
-            }
-        });
-        return deposits;
+        return depositRepository.findDepositsByAccountId(accountId);
+//        ArrayList<Deposit> deposits = new ArrayList<>();
+//        depositRepository.findAll().forEach(deposit -> {
+//            if (deposit.getAccount_id() == accountId) {
+//                // adds deposit to list if account is the account specified
+//                deposits.add(deposit);
+//            }
+//        });
+//        return deposits;
     }
 
     public Deposit updateDeposit(Deposit deposit) {
-        return depositRepository.save(deposit);
+        return depositRepository.saveDeposit(deposit);
     }
 
     public void deleteDeposit(Long id) {
-        depositRepository.deleteById(id);
+        depositRepository.deleteDepositById(id);
     }
 }
