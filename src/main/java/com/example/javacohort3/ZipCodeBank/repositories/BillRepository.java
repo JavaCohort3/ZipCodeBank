@@ -7,24 +7,12 @@ import java.util.ArrayList;
 
 public interface BillRepository extends CrudRepository<Bill,Long> {
 
-        void verifyByBillId(Long id);
 
-
-        Bill createBillByAccountId(Bill bill, Long id);
-
-
-        Bill getBillById(Long id);
-
-
-        ArrayList<Bill> getAllBill();
-
-
-        ArrayList<Bill> getBillsByCustomerId(Long id);
-
-
-        Bill updateBill(Bill bill);
-
-
-        void deleteBill(Long id);
+//        Bill findBillByAccountId(Bill bill, Long id);
+//        Bill getBillById(Long id);
+//        ArrayList<Bill> getAllBill();
+//        ArrayList<Bill> getBillsByCustomerId(Long id);
+//        Bill updateBill(Bill bill);
+//        void deleteBill(Long id);
 
 }

@@ -29,7 +29,9 @@ public class DepositService {
     }
 
     public Deposit createDepositByFromAccountId(Deposit deposit, Long accountId) {
+
         return depositRepository.saveDepositByAccountId(deposit, accountId);
+
     }
 
     public Deposit getDepositById(Long id) {
@@ -46,6 +48,7 @@ public class DepositService {
 //            }
 //        });
 //        return deposits;
+
     }
 
     public Deposit updateDeposit(Deposit deposit) {

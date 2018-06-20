@@ -11,4 +11,3 @@ public interface DepositRepository extends CrudRepository<Deposit, Long> {
     ArrayList<Deposit> findDepositsByAccountId(Long accountId);
     Deposit saveDeposit(Deposit deposit);
     void deleteDepositById(Long depositId);
-}

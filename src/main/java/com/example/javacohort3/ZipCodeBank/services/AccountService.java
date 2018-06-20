@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
+import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,31 +18,43 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public void verifyAccount(Long accountId){
+    public AccountService() {
+
+    }
+
+
+    public void verifyAccountById(Long accountId){
         if(accountRepository.findById(accountId).orElse(null) == null)throw new ResourceNotFoundException();
     }
 
     public Account createAccountFromCustomerId(Account account, Long costumerId){
-        Account account1 = accountRepository.findById(costumerId).orElse(null);
-        account.setCustomer(account.getCustomer());
-       //binds customerId to account
-        account.setId(costumerId);
-        return accountRepository.save(account);
+       return accountRepository.save(account);
     }
+    public Account getAccountById(Long accountId){
+        return accountRepository.findById(accountId).orElse(null);
+    }
+
     public ArrayList<Account> getAllAccountsByCustomerId(Long customerId){
-        ArrayList<Account> accounts = accountRepository.getAccounsByCustomerId(customerId);
+        return accountRepository.findAllAccountsByCustomerId(customerId);
+    }
+
+    public ArrayList<Account> getAllAccounts(){
+        ArrayList<Account> accounts = new ArrayList<>();
+        accountRepository.findAll().forEach(accounts::add);
         return accounts;
     }
 
-    public ArrayList<Account> getAllaccounts(){
-        ArrayList<Account> accounts = accountRepository.getAllAccounts();
-        return new ArrayList<>();
+    public Account getAccountById(Long accountId){
+        return accountRepository.findById(accountId).orElse(null);
     }
 
     public Account updateAccount(Account account, Long accountId){
         return accountRepository.save(account);
     }
+
     public void deleteAccount(Long accountId){
-        accountRepository.deleteAccountById(accountId);
+        accountRepository.deleteById(accountId);
+
     }
+
 }

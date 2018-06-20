@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
+import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.services.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 
 @RestController
 public class AccountController {
+
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private AccountService accountService;
 
@@ -25,11 +28,13 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+
+
     @RequestMapping(value = "/accounts", method = RequestMethod.GET)
     public ResponseEntity<?> getAllAccounts() {
         HttpStatus status = HttpStatus.OK;
 
-        Account account = accountService.getAllAccounts();
+        ArrayList<Account> account = accountService.getAllAccounts();
 
         log.info("Get accounts");
         return new ResponseEntity<>(account, status);
@@ -38,27 +43,17 @@ public class AccountController {
 
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
-        HttpStatus status;
-        Object response;
-        Account account = accountService.getAccountByID(accountId);
 
-        accountService.verifyAccountById(accountId);
+        log.info("[Get]" + accountId);
 
-        log.info("[Get]" + account);
-        status = HttpStatus.OK;;
-        response = account;
-
-        return new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
-    public ResponseEntity<?> getAccountsByCustomerId(@PathVariable Long customerId) {
+    public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
         HttpStatus status = HttpStatus.OK;
-
-        accountService.getAccountsByCustomerId(customerId);
-
-            log.info("[Get]" + customerId);
-
+        accountService.getAllAccountsByCustomerId(customerId);
+        log.info("[Get]" + customerId);
         return new ResponseEntity<>(customerId, status);
     }
 
@@ -83,29 +78,17 @@ public class AccountController {
 
     @RequestMapping(value = "accounts/{accountId}", method = RequestMethod.PUT)
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {
-        HttpStatus status;
-
-        Account oldAccount = accountService.getAccount(accountId);
-        accountService.updateAccount(account, accountId);
-
-        if(oldAccount != null){
-            log.info("[updated]" + account);
-            status = HttpStatus.OK;
-        }else{
-            log.info("[created]" + account);
-            status = HttpStatus.CREATED;
-        }
-
-        return new ResponseEntity<>(account, status);
+        Account old_account = accountService.getAccountById(accountId);
+        Account new_account = accountService.updateAccount(account);
+        return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/accounts/{accountId", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
+    public ResponseEntity<?> deleteAccountById(@PathVariable Long accountId){
         HttpStatus status = HttpStatus.NO_CONTENT;
-        Account account = accountService.getAccount(accountId);
+        Account account = accountService.getAccountById(accountId);
 
-        accountService.verifyAccountByID(accountId);
-        accountService.deleteAccountById(accountId);
+        accountService.deleteAccount(accountId);
         log.info("Deleted" + accountId);
 
         return new ResponseEntity<>(account, status);

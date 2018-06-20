@@ -36,7 +36,6 @@ public class CustomerService {
 //             somehow have code to call the account Id
 //               might need to extend or autowire the accountRepoonce its made
         }
-
         throw new ResourceNotFoundException();
     }
 
@@ -55,7 +54,7 @@ public class CustomerService {
 
     // Update a customer
     public Customer updateCustomer(Customer customer, Long id) {
-        return customerRepository.updateCustomer(customer);
+        return customerRepository.save(customer);
     }
 
 }
