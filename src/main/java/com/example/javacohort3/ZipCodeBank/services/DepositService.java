@@ -8,54 +8,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DepositService {
-    private AccountRepository accountRepository;
-    private DepositRepository depositRepository;
 
     @Autowired
-    public DepositService(AccountRepository accountRepository, DepositRepository depositRepository) {
-        this.accountRepository = accountRepository;
-        this.depositRepository = depositRepository;
-    }
+    AccountRepository accountRepository;
+    @Autowired
+    private DepositRepository depositRepository;
+    @Autowired
+    AccountService accountService;
 
-    public void verifyAccount(Long accountId) {
-        if (accountRepository.findById(accountId).orElse(null) == null) throw new ResourceNotFoundException();
-    }
 
-    public void verifyDeposit(Long depositId) {
+    public void verifyDeposit(Long depositId, Long accountId) {
+        accountService.verifyAccountById(accountId);
         if (depositRepository.findById(depositId).orElse(null) == null) throw new ResourceNotFoundException();
     }
 
     public Deposit createDepositByFromAccountId(Deposit deposit, Long accountId) {
 
-        return depositRepository.saveDepositByAccountId(deposit, accountId);
-
+        if (accountRepository.existsByAccountId(accountId)) {
+            return depositRepository.save(deposit);
+        }else {
+            throw new ResourceNotFoundException();
+        }
     }
 
     public Deposit getDepositById(Long id) {
         return depositRepository.findDepositById(id);
     }
 
-    public ArrayList<Deposit> getAllDepositsForAccountId(Long accountId) {
-        return depositRepository.findDepositsByAccountId(accountId);
-//        ArrayList<Deposit> deposits = new ArrayList<>();
-//        depositRepository.findAll().forEach(deposit -> {
-//            if (deposit.getAccount_id() == accountId) {
-//                // adds deposit to list if account is the account specified
-//                deposits.add(deposit);
-//            }
-//        });
-//        return deposits;
+    public List<Deposit> getAllDepositsForAccountId(Long accountId) {
 
+        List<Deposit> depositList = new ArrayList<>();
+        depositRepository.findByAccountId(accountId).forEach(depositList::add);
+        return depositList;
     }
 
-    public Deposit updateDeposit(Deposit deposit) {
-        return depositRepository.saveDeposit(deposit);
+    public Deposit updateDeposit(Deposit deposit, Long accountId) {
+        return depositRepository.save(deposit);
     }
 
-    public void deleteDeposit(Long id) {
-        depositRepository.deleteDepositById(id);
+    public void deleteDeposit(Long accountId) {
+        depositRepository.deleteById(accountId);
+
     }
 }

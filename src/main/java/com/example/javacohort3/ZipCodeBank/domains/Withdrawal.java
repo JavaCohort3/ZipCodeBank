@@ -1,28 +1,34 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import com.example.javacohort3.ZipCodeBank.enums.Medium;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
 import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.util.Date;
 
 @Entity
-public class Withdrawal implements Serializable {
+public class Withdrawal {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private TransactionType type;
-    private String transaction_date;
-    private String status;
-    private Long payer_id;
-    private String medium;
+    private Date transaction_date;
+    private TransactionStatus status;
+    @ManyToOne
+    private Customer payer_id;
+    private Medium medium;
     private Double amount;
     private String description;
     @ManyToOne
     private Account account_id;
-
+  
     public Withdrawal(){ }
 
-    public Withdrawal(Long id, TransactionType type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description, Account account_id) {
+    public Withdrawal(Long id, TransactionType type, Date transaction_date, TransactionStatus status, 
+                      Customer payer_id, Medium medium, Double amount, String description, Account account_id) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -50,35 +56,35 @@ public class Withdrawal implements Serializable {
         this.type = type;
     }
 
-    public String getTransaction_date() {
+    public Date getTransaction_date() {
         return transaction_date;
     }
 
-    public void setTransaction_date(String transaction_date) {
+    public void setTransaction_date(Date transaction_date) {
         this.transaction_date = transaction_date;
     }
 
-    public String getStatus() {
+    public TransactionStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TransactionStatus status) {
         this.status = status;
     }
 
-    public Long getPayer_id() {
+    public Customer getPayer_id() {
         return payer_id;
     }
 
-    public void setPayer_id(Long payer_id) {
+    public void setPayer_id(Customer payer_id) {
         this.payer_id = payer_id;
     }
 
-    public String getMedium() {
+    public Medium getMedium() {
         return medium;
     }
 
-    public void setMedium(String medium) {
+    public void setMedium(Medium medium) {
         this.medium = medium;
     }
 

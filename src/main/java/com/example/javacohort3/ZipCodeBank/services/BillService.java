@@ -3,19 +3,23 @@ package com.example.javacohort3.ZipCodeBank.services;
 
 import com.example.javacohort3.ZipCodeBank.domains.Bill;
 import com.example.javacohort3.ZipCodeBank.domains.Customer;
+import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
+import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BillService {
 
     @Autowired
     private BillRepository billRepository;
-
+    @Autowired
+    private AccountRepository accountRepository;
     public BillService() {
     }
 
@@ -23,46 +27,38 @@ public class BillService {
         this.billRepository = billRepository;
     }
 
-    public void verifyByBillId(Long id){
+    public void verifyByBillId(Long id)throws ResourceNotFoundException{
      if (billRepository.findById(id).orElse(null) == null){
-         //throw new ResourceNotFoundException;
+         throw new ResourceNotFoundException();
      }
     }
 
 
-    public Bill createBill(Bill bill, Long id){return billRepository.save(bill); }
-
-
-    public Bill getBillById(Long id){
-        return billRepository.findById(id).orElse(null);
+    public Bill createBill(Bill bill, Long accountId){
+        if (accountRepository.existsByAccountId(accountId)){
+            return billRepository.save(bill);
+        }else {
+            throw new ResourceNotFoundException();
+        }
     }
 
 
-    public ArrayList<Bill> getAllBillByAccountId(Long id){
-        ArrayList<Bill> listOfAllBill = (ArrayList<Bill>) billRepository.findAll();
-        for (Bill b : listOfAllBill)
-        {
-            if (b.getAccount_id().equals(id)){
-                billRepository.findById(b.getId());
-            }else {
-                //throw new ResourceNotFoundException();
-            }
-        }
-        return null;
+    public Bill getBillById(Long billId){
+        return billRepository.findById(billId).orElse(null);
     }
 
 
-    public ArrayList<Bill> getBillsByCustomerId(Long id){
-        ArrayList<Bill> listOfAllBill = (ArrayList<Bill>) billRepository.findAll();
-        for (Bill b : listOfAllBill)
-        {
-            if (b.getId().equals(id)){
-                billRepository.findById(b.getId());
-            }else {
-               // throw new ResourceNotFoundException();
-            }
-        }
-        return null;
+    public List<Bill> getAllBillByAccountId(Long accountId){
+        List<Bill> billList = new ArrayList<>();
+            billRepository.findByAccountId(accountId).forEach(billList::add);
+            return billList;
+    }
+
+
+    public List<Bill> getBillsByCustomerId(Long customerId){
+        List<Bill> billList = new ArrayList<>();
+        billRepository.findByCustomerId(customerId).forEach(billList::add);
+        return billList;
     }
 
 

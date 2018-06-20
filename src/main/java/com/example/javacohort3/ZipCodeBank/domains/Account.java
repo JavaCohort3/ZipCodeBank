@@ -25,6 +25,7 @@ public class Account implements Serializable {
 
     public Account(){}
 
+
     public Account(Long id, AccountType type, String nickname, Integer rewards, Double balance, Customer customer) {
         this.id = id;
         this.type = type;
@@ -35,11 +36,11 @@ public class Account implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return accountId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public AccountType getType() {
@@ -91,7 +92,7 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
+                "id=" + accountId +
                 ", type=" + type +
                 ", nickname='" + nickname + '\'' +
                 ", rewards=" + rewards +
