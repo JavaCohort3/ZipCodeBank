@@ -72,10 +72,10 @@ import static org.mockito.Mockito.when;
 //        Customer customer = new Customer();
 //
 //        ReflectionTestUtils.setField(controller, "customerService", customerService);
-//        when(customerService.getCustomerById(customer.getId())).thenReturn(customer);
+//        when(customerService.getCustomerById(customer.getAccountId())).thenReturn(customer);
 //
-//        ResponseEntity<?> getCustomerByID = controller.getCustomerById(customer.getId());
-//        verify(customerService, times(1)).getCustomerById(customer.getId());
+//        ResponseEntity<?> getCustomerByID = controller.getCustomerById(customer.getAccountId());
+//        verify(customerService, times(1)).getCustomerById(customer.getAccountId());
 //
 //        Assert.assertEquals(HttpStatus.OK, getCustomerByID.getStatusCode());
 //    }
@@ -98,13 +98,13 @@ import static org.mockito.Mockito.when;
 //    public void updateCustomerTest() {
 //        CustomerController controller = new CustomerController(new CustomerService());
 //        Customer customer = new Customer();
-//        //customer.setId((long) 888);
+//        //customer.setAccountId((long) 888);
 //
 //        ReflectionTestUtils.setField(controller, "customerService", customerService);
-//        when(customerService.updateCustomer(customer, customer.getId())).thenReturn(customer);
+//        when(customerService.updateCustomer(customer, customer.getAccountId())).thenReturn(customer);
 //
-//        ResponseEntity<?> updateCustomer = controller.updateCustomer(customer, customer.getId());
-//        verify(customerService, times(1)).updateCustomer(customer, customer.getId());
+//        ResponseEntity<?> updateCustomer = controller.updateCustomer(customer, customer.getAccountId());
+//        verify(customerService, times(1)).updateCustomer(customer, customer.getAccountId());
 //
 //        Assert.assertEquals(HttpStatus.OK, updateCustomer.getStatusCode());
 //    }
