@@ -5,7 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
 
 @Entity
 public class Deposit implements Serializable  {
@@ -21,7 +20,8 @@ public class Deposit implements Serializable  {
     private String description;
 
     @ManyToOne
-    private Account account_id;
+    private Account account;
+
 
     public Deposit() {}
 
@@ -63,6 +63,22 @@ public class Deposit implements Serializable  {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Account getAccount_id() { return account_id; }
-    public void setAccount_id(Account account_id) { this.account_id = account_id; }
+    public Account getAccount() { return account; }
+    public void setAccount(Account account) { this.account = account; }
+
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "id=" + id +
+                ", type=" + type +
+                ", transaction_date='" + transaction_date + '\'' +
+                ", status='" + status + '\'' +
+                ", payee_id=" + payee_id +
+                ", medium=" + medium +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", account=" + account +
+                '}';
+    }
+
 }
