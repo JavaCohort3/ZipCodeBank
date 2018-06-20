@@ -77,13 +77,14 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Address getAddress() {
+    public Set<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Set<Address> address) {
         this.address = address;
     }
+
 
     @Override
     public String toString() {

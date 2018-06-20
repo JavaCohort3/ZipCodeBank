@@ -24,12 +24,11 @@ public class Withdrawal {
     private String description;
     @ManyToOne
     private Account account_id;
+  
+    public Withdrawal(){ }
 
-    public Withdrawal(){
-
-    }
-
-    public Withdrawal(Long id, TransactionType type, Date transaction_date, TransactionStatus status, Customer payer_id, Medium medium, Double amount, String description, Account account_id) {
+    public Withdrawal(Long id, TransactionType type, Date transaction_date, TransactionStatus status, 
+                      Customer payer_id, Medium medium, Double amount, String description, Account account_id) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;

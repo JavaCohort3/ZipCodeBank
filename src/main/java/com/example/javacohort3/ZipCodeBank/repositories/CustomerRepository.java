@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-
     Customer findByAccountId(Long accountId);
-
     
 }

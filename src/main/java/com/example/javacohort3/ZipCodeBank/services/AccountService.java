@@ -18,6 +18,11 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    public AccountService() {
+
+    }
+
+
     public void verifyAccountById(Long accountId){
         if(accountRepository.existsByAccountId(accountId)){
             getAccountById(accountId);
@@ -44,11 +49,13 @@ public class AccountService {
 
     public Account getAccountById (Long id){
         return accountRepository.findById(id).orElse(null);
+
     }
 
     public Account updateAccount(Account account){
         return accountRepository.save(account);
     }
+
 
     public void deleteAccount(Long id){
         accountRepository.deleteById(id);

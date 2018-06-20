@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
 import com.example.javacohort3.ZipCodeBank.enums.Medium;
+
 import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
 import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
 
@@ -25,13 +26,11 @@ public class Deposit {
     private Account accountId;
 
 
-
-
     public Deposit() {
-
     }
 
-    public Deposit(Long id, TransactionType type, Date transaction_date, TransactionStatus status, Customer payee_id, Medium medium, Double amount, String description, Account accountId) {
+    public Deposit(Long id, TransactionType type, Date transaction_date, TransactionStatus status, Customer payee_id, 
+                   Medium medium, Double amount, String description, Account accountId) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -59,6 +58,7 @@ public class Deposit {
     public void setPayee_id(Customer payee_id) { this.payee_id = payee_id; }
 
     public Medium getMedium() { return medium; }
+
     public void setMedium(Medium medium) { this.medium = medium; }
 
     public Double getAmount() { return amount; }
@@ -66,6 +66,7 @@ public class Deposit {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
 
     public Account getAccountId() { return accountId; }
     public void setAccountId(Account accountId) { this.accountId = accountId; }
@@ -76,7 +77,7 @@ public class Deposit {
                 "id=" + id +
                 ", type=" + type +
                 ", transaction_date=" + transaction_date +
-                ", status=" + status +
+                ", status=" + status 
                 ", payee_id=" + payee_id +
                 ", medium=" + medium +
                 ", amount=" + amount +
@@ -84,4 +85,3 @@ public class Deposit {
                 ", accountId=" + accountId +
                 '}';
     }
-}

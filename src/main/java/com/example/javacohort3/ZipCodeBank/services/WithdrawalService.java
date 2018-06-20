@@ -22,7 +22,6 @@ public class WithdrawalService {
     }
 
     public void verifyAccount(Long accountId){
-
     }
 
     public void verifyWithdrawal(Long withdrawalId){
@@ -39,6 +38,7 @@ public class WithdrawalService {
 //        return withdrawalRepository.save(withdrawal);
 //    }
 
+
     public Withdrawal getWithdrawalById (Long id){
         return withdrawalRepository.findById(id).orElse(null);
     }
@@ -49,7 +49,7 @@ public class WithdrawalService {
         return withdrawals;
     }
 
-    public Withdrawal updateWIthdrawal (Withdrawal withdrawal){
+    public Withdrawal updateWithdrawal (Withdrawal withdrawal){
         return withdrawalRepository.save(withdrawal);
     }
 

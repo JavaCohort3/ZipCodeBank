@@ -1,13 +1,16 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.util.Date;
 
 
+
 @Entity
-public class Bill {
+public class Bill implements Serializable {
+
     @Id
     private Long id;
     @ManyToOne
@@ -18,8 +21,10 @@ public class Bill {
     private Date recurring_date;
     private Date upcoming_payment_date;
     private Double payment_amount;
+  
     @ManyToOne
     private Account accountId;
+
 
 
     public Bill() {

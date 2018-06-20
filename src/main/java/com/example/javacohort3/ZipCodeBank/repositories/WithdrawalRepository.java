@@ -1,5 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.repositories;
 
+import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Withdrawal;
 import org.springframework.data.repository.CrudRepository;
 
