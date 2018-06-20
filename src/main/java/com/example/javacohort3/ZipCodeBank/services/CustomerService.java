@@ -54,7 +54,7 @@ public class CustomerService {
 
     // Update a customer
     public Customer updateCustomer(Customer customer, Long id) {
-        return customerRepository.updateCustomer(customer);
+        return customerRepository.save(customer);
     }
 
 }

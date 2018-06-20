@@ -1,21 +1,27 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     private Long id;
     private Long accountId;
     private String first_name;
     private String last_name;
-    private Address address;
+    @OneToMany
+    @Column(name = "address")
+    private Set<Address> address;
 
     public Customer() { }
 
-    public Customer(Long id, Long accountId, String first_name, String last_name, Address address) {
+    public Customer(Long id, Long accountId, String first_name, String last_name, Set<Address> address) {
         this.id = id;
         this.accountId = accountId;
         this.first_name = first_name;
@@ -55,13 +61,14 @@ public class Customer {
         this.last_name = last_name;
     }
 
-    public Address getAddress() {
+    public Set<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Set<Address> address) {
         this.address = address;
     }
+
 
     @Override
     public String toString() {

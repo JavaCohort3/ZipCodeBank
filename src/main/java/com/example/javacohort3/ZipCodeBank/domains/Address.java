@@ -3,8 +3,10 @@ package com.example.javacohort3.ZipCodeBank.domains;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import java.io.Serializable;
+
 @Entity
-public class Address {
+public class Address{
 
     @Id
     private Long id;
@@ -85,5 +87,5 @@ public class Address {
                 ", zipCode='" + zipCode + '\'' +
                 '}';
     }
-    
+
 }

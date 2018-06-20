@@ -1,5 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
+import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Withdrawal;
 import com.example.javacohort3.ZipCodeBank.services.WithdrawalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class WithdrawalController {
     @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDWithdrawalFromAccountId(@RequestBody Withdrawal withdrawal, @PathVariable Long withdrawalId) {
         Withdrawal old_withdrawal = withdrawalService.getWithdrawalById(withdrawalId);
-        Withdrawal new_withdrawal = withdrawalService.updateWIthdrawal(withdrawal);
+        Withdrawal new_withdrawal = withdrawalService.updateWithdrawal(withdrawal);
         return new ResponseEntity<>(withdrawal, HttpStatus.CREATED);
     }
 

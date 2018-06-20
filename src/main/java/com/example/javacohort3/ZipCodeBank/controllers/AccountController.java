@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 @RestController
 public class AccountController {
+
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private AccountService accountService;
 
@@ -52,7 +53,7 @@ public class AccountController {
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
         HttpStatus status = HttpStatus.OK;
         accountService.getAllAccountsByCustomerId(customerId);
-            log.info("[Get]" + customerId);
+        log.info("[Get]" + customerId);
         return new ResponseEntity<>(customerId, status);
     }
 
@@ -87,7 +88,7 @@ public class AccountController {
         HttpStatus status = HttpStatus.NO_CONTENT;
         Account account = accountService.getAccountById(accountId);
 
-        accountService.deleteAccountById(accountId);
+        accountService.deleteAccount(accountId);
         log.info("Deleted" + accountId);
 
         return new ResponseEntity<>(account, status);

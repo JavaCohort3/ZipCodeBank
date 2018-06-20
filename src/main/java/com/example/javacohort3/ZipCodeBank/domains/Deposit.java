@@ -1,15 +1,17 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
 import com.example.javacohort3.ZipCodeBank.enums.Medium;
-import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Entity
-public class Deposit {
+public class Deposit implements Serializable  {
     @Id
     private Long id;
+    private String type;
     private TransactionType type;
     private String transaction_date;
     private String status;
@@ -18,11 +20,14 @@ public class Deposit {
     private Double amount;
     private String description;
 
-    private Long account_id;
+    @ManyToOne
+    private Account account_id;
 
     public Deposit() {}
 
-    public Deposit(Long id, TransactionType type, String transaction_date, String status, Long payee_id, Medium medium, Double amount, String description) {
+    public Deposit(Long id, String type, String transaction_date,
+                   String status, Long payee_id, Medium medium,
+                   Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -36,8 +41,8 @@ public class Deposit {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public TransactionType getType() { return type; }
-    public void setType(TransactionType type) { this.type = type; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
 
     public String getTransaction_date() { return transaction_date; }
     public void setTransaction_date(String transaction_date) { this.transaction_date = transaction_date; }
@@ -49,6 +54,7 @@ public class Deposit {
     public void setPayee_id(Long payee_id) { this.payee_id = payee_id; }
 
     public Medium getMedium() { return medium; }
+      
     public void setMedium(Medium medium) { this.medium = medium; }
 
     public Double getAmount() { return amount; }
@@ -57,6 +63,6 @@ public class Deposit {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Long getAccount_id() { return account_id; }
-    public void setAccount_id(Long account_id) { this.account_id = account_id; }
+    public Account getAccount_id() { return account_id; }
+    public void setAccount_id(Account account_id) { this.account_id = account_id; }
 }

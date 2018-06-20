@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 //  all except verify
 
-    Customer createCustomer(Customer customer);
+    //Customer createCustomer(Customer customer);
     Customer getCustomerByAccountId(Long id);
-    ArrayList<Customer> getAllCustomers();
+//    ArrayList<Customer> getAllCustomers();
     Customer getCustomerById(Long id);
-    Customer updateCustomer(Customer customer);
-    void deleteCustomer(Long id);
+//    Customer updateCustomer(Customer customer);
+//    void deleteCustomer(Long id);
     
 }

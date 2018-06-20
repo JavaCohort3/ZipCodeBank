@@ -34,8 +34,6 @@ public class DepositService {
         account.setBalance(account.getBalance() + deposit.getAmount());
         accountRepository.save(account);
 
-        // binds account ID to deposit
-        deposit.setAccount_id(accountId);
         return depositRepository.save(deposit);
     }
 
@@ -46,7 +44,7 @@ public class DepositService {
     public ArrayList<Deposit> getAllDepositsForAccountId(Long accountId) {
         ArrayList<Deposit> deposits = new ArrayList<>();
         depositRepository.findAll().forEach(deposit -> {
-            if (deposit.getAccount_id() == accountId) {
+            if (deposit.getAccount_id().equals(accountId)) {
                 // adds deposit to list if account is the account specified
                 deposits.add(deposit);
             }

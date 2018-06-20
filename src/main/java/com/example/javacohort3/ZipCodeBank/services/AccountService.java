@@ -28,32 +28,33 @@ public class AccountService {
     }
 
     public Account createAccountFromCustomerId(Account account, Long costumerId){
-        Account account1 = accountRepository.findById(costumerId).orElse(null);
-        account.setCustomer(account.getCustomer());
-       //binds customerId to account
-        account.setId(costumerId);
-        return accountRepository.save(account);
+       return accountRepository.save(account);
     }
     public Account getAccountById(Long accountId){
         return accountRepository.findById(accountId).orElse(null);
     }
 
     public ArrayList<Account> getAllAccountsByCustomerId(Long customerId){
-        ArrayList<Account> accounts = accountRepository.getAccountsByCustomerIds(customerId);
-        return accounts;
+        return accountRepository.findAllAccountsByCustomerId(customerId);
     }
 
     public ArrayList<Account> getAllAccounts(){
-        ArrayList<Account> accounts = accountRepository.getAllAccounts();
-        return new ArrayList<>();
+        ArrayList<Account> accounts = new ArrayList<>();
+        accountRepository.findAll().forEach(accounts::add);
+        return accounts;
     }
 
-    public Account updateAccount(Account accountId){
-        return accountRepository.save(accountId);
+    public Account getAccountById(Long accountId){
+        return accountRepository.findById(accountId).orElse(null);
     }
 
-    public void deleteAccountById(Long accountId){
-        accountRepository.deleteAccountById(accountId);
+    public Account updateAccount(Account account, Long accountId){
+        return accountRepository.save(account);
+    }
+
+    public void deleteAccount(Long accountId){
+        accountRepository.deleteById(accountId);
+
     }
 
 }
