@@ -28,10 +28,6 @@ public class AccountService {
     }
 
     public Account createAccountFromCustomerId(Account account, Long costumerId){
-        Account account1 = accountRepository.findById(costumerId).orElse(null);
-        account.setCustomer(account.getCustomer());
-       //binds customerId to account
-        account.setId(costumerId);
         return accountRepository.save(account);
     }
     public Account getAccountById(Long accountId){
