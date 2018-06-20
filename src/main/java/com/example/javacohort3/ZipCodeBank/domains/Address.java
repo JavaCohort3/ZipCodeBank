@@ -20,7 +20,8 @@ public class Address {
 
     public Address() { }
 
-    public Address(Long id, Integer street_number, String street_name, String city, String state, Integer zipCode, Customer customer) {
+    public Address(Long id, Integer street_number, String street_name,
+                   String city, String state, Integer zipCode, Customer customer) {
         this.id = id;
         this.street_number = street_number;
         this.street_name = street_name;

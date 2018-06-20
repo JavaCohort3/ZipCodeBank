@@ -4,6 +4,7 @@ package com.example.javacohort3.ZipCodeBank.domains;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 

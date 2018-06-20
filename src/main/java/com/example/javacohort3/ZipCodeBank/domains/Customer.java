@@ -77,11 +77,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Set<Address> getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Set<Address> address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

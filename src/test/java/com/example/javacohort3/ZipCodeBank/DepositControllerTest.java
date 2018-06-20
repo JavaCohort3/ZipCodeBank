@@ -42,8 +42,8 @@ import static org.mockito.Mockito.when;
 //
 //        Account account = new Account();
 //        Deposit deposit = new Deposit();
-//        account.setId(new Long(3));
-//        Long accountId = account.getId();
+//        account.setAccountId(new Long(3));
+//        Long accountId = account.getAccountId();
 //        deposit.setAccount_id(accountId);
 //
 //        depositService.createDepositByFromAccountId(deposit, accountId);
@@ -59,8 +59,8 @@ import static org.mockito.Mockito.when;
 //        ReflectionTestUtils.setField(controller, "depositService", depositService);
 //
 //        Deposit deposit = new Deposit();
-//        deposit.setId(new Long(5));
-//        Long id = deposit.getId();
+//        deposit.setAccountId(new Long(5));
+//        Long id = deposit.getAccountId();
 //
 //        when(depositService.getDepositById(id)).thenReturn(deposit);
 //        ResponseEntity<?> depositReturned = controller.getDepositById(id);
@@ -75,8 +75,8 @@ import static org.mockito.Mockito.when;
 //
 //        Account account = new Account();
 //        Deposit deposit = new Deposit();
-//        account.setId(new Long(3));
-//        Long accountId = account.getId();
+//        account.setAccountId(new Long(3));
+//        Long accountId = account.getAccountId();
 //        deposit.setAccount_id(accountId);
 //
 //        when(depositService.createDepositByFromAccountId(deposit, accountId)).thenReturn(deposit);
@@ -91,8 +91,8 @@ import static org.mockito.Mockito.when;
 //        ReflectionTestUtils.setField(controller, "depositService", depositService);
 //
 //        Deposit deposit = new Deposit();
-//        deposit.setId(new Long(5));
-//        Long id = deposit.getId();
+//        deposit.setAccountId(new Long(5));
+//        Long id = deposit.getAccountId();
 //
 //        when(depositService.updateDeposit(deposit)).thenReturn(deposit);
 //        ResponseEntity<?> depositCreated = controller.updateDeposit(deposit, id);
@@ -106,8 +106,8 @@ import static org.mockito.Mockito.when;
 //        ReflectionTestUtils.setField(controller, "depositService", depositService);
 //
 //        Deposit deposit = new Deposit();
-//        deposit.setId(new Long(5));
-//        Long id = deposit.getId();
+//        deposit.setAccountId(new Long(5));
+//        Long id = deposit.getAccountId();
 //
 //        depositService.deleteDeposit(id);
 //        when(depositService.getDepositById(id)).thenReturn(null);

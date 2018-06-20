@@ -29,7 +29,7 @@ public class Deposit {
     public Deposit() {
     }
 
-    public Deposit(Long id, TransactionType type, Date transaction_date, TransactionStatus status, Customer payee_id, 
+    public Deposit(Long id, TransactionType type, Date transaction_date, TransactionStatus status, Customer payee_id,
                    Medium medium, Double amount, String description, Account accountId) {
         this.id = id;
         this.type = type;
@@ -42,34 +42,78 @@ public class Deposit {
         this.accountId = accountId;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public TransactionType getType() { return type; }
-    public void setType(TransactionType type) { this.type = type; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Date getTransaction_date() { return transaction_date; }
-    public void setTransaction_date(Date transaction_date) { this.transaction_date = transaction_date; }
+    public TransactionType getType() {
+        return type;
+    }
 
-    public TransactionStatus getStatus() { return status; }
-    public void setStatus(TransactionStatus status) { this.status = status; }
+    public void setType(TransactionType type) {
+        this.type = type;
+    }
 
-    public Customer getPayee_id() { return payee_id; }
-    public void setPayee_id(Customer payee_id) { this.payee_id = payee_id; }
+    public Date getTransaction_date() {
+        return transaction_date;
+    }
 
-    public Medium getMedium() { return medium; }
+    public void setTransaction_date(Date transaction_date) {
+        this.transaction_date = transaction_date;
+    }
 
-    public void setMedium(Medium medium) { this.medium = medium; }
+    public TransactionStatus getStatus() {
+        return status;
+    }
 
-    public Double getAmount() { return amount; }
-    public void setAmount(Double amount) { this.amount = amount; }
+    public void setStatus(TransactionStatus status) {
+        this.status = status;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public Customer getPayee_id() {
+        return payee_id;
+    }
+
+    public void setPayee_id(Customer payee_id) {
+        this.payee_id = payee_id;
+    }
+
+    public Medium getMedium() {
+        return medium;
+    }
+
+    public void setMedium(Medium medium) {
+        this.medium = medium;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
-    public Account getAccountId() { return accountId; }
-    public void setAccountId(Account accountId) { this.accountId = accountId; }
+    public Account getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Account accountId) {
+        this.accountId = accountId;
+    }
 
     @Override
     public String toString() {
@@ -77,7 +121,7 @@ public class Deposit {
                 "id=" + id +
                 ", type=" + type +
                 ", transaction_date=" + transaction_date +
-                ", status=" + status 
+                ", status=" + status +
                 ", payee_id=" + payee_id +
                 ", medium=" + medium +
                 ", amount=" + amount +
@@ -85,3 +129,4 @@ public class Deposit {
                 ", accountId=" + accountId +
                 '}';
     }
+}

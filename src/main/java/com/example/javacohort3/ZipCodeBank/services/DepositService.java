@@ -21,8 +21,7 @@ public class DepositService {
     AccountService accountService;
 
 
-    public void verifyDeposit(Long depositId, Long accountId) {
-        accountService.verifyAccountById(accountId);
+    public void verifyDeposit(Long depositId) {
         if (depositRepository.findById(depositId).orElse(null) == null) throw new ResourceNotFoundException();
     }
 
@@ -36,7 +35,7 @@ public class DepositService {
     }
 
     public Deposit getDepositById(Long id) {
-        return depositRepository.findDepositById(id);
+        return depositRepository.findById(id).orElse(null);
     }
 
     public List<Deposit> getAllDepositsForAccountId(Long accountId) {

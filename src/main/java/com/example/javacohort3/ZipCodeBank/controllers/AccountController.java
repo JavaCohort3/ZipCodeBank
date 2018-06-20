@@ -2,21 +2,15 @@ package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Customer;
-import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.services.AccountService;
-import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,29 +38,25 @@ public class AccountController {
 
     @RequestMapping(value = "customers/{customerId}/accounts/{accountId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
+        HttpStatus status;
+        Object response;
+        Account account = accountService.getAccountById(accountId);
 
+        accountService.verifyAccountById(accountId);
 
         log.info("[Get]" + account);
         status = HttpStatus.OK;
         response = account;
 
-        log.info("[Get]" + accountId);
-
-
-        return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
+        return new ResponseEntity<>(response, status);
     }
 
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
         HttpStatus status = HttpStatus.OK;
-
-       Account customerInfo = accountService.getAccountByCustomerId(customerId);
-            log.info("[Get]" + customerId);
-        return new ResponseEntity<>(customerInfo, status);
-        accountService.getAllAccountsByCustomerId(customerId);
+        Account customerInfo = accountService.getAccountByCustomerId(customerId);
         log.info("[Get]" + customerId);
-        return new ResponseEntity<>(customerId, status);
-
+        return new ResponseEntity<>(customerInfo, status);
     }
 
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
@@ -103,9 +93,6 @@ public class AccountController {
 
 
     }
-
-    @RequestMapping(value = "/customers/{customerId}/accounts/{accountId}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
 
     @RequestMapping(value = "accounts/{accountId}", method = RequestMethod.PUT)
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {

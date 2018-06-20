@@ -42,9 +42,9 @@ import static org.mockito.Mockito.when;
 //        BillController controller = new BillController(new BillService());
 //        Bill bill = new Bill();
 //        ReflectionTestUtils.setField(controller, "billService", billService);
-//        when(billService.getBillById(bill.getId())).thenReturn(bill);
-//        ResponseEntity<?> billById = controller.getBillById(bill.getId());
-//        verify(billService,times(1)).getBillById(bill.getId());
+//        when(billService.getBillById(bill.getAccountId())).thenReturn(bill);
+//        ResponseEntity<?> billById = controller.getBillById(bill.getAccountId());
+//        verify(billService,times(1)).getBillById(bill.getAccountId());
 //        Assert.assertEquals(HttpStatus.OK,billById.getStatusCode());
 //
 //    }
@@ -78,10 +78,10 @@ import static org.mockito.Mockito.when;
 //        BillController controller = new BillController(new BillService());
 //        Bill bill = new Bill();
 //        ReflectionTestUtils.setField(controller, "billService", billService);
-//        billService.deleteBill(bill.getId());
-//        when(billService.getBillById(bill.getId())).thenReturn(null);
-//        ResponseEntity<?> billDelete = controller.deleteBill(bill.getId());
-//        verify(billService,times(2)).deleteBill(bill.getId());
+//        billService.deleteBill(bill.getAccountId());
+//        when(billService.getBillById(bill.getAccountId())).thenReturn(null);
+//        ResponseEntity<?> billDelete = controller.deleteBill(bill.getAccountId());
+//        verify(billService,times(2)).deleteBill(bill.getAccountId());
 //        Assert.assertEquals(HttpStatus.NO_CONTENT,billDelete.getStatusCode());
 //    }
 //
@@ -103,7 +103,7 @@ import static org.mockito.Mockito.when;
 //        Bill bill = new Bill();
 //        ReflectionTestUtils.setField(controller, "billService", billService);
 //        when(billService.updateBill(bill)).thenReturn(new Bill());
-//        ResponseEntity<?> update = controller.updateBill(bill,bill.getId());
+//        ResponseEntity<?> update = controller.updateBill(bill,bill.getAccountId());
 //        verify(billService,times(1)).updateBill(bill);
 //        Assert.assertEquals(HttpStatus.CREATED,update.getStatusCode());
 //    }
