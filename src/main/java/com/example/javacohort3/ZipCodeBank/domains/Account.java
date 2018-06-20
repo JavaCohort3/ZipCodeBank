@@ -1,16 +1,27 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import com.example.javacohort3.ZipCodeBank.enums.AccountType;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Account {
+
+    @Id
     private Long id;
-    private Enum type;
+    private AccountType type;
     private String nickname;
     private Integer rewards;
     private Double balance;
+
+    @ManyToOne
     private Customer customer;
 
     public Account(){}
 
-    public Account(Long id, Enum type, String nickname, Integer rewards, Double balance, Customer customer) {
+    public Account(Long id, AccountType type, String nickname, Integer rewards, Double balance, Customer customer) {
         this.id = id;
         this.type = type;
         this.nickname = nickname;
@@ -27,11 +38,11 @@ public class Account {
         this.id = id;
     }
 
-    public Enum getType() {
+    public AccountType getType() {
         return type;
     }
 
-    public void setType(Enum type) {
+    public void setType(AccountType type) {
         this.type = type;
     }
 
