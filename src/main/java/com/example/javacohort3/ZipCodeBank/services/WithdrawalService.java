@@ -22,22 +22,22 @@ public class WithdrawalService {
     }
 
     public void verifyAccount(Long accountId){
-        if(accountRepository.findById(accountId).orElse(null) == null) throw new ResourceNotFoundException();
+
     }
 
     public void verifyWithdrawal(Long withdrawalId){
         if(withdrawalRepository.findById(withdrawalId).orElse(null) == null) throw new ResourceNotFoundException();
     }
 
-    public Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Long accountId) {
-        Account account = accountRepository.findById(accountId).orElse(null);
-        account.setBalance(account.getBalance() - withdrawal.getAmount());
-        accountRepository.save(account);
-
-        // binds account ID to deposit
-        withdrawal.setAccount_id(accountId);
-        return withdrawalRepository.save(withdrawal);
-    }
+//    public Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Long accountId) {
+//        Account account = accountRepository.findById(accountId).orElse(null);
+//        account.setBalance(account.getBalance() - withdrawal.getAmount());
+//        accountRepository.save(account);
+//
+//        // binds account ID to deposit
+//        withdrawal.setAccount_id(accountId);
+//        return withdrawalRepository.save(withdrawal);
+//    }
 
     public Withdrawal getWithdrawalById (Long id){
         return withdrawalRepository.findById(id).orElse(null);

@@ -1,19 +1,37 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import com.example.javacohort3.ZipCodeBank.enums.Medium;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.util.Date;
+
+@Entity
 public class Deposit {
+    @Id
     private Long id;
-    private Enum type;
-    private String transaction_date;
-    private String status;
-    private Long payee_id;
-    private Enum medium;
+    private TransactionType type;
+    private Date transaction_date;
+    private TransactionStatus status;
+    @ManyToOne
+    private Customer payee_id;
+    private Medium medium;
     private Double amount;
     private String description;
-    private Long account_id;
+    @ManyToOne
+    private Account accountId;
 
-    public Deposit() {}
 
-    public Deposit(Long id, Enum type, String transaction_date, String status, Long payee_id, Enum medium, Double amount, String description) {
+
+
+    public Deposit() {
+
+    }
+
+    public Deposit(Long id, TransactionType type, Date transaction_date, TransactionStatus status, Customer payee_id, Medium medium, Double amount, String description, Account accountId) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -22,25 +40,26 @@ public class Deposit {
         this.medium = medium;
         this.amount = amount;
         this.description = description;
+        this.accountId = accountId;
     }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Enum getType() { return type; }
-    public void setType(Enum type) { this.type = type; }
+    public TransactionType getType() { return type; }
+    public void setType(TransactionType type) { this.type = type; }
 
-    public String getTransaction_date() { return transaction_date; }
-    public void setTransaction_date(String transaction_date) { this.transaction_date = transaction_date; }
+    public Date getTransaction_date() { return transaction_date; }
+    public void setTransaction_date(Date transaction_date) { this.transaction_date = transaction_date; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public TransactionStatus getStatus() { return status; }
+    public void setStatus(TransactionStatus status) { this.status = status; }
 
-    public Long getPayee_id() { return payee_id; }
-    public void setPayee_id(Long payee_id) { this.payee_id = payee_id; }
+    public Customer getPayee_id() { return payee_id; }
+    public void setPayee_id(Customer payee_id) { this.payee_id = payee_id; }
 
-    public Enum getMedium() { return medium; }
-    public void setMedium(Enum medium) { this.medium = medium; }
+    public Medium getMedium() { return medium; }
+    public void setMedium(Medium medium) { this.medium = medium; }
 
     public Double getAmount() { return amount; }
     public void setAmount(Double amount) { this.amount = amount; }
@@ -48,6 +67,21 @@ public class Deposit {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Long getAccount_id() { return account_id; }
-    public void setAccount_id(Long account_id) { this.account_id = account_id; }
+    public Account getAccountId() { return accountId; }
+    public void setAccountId(Account accountId) { this.accountId = accountId; }
+
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "id=" + id +
+                ", type=" + type +
+                ", transaction_date=" + transaction_date +
+                ", status=" + status +
+                ", payee_id=" + payee_id +
+                ", medium=" + medium +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", accountId=" + accountId +
+                '}';
+    }
 }

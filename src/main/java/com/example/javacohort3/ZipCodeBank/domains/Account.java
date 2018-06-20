@@ -1,17 +1,25 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import com.example.javacohort3.ZipCodeBank.enums.AccountType;
+
+import javax.persistence.*;
+
+@Entity
 public class Account {
-    private Long id;
-    private Enum type;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long accountId;
+    private AccountType type;
     private String nickname;
     private Integer rewards;
     private Double balance;
+    @ManyToOne
     private Customer customer;
 
     public Account(){}
 
-    public Account(Long id, Enum type, String nickname, Integer rewards, Double balance, Customer customer) {
-        this.id = id;
+    public Account(Long accountId, AccountType type, String nickname, Integer rewards, Double balance, Customer customer) {
+        this.accountId = accountId;
         this.type = type;
         this.nickname = nickname;
         this.rewards = rewards;
@@ -20,18 +28,18 @@ public class Account {
     }
 
     public Long getId() {
-        return id;
+        return accountId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long accountId) {
+        this.accountId = accountId;
     }
 
-    public Enum getType() {
+    public AccountType getType() {
         return type;
     }
 
-    public void setType(Enum type) {
+    public void setType(AccountType type) {
         this.type = type;
     }
 
@@ -70,7 +78,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
+                "id=" + accountId +
                 ", type=" + type +
                 ", nickname='" + nickname + '\'' +
                 ", rewards=" + rewards +

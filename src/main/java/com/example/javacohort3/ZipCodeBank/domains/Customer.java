@@ -1,20 +1,47 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
-public class Customer {
+import javax.persistence.*;
+import java.util.Set;
 
+@Entity
+public class Customer {
+    @Id
     private Long id;
-    private Long accountId;
-    private String first_name;
-    private String last_name;
+    @ManyToOne
+    private Account accountId;
+    private String firstName;
+    private String lastName;
+    @ManyToOne
     private Address address;
 
     public Customer() { }
 
-    public Customer(Long id, Long accountId, String first_name, String last_name, Address address) {
+    public Customer(String firstName){
+        this.firstName = firstName;
+    }
+
+    public Customer(Long id){
+        this.id = id;
+    }
+
+    public Customer(Long id,String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Customer(Long id, Account accountId, String firstName, String lastName) {
         this.id = id;
         this.accountId = accountId;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Customer(Long id, Account accountId, String firstName, String lastName, Address address) {
+        this.id = id;
+        this.accountId = accountId;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
     }
 
@@ -26,28 +53,28 @@ public class Customer {
         this.id = id;
     }
 
-    public Long getAccountId() {
+    public Account getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Long accountId) {
+    public void setAccountId(Account accountId) {
         this.accountId = accountId;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Address getAddress() {
@@ -63,8 +90,8 @@ public class Customer {
         return "Customer{" +
                 "id=" + id +
                 ", accountId=" + accountId +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", address=" + address +
                 '}';
     }

@@ -7,48 +7,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AccountService {
-
+    @Autowired
     private AccountRepository accountRepository;
 
-    @Autowired
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
     public void verifyAccountById(Long accountId){
-        if(accountRepository.findById(accountId).orElse(null) == null)throw new ResourceNotFoundException();
+        if(accountRepository.existsByAccountId(accountId)){
+            getAccountById(accountId);
+        }
+        else {
+            throw new ResourceNotFoundException();
+        }
     }
 
-    public Account createAccountFromCustomerId(Account account, Long costumerId){
-        Account account1 = accountRepository.findById(costumerId).orElse(null);
-        account.setCustomer(account.getCustomer());
-       //binds customerId to account
-        account.setId(costumerId);
-        return accountRepository.save(account);
-    }
-    public ArrayList<Account> getAllAccountsByCustomerId(Long customerId){
-        ArrayList<Account> accounts = accountRepository.getAccountsByCustomerIds(customerId);
-        return accounts;
-    }
-
-    public ArrayList<Account> getAllAccounts(){
-        ArrayList<Account> accounts = accountRepository.getAllAccounts();
-        return new ArrayList<>();
-    }
-
-    public Account getAccountById(Long accountId){
-        return accountRepository.getAccountById(accountId);
-    }
-
-    public Account updateAccount(Account account, Long accountId){
+    public Account createAccount(Account account){
         return accountRepository.save(account);
     }
 
-    public void deleteAccountById(Long accountId){
-        accountRepository.deleteAccountById(accountId);
+    public Account getAccountByCustomerId (Long customerId){
+        return accountRepository.findAccountByCustomerId(customerId);
+    }
+
+    public List<Account> getAllAccountsByCustomerFirst_Name(String customerFirst_Name){
+        List<Account> accountsList = new ArrayList<>();
+        accountRepository.findByCustomerFirstName(customerFirst_Name).forEach(accountsList::add);
+
+        return accountsList;
+    }
+
+    public Account getAccountById (Long id){
+        return accountRepository.findById(id).orElse(null);
+    }
+
+    public Account updateAccount(Account account){
+        return accountRepository.save(account);
+    }
+
+    public void deleteAccount(Long id){
+        accountRepository.deleteById(id);
     }
 
 }

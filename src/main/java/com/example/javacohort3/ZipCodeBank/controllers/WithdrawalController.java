@@ -38,13 +38,13 @@ public class WithdrawalController {
     }
 
     // Create Withdrawal
-    @RequestMapping(value = "/accounts/{accountId}/withdrawals", method = RequestMethod.POST)
-    public ResponseEntity<?> createWithdrawalFromAccount(@RequestBody Withdrawal withdrawal, @PathVariable Long accountId) {
-        withdrawalService.verifyAccount(accountId);
-
-        Withdrawal w = withdrawalService.createWithdrawalFromAccount(withdrawal, accountId);
-        return new ResponseEntity<>(w, HttpStatus.CREATED);
-    }
+//    @RequestMapping(value = "/accounts/{accountId}/withdrawals", method = RequestMethod.POST)
+//    public ResponseEntity<?> createWithdrawalFromAccount(@RequestBody Withdrawal withdrawal, @PathVariable Long accountId) {
+//        withdrawalService.verifyAccount(accountId);
+//
+//        Withdrawal w = withdrawalService.createWithdrawalFromAccount(withdrawal, accountId);
+//        return new ResponseEntity<>(w, HttpStatus.CREATED);
+//    }
 
     // Update Withdrawal
     @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.PUT)

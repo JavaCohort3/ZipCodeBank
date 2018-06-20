@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -29,33 +30,26 @@ public class CustomerService {
 
     // Get Customer by their Account ID
     public Customer getCustomerByAccountId(Long accountId) {
-        for (Customer c : customerRepository.findAll()) {
-            if(c.getAccountId().equals(accountId)) {
-                return c;
-            }
-//             somehow have code to call the account Id
-//               might need to extend or autowire the accountRepoonce its made
-        }
-
-        throw new ResourceNotFoundException();
+       return customerRepository.findByAccountId(accountId);
     }
 
-    // Get all of our customers //TODO ---- DONE -----
-    public ArrayList<Customer> getAllCustomers() {
-        ArrayList<Customer> customer = new ArrayList<>();
-        customerRepository.findAll().forEach(customer::add);
 
-        return customer;
+    public List<Customer> getAllCustomers() {
+       return (List<Customer>) customerRepository.findAll();
     }
 
     // Get Customer By their ID
     public Customer getCustomerById(Long id) {
-        return customerRepository.getCustomerById(id);
+        return customerRepository.findById(id).orElse(null);
     }
 
     // Update a customer
-    public Customer updateCustomer(Customer customer, Long id) {
-        return customerRepository.updateCustomer(customer);
+    public Customer updateCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    public void deleteCustomer(Long customerId){
+        customerRepository.deleteById(customerId);
     }
 
 }

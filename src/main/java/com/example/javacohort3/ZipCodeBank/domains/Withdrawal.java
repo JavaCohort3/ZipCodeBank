@@ -1,22 +1,35 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import com.example.javacohort3.ZipCodeBank.enums.Medium;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.util.Date;
+
+@Entity
 public class Withdrawal {
 
+    @Id
     private Long id;
-    private String type;
-    private String transaction_date;
-    private String status;
-    private Long payer_id;
-    private String medium;
+    private TransactionType type;
+    private Date transaction_date;
+    private TransactionStatus status;
+    @ManyToOne
+    private Customer payer_id;
+    private Medium medium;
     private Double amount;
     private String description;
-    private Long account_id;
+    @ManyToOne
+    private Account account_id;
 
     public Withdrawal(){
 
     }
 
-    public Withdrawal(Long id, String type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description, Long account_id) {
+    public Withdrawal(Long id, TransactionType type, Date transaction_date, TransactionStatus status, Customer payer_id, Medium medium, Double amount, String description, Account account_id) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -36,43 +49,43 @@ public class Withdrawal {
         this.id = id;
     }
 
-    public String getType() {
+    public TransactionType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TransactionType type) {
         this.type = type;
     }
 
-    public String getTransaction_date() {
+    public Date getTransaction_date() {
         return transaction_date;
     }
 
-    public void setTransaction_date(String transaction_date) {
+    public void setTransaction_date(Date transaction_date) {
         this.transaction_date = transaction_date;
     }
 
-    public String getStatus() {
+    public TransactionStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TransactionStatus status) {
         this.status = status;
     }
 
-    public Long getPayer_id() {
+    public Customer getPayer_id() {
         return payer_id;
     }
 
-    public void setPayer_id(Long payer_id) {
+    public void setPayer_id(Customer payer_id) {
         this.payer_id = payer_id;
     }
 
-    public String getMedium() {
+    public Medium getMedium() {
         return medium;
     }
 
-    public void setMedium(String medium) {
+    public void setMedium(Medium medium) {
         this.medium = medium;
     }
 
@@ -92,11 +105,11 @@ public class Withdrawal {
         this.description = description;
     }
 
-    public Long getAccount_id() {
+    public Account getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(Long account_id) {
+    public void setAccount_id(Account account_id) {
         this.account_id = account_id;
     }
 
