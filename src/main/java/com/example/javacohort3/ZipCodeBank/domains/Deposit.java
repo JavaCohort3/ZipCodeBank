@@ -1,7 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
 import com.example.javacohort3.ZipCodeBank.enums.Medium;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,12 +12,14 @@ public class Deposit implements Serializable  {
     @Id
     private Long id;
     private String type;
+    private TransactionType type;
     private String transaction_date;
     private String status;
     private Long payee_id;
     private Medium medium;
     private Double amount;
     private String description;
+
     @ManyToOne
     private Account account_id;
 
@@ -52,7 +53,8 @@ public class Deposit implements Serializable  {
     public Long getPayee_id() { return payee_id; }
     public void setPayee_id(Long payee_id) { this.payee_id = payee_id; }
 
-    public Enum getMedium() { return medium; }
+    public Medium getMedium() { return medium; }
+      
     public void setMedium(Medium medium) { this.medium = medium; }
 
     public Double getAmount() { return amount; }

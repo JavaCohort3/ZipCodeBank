@@ -13,4 +13,5 @@ public interface DepositRepository extends CrudRepository<Deposit, Long> {
     //ArrayList<Deposit> getAllDepositsForAccountId(Long accountId);
 //    Deposit updateDeposit(Deposit deposit, Long accountId);
 //    void deleteDeposit(Long depositId);
+
 }

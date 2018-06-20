@@ -18,6 +18,11 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    public AccountService() {
+
+    }
+
+
     public void verifyAccountById(Long accountId){
         if(accountRepository.findById(accountId).orElse(null) == null)throw new ResourceNotFoundException();
     }
@@ -25,6 +30,10 @@ public class AccountService {
     public Account createAccountFromCustomerId(Account account, Long costumerId){
        return accountRepository.save(account);
     }
+    public Account getAccountById(Long accountId){
+        return accountRepository.findById(accountId).orElse(null);
+    }
+
     public ArrayList<Account> getAllAccountsByCustomerId(Long customerId){
         return accountRepository.findAllAccountsByCustomerId(customerId);
     }
@@ -45,6 +54,7 @@ public class AccountService {
 
     public void deleteAccount(Long accountId){
         accountRepository.deleteById(accountId);
+
     }
 
 }
