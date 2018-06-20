@@ -11,7 +11,7 @@ public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long accountId;
+    private Long id;
 
     @Transient // not sure if i'm using this 100% correct yet.
     private AccountType type;
@@ -27,7 +27,7 @@ public class Account implements Serializable {
 
 
     public Account(Long id, AccountType type, String nickname, Integer rewards, Double balance, Customer customer) {
-        this.accountId = id;
+        this.id = id;
         this.type = type;
         this.nickname = nickname;
         this.rewards = rewards;
@@ -35,12 +35,12 @@ public class Account implements Serializable {
         this.customer = customer;
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public Long getId() {
+        return id;
     }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
+    public void setId(Long accountId) {
+        this.id = accountId;
     }
 
     public AccountType getType() {
@@ -92,7 +92,7 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "Account{" +
-                "accountId=" + accountId +
+                "id=" + id +
                 ", type=" + type +
                 ", nickname='" + nickname + '\'' +
                 ", rewards=" + rewards +

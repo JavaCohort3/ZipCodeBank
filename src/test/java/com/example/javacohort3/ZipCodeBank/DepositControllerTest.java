@@ -1,28 +1,26 @@
-
-package com.example.javacohort3.ZipCodeBank;
-
-import com.example.javacohort3.ZipCodeBank.controllers.DepositController;
-import com.example.javacohort3.ZipCodeBank.domains.Account;
-import com.example.javacohort3.ZipCodeBank.domains.Deposit;
-import com.example.javacohort3.ZipCodeBank.services.DepositService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.util.ReflectionTestUtils;
-
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-
+//package com.example.javacohort3.ZipCodeBank;
+//
+//import com.example.javacohort3.ZipCodeBank.controllers.DepositController;
+//import com.example.javacohort3.ZipCodeBank.domains.Account;
+//import com.example.javacohort3.ZipCodeBank.domains.Deposit;
+//import com.example.javacohort3.ZipCodeBank.services.DepositService;
+//import org.junit.Assert;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.mockito.Mock;
+//import org.mockito.MockitoAnnotations;
+//import org.springframework.boot.SpringBootConfiguration;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+//import org.springframework.test.context.web.WebAppConfiguration;
+//import org.springframework.test.util.ReflectionTestUtils;
+//
+//import static org.mockito.Mockito.times;
+//import static org.mockito.Mockito.verify;
+//import static org.mockito.Mockito.when;
+//
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringBootConfiguration
 //@WebAppConfiguration
@@ -42,8 +40,8 @@ import static org.mockito.Mockito.when;
 //
 //        Account account = new Account();
 //        Deposit deposit = new Deposit();
-//        account.setId(new Long(3));
-//        Long accountId = account.getId();
+//        account.setAccountId(new Long(3));
+//        Long accountId = account.getAccountId();
 //        deposit.setAccount_id(accountId);
 //
 //        depositService.createDepositByFromAccountId(deposit, accountId);
@@ -59,8 +57,8 @@ import static org.mockito.Mockito.when;
 //        ReflectionTestUtils.setField(controller, "depositService", depositService);
 //
 //        Deposit deposit = new Deposit();
-//        deposit.setId(new Long(5));
-//        Long id = deposit.getId();
+//        deposit.setAccountId(new Long(5));
+//        Long id = deposit.getAccountId();
 //
 //        when(depositService.getDepositById(id)).thenReturn(deposit);
 //        ResponseEntity<?> depositReturned = controller.getDepositById(id);
@@ -75,8 +73,8 @@ import static org.mockito.Mockito.when;
 //
 //        Account account = new Account();
 //        Deposit deposit = new Deposit();
-//        account.setId(new Long(3));
-//        Long accountId = account.getId();
+//        account.setAccountId(new Long(3));
+//        Long accountId = account.getAccountId();
 //        deposit.setAccount_id(accountId);
 //
 //        when(depositService.createDepositByFromAccountId(deposit, accountId)).thenReturn(deposit);
@@ -91,8 +89,8 @@ import static org.mockito.Mockito.when;
 //        ReflectionTestUtils.setField(controller, "depositService", depositService);
 //
 //        Deposit deposit = new Deposit();
-//        deposit.setId(new Long(5));
-//        Long id = deposit.getId();
+//        deposit.setAccountId(new Long(5));
+//        Long id = deposit.getAccountId();
 //
 //        when(depositService.updateDeposit(deposit)).thenReturn(deposit);
 //        ResponseEntity<?> depositCreated = controller.updateDeposit(deposit, id);
@@ -106,8 +104,8 @@ import static org.mockito.Mockito.when;
 //        ReflectionTestUtils.setField(controller, "depositService", depositService);
 //
 //        Deposit deposit = new Deposit();
-//        deposit.setId(new Long(5));
-//        Long id = deposit.getId();
+//        deposit.setAccountId(new Long(5));
+//        Long id = deposit.getAccountId();
 //
 //        depositService.deleteDeposit(id);
 //        when(depositService.getDepositById(id)).thenReturn(null);
