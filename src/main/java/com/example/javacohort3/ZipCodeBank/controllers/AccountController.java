@@ -124,5 +124,4 @@ public class AccountController {
 
         return new ResponseEntity<> (status);
     }
-
 }
