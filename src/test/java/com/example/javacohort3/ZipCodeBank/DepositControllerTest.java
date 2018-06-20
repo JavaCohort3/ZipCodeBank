@@ -1,28 +1,26 @@
-
-package com.example.javacohort3.ZipCodeBank;
-
-import com.example.javacohort3.ZipCodeBank.controllers.DepositController;
-import com.example.javacohort3.ZipCodeBank.domains.Account;
-import com.example.javacohort3.ZipCodeBank.domains.Deposit;
-import com.example.javacohort3.ZipCodeBank.services.DepositService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.util.ReflectionTestUtils;
-
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-
+//package com.example.javacohort3.ZipCodeBank;
+//
+//import com.example.javacohort3.ZipCodeBank.controllers.DepositController;
+//import com.example.javacohort3.ZipCodeBank.domains.Account;
+//import com.example.javacohort3.ZipCodeBank.domains.Deposit;
+//import com.example.javacohort3.ZipCodeBank.services.DepositService;
+//import org.junit.Assert;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.mockito.Mock;
+//import org.mockito.MockitoAnnotations;
+//import org.springframework.boot.SpringBootConfiguration;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+//import org.springframework.test.context.web.WebAppConfiguration;
+//import org.springframework.test.util.ReflectionTestUtils;
+//
+//import static org.mockito.Mockito.times;
+//import static org.mockito.Mockito.verify;
+//import static org.mockito.Mockito.when;
+//
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringBootConfiguration
 //@WebAppConfiguration

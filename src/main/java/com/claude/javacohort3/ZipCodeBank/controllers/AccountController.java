@@ -2,15 +2,21 @@ package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Customer;
+import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.services.AccountService;
+import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,6 +35,7 @@ public class AccountController {
     @RequestMapping(value = "/customer/{customerFirst_Name}/accounts", method = RequestMethod.GET)
     public ResponseEntity<?> getAllAccounts(@PathVariable String customerFirst_Name) {
         HttpStatus status = HttpStatus.OK;
+
         List<Account> allAccounts = accountService.getAllAccountsByCustomerFirst_Name(customerFirst_Name);
         log.info("Get accounts");
         return new ResponseEntity<>(allAccounts, status);
@@ -40,10 +47,13 @@ public class AccountController {
         HttpStatus status;
         Object response;
         Account account = accountService.getAccountById(accountId);
+
         accountService.verifyAccountById(accountId);
+
         log.info("[Get]" + account);
         status = HttpStatus.OK;
         response = account;
+
         return new ResponseEntity<>(response, status);
     }
 
@@ -60,6 +70,8 @@ public class AccountController {
         HttpStatus status = HttpStatus.CREATED;
         account.setCustomer(new Customer(customerId,null,"","",null));
         Account a = accountService.createAccount(account);
+
+
         log.info("[POST] " + a);
         return new ResponseEntity<>(a, status);
     }
@@ -68,7 +80,11 @@ public class AccountController {
     @RequestMapping(value = "/customers/{customerId}/accounts/{accountId}", method = RequestMethod.PUT)
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long customerId ,@PathVariable Long accountId) {
         HttpStatus status;
+
+
         Account oldAccount = accountService.updateAccount(account);
+
+
         if(oldAccount.equals(accountService.getAccountById(accountId))){
             account.setCustomer(new Customer(customerId,null,"","",null));
             Account a = accountService.createAccount(account);
@@ -80,21 +96,17 @@ public class AccountController {
             status = HttpStatus.CREATED;
             return new ResponseEntity<>(status);
         }
+
+
     }
 
-
-    @RequestMapping(value = "accounts/{accountId}", method = RequestMethod.PUT)
-    public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {
-        Account old_account = accountService.getAccountById(accountId);
-        Account new_account = accountService.updateAccount(account);
-        return new ResponseEntity<>(account, HttpStatus.CREATED);
-    }
-
-    @RequestMapping(value = "/accounts/{accountId", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteAccountById(@PathVariable Long accountId){
+    @RequestMapping(value = "/customers/{customerId}/accounts/{accountId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
         HttpStatus status = HttpStatus.NO_CONTENT;
+
         accountService.deleteAccount(accountId);
         log.info("Deleted" + accountId);
+
         return new ResponseEntity<> (status);
     }
 }

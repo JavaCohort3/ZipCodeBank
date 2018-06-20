@@ -60,6 +60,7 @@ public class DepositController {
             // deposit was non-existent
             isNew = true;
         }
+
         return new ResponseEntity<>(deposit, isNew ? HttpStatus.CREATED : HttpStatus.OK);
     }
 
