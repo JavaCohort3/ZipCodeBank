@@ -3,17 +3,20 @@ package com.example.javacohort3.ZipCodeBank.domains;
 import com.example.javacohort3.ZipCodeBank.enums.AccountType;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Account {
 
-    @ManyToOne
+    @Id
     private Long id;
     private AccountType type;
     private String nickname;
     private Integer rewards;
     private Double balance;
+
+    @ManyToOne
     private Customer customer;
 
     public Account(){}
