@@ -8,18 +8,19 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long accountId;
+    private Long id;
     private AccountType type;
     private String nickname;
     private Integer rewards;
     private Double balance;
+
     @ManyToOne
     private Customer customer;
 
     public Account(){}
 
-    public Account(Long accountId, AccountType type, String nickname, Integer rewards, Double balance, Customer customer) {
-        this.accountId = accountId;
+    public Account(Long id, AccountType type, String nickname, Integer rewards, Double balance, Customer customer) {
+        this.id = id;
         this.type = type;
         this.nickname = nickname;
         this.rewards = rewards;
@@ -31,8 +32,8 @@ public class Account {
         return accountId;
     }
 
-    public void setId(Long accountId) {
-        this.accountId = accountId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public AccountType getType() {
@@ -42,6 +43,12 @@ public class Account {
     public void setType(AccountType type) {
         this.type = type;
     }
+
+    //serialization method
+    public String getTypeValue(AccountType type){
+        return type.toValue();
+    }
+    public void setTypeValue(){}
 
     public String getNickname() {
         return nickname;
@@ -78,7 +85,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + accountId +
+                "id=" + id +
                 ", type=" + type +
                 ", nickname='" + nickname + '\'' +
                 ", rewards=" + rewards +

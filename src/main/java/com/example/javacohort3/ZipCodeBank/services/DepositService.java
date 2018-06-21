@@ -1,6 +1,5 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
-import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Deposit;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
@@ -21,9 +20,6 @@ public class DepositService {
     @Autowired
     AccountService accountService;
 
-
-
-
     public void verifyDeposit(Long depositId, Long accountId) {
         accountService.verifyAccountById(accountId);
         if (depositRepository.findById(depositId).orElse(null) == null) throw new ResourceNotFoundException();
@@ -38,7 +34,7 @@ public class DepositService {
     }
 
     public Deposit getDepositById(Long id) {
-        return depositRepository.findById(id).orElse(null);
+        return depositRepository.findDepositById(id);
     }
 
     public List<Deposit> getAllDepositsForAccountId(Long accountId) {

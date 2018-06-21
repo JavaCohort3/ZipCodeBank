@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface DepositRepository extends CrudRepository<Deposit, Long> {
-
     //public Deposit saveByAccountId(Deposit deposit,Long accountId);
     public List<Deposit> findByAccountId(Long accountId);
-
 }

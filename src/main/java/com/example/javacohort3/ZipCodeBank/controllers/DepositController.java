@@ -1,7 +1,9 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Deposit;
+import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.services.DepositService;
+import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,13 +45,22 @@ public class DepositController {
         return new ResponseEntity<>(d, HttpStatus.CREATED);
     }
 
-//    // Update Deposit
-//    @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.PUT)
-//    public ResponseEntity<?> updateDeposit(@RequestBody Deposit deposit, @PathVariable Long depositId) {
-//        Deposit old_deposit = depositService.getDepositById(depositId);
-//        Deposit new_deposit = depositService.updateDeposit(deposit);
-//        return new ResponseEntity<>(deposit, HttpStatus.OK);
-//    }
+    // Update Deposit
+    @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateDeposit(@RequestBody Deposit deposit, @PathVariable Long depositId) {
+        HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor hasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor = new HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor();
+        Boolean isNew = hasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor.wellHasItThen();
+
+        try {
+            // deposit already exists
+            depositService.verifyDeposit(depositId);
+        } catch (ResourceNotFoundException rnfe) {
+            // deposit was non-existent
+            isNew = true;
+        }
+
+        return new ResponseEntity<>(deposit, isNew ? HttpStatus.CREATED : HttpStatus.OK);
+    }
 
     // Delete Deposit
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.DELETE)

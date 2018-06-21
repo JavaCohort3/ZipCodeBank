@@ -12,6 +12,7 @@ import java.util.Date;
 @Entity
 public class Deposit {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private TransactionType type;
     private Date transaction_date;
@@ -24,12 +25,7 @@ public class Deposit {
     @ManyToOne
     private Account accountId;
 
-
-
-
-    public Deposit() {
-
-    }
+    public Deposit() {}
 
     public Deposit(Long id, TransactionType type, Date transaction_date, TransactionStatus status, Customer payee_id, Medium medium, Double amount, String description, Account accountId) {
         this.id = id;

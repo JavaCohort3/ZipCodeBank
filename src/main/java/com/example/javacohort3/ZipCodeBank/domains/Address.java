@@ -7,8 +7,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Integer street_number;
     private String street_name;
