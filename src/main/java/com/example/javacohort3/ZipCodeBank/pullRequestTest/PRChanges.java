@@ -1,6 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.pullRequestTest;
 
-public class PRClass {
+public class PRChanges {
 
     private Long id;
 
@@ -8,7 +8,7 @@ public class PRClass {
 
     private String lastName;
 
-    public PRClass(Long id, String firstName, String lastName) {
+    public PRChanges(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,7 +40,7 @@ public class PRClass {
 
     @Override
     public String toString() {
-        return "PRClass{" +
+        return "PRChanges{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
