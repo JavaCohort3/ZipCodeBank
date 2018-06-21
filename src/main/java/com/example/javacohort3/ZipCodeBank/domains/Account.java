@@ -6,6 +6,7 @@ import com.example.javacohort3.ZipCodeBank.enums.AccountType;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
 @Entity
 public class Account implements Serializable {
 

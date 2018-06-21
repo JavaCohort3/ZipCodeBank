@@ -1,8 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
 
-import org.hibernate.annotations.ManyToAny;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +9,7 @@ import java.util.Date;
 
 @Entity
 public class Bill implements Serializable {
+
 
     @Id
     private Long id;

@@ -29,6 +29,7 @@ public class WithdrawalController {
         return new ResponseEntity<>(withdrawals, HttpStatus.OK);
     }
 
+
     // Get Withdrawal (By ID)
     @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.GET)
     public ResponseEntity<?> getWithdrawalById(@PathVariable Long withdrawalId) {

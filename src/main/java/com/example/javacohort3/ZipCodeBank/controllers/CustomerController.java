@@ -36,6 +36,7 @@ public class CustomerController {
         return new ResponseEntity<>(customer, status);
     }
 
+
     // Get all Customers
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ResponseEntity<?> getAllCustomers() {

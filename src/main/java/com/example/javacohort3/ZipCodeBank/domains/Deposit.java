@@ -128,5 +128,6 @@ public class Deposit {
                 ", description='" + description + '\'' +
                 ", accountId=" + accountId +
                 '}';
+
     }
 }

@@ -28,6 +28,7 @@ public class WithdrawalService {
         if(withdrawalRepository.findById(withdrawalId).orElse(null) == null) throw new ResourceNotFoundException();
     }
 
+
 //    public Withdrawal createWithdrawalFromAccount (Withdrawal withdrawal, Long accountId) {
 //        Account account = accountRepository.findById(accountId).orElse(null);
 //        account.setBalance(account.getBalance() - withdrawal.getAmount());

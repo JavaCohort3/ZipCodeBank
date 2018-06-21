@@ -12,6 +12,7 @@ import java.util.Date;
 @Entity
 public class Withdrawal {
 
+
     @Id
     private Long id;
     private TransactionType type;
