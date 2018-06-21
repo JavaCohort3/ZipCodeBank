@@ -20,11 +20,8 @@ public class WithdrawalService {
         this.accountRepository = accountRepository;
         this.withdrawalRepository = withdrawalRepository;
     }
-
-    public void verifyAccount(
-            Long account_Id){
-        if(accountRepository.findById(account_Id).equals(null)) throw new ResourceNotFoundException();
-    }
+  
+    public void verifyAccount(Long accountId){ }
 
     public void verifyWithdrawal(Long withdrawalId){
         if(withdrawalRepository.findById(withdrawalId).orElse(null) == null) throw new ResourceNotFoundException();

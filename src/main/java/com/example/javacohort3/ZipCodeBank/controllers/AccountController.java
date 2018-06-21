@@ -1,8 +1,10 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
+import com.example.javacohort3.ZipCodeBank.domains.Customer;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.services.AccountService;
+import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -28,23 +31,21 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-
-
-    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllAccounts() {
+    @RequestMapping(value = "/customer/{customerFirst_Name}/accounts", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllAccounts(@PathVariable String customerFirst_Name) {
         HttpStatus status = HttpStatus.OK;
 
-        ArrayList<Account> account = accountService.getAllAccounts();
-
+        List<Account> allAccounts = accountService.getAllAccountsByCustomerFirst_Name(customerFirst_Name);
         log.info("Get accounts");
-        return new ResponseEntity<>(account, status);
+        return new ResponseEntity<>(allAccounts, status);
     }
 
 
-    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET)
+    @RequestMapping(value = "customers/{customerId}/accounts/{accountId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
-
-        log.info("[Get]" + accountId);
+        log.info("[Get]" + account);
+        status = HttpStatus.OK;
+        response = account;
 
         return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
     }
@@ -52,46 +53,53 @@ public class AccountController {
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
         HttpStatus status = HttpStatus.OK;
-        accountService.getAllAccountsByCustomerId(customerId);
-        log.info("[Get]" + customerId);
-        return new ResponseEntity<>(customerId, status);
+      
+        Account customerInfo = accountService.getAccountByCustomerId(customerId);
+            log.info("[Get]" + customerId);
+        return new ResponseEntity<>(customerInfo, status);
     }
 
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
         HttpStatus status = HttpStatus.CREATED;
+        account.setCustomer(new Customer(customerId,null,"","",null));
+        Account a = accountService.createAccount(account);
 
-        Account a = accountService.createAccountFromCustomerId(account, customerId);
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        URI newUri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{customerId}/accounts")
-                .buildAndExpand(a.getId())
-                .toUri();
-
-        httpHeaders.setLocation(newUri);
 
         log.info("[POST] " + a);
-        return new ResponseEntity<>(a, httpHeaders, status);
+        return new ResponseEntity<>(a, status);
     }
 
-    @RequestMapping(value = "accounts/{accountId}", method = RequestMethod.PUT)
-    public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {
-        Account old_account = accountService.getAccountById(accountId);
-        Account new_account = accountService.updateAccount(account);
-        return new ResponseEntity<>(account, HttpStatus.CREATED);
+    @RequestMapping(value = "/customers/{customerId}/accounts/{accountId}", method = RequestMethod.PUT)
+    public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long customerId ,@PathVariable Long accountId) {
+        HttpStatus status;
+
+
+        Account oldAccount = accountService.updateAccount(account);
+
+
+        if(oldAccount.equals(accountService.getAccountById(accountId))){
+            account.setCustomer(new Customer(customerId,null,"","",null));
+            Account a = accountService.createAccount(account);
+            log.info("[updated]" + account);
+            status = HttpStatus.OK;
+            return new ResponseEntity<>(a,status);
+        }else{
+            log.info("[created]" + account);
+            status = HttpStatus.CREATED;
+            return new ResponseEntity<>(status);
+        }
+
+
     }
 
-    @RequestMapping(value = "/accounts/{accountId", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteAccountById(@PathVariable Long accountId){
+    @RequestMapping(value = "/customers/{customerId}/accounts/{accountId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
         HttpStatus status = HttpStatus.NO_CONTENT;
-        Account account = accountService.getAccountById(accountId);
 
         accountService.deleteAccount(accountId);
         log.info("Deleted" + accountId);
 
-        return new ResponseEntity<>(account, status);
+        return new ResponseEntity<> (status);
     }
-
 }

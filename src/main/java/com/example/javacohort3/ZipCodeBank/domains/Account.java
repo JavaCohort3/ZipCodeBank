@@ -1,21 +1,15 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
-
 import com.example.javacohort3.ZipCodeBank.enums.AccountType;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-public class Account implements Serializable {
-
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Transient // not sure if i'm using this 100% correct yet.
     private AccountType type;
-
     private String nickname;
     private Integer rewards;
     private Double balance;
@@ -35,7 +29,7 @@ public class Account implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return accountId;
     }
 
     public void setId(Long id) {

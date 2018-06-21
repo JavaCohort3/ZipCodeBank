@@ -15,17 +15,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CustomerController {
 
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
+    @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
+
 
     // Get a Customer by their Account ID
     @RequestMapping(value ="/accounts/{accountId}/customer", method = RequestMethod.GET)
@@ -42,7 +41,7 @@ public class CustomerController {
     public ResponseEntity<?> getAllCustomers() {
         HttpStatus status = HttpStatus.OK;
 
-        ArrayList<Customer> customers = customerService.getAllCustomers();
+        List<Customer> customers = customerService.getAllCustomers();
 
         log.info("[GET ALL PEOPLE]: " + customers);
         return new ResponseEntity<>(customers, status);
@@ -52,10 +51,10 @@ public class CustomerController {
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
         HttpStatus status = HttpStatus.OK;
-        Customer customer = customerService.getCustomerById(id);
-
         // throw error if (customer == null)
         customerService.verifyCustomer(id);
+        Customer customer = customerService.getCustomerById(id);
+
 
         //if they do exist
         log.info("[GET BY ID]: " + customer);
@@ -78,18 +77,31 @@ public class CustomerController {
         httpHeaders.setLocation(newUri);
 
         log.info("[POST " + c);
-        return new ResponseEntity<>(c, status);
+        return new ResponseEntity<>(c,httpHeaders, status);
     }
 
     // Update a Customer by their ID
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
-        HttpStatus status = HttpStatus.OK;
-        customerService.updateCustomer(customer, id);
-        customerService.verifyCustomer(id);
+        HttpStatus status;
+        Customer c = customerService.updateCustomer(customer);
+        if (customerService.updateCustomer(customer).equals(customerService.getCustomerById(id))){
+            status = HttpStatus.OK;
+            log.info("[PUT-UPDATE]: " + customer);
+            return new ResponseEntity<>(c,status);
+        }else {
+            status = HttpStatus.CREATED;
+            log.info("[PUT-UPDATE(CREATED)]: " + customer);
+            return new ResponseEntity<>(c,status);
+        }
 
-        log.info("[PUT-UPDATE]: " + customer);
-        return new ResponseEntity<>(customer, status);
+
+    }
+
+    @RequestMapping(value = "/customers/{customerId}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long customerId){
+        customerService.deleteCustomer(customerId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

@@ -4,15 +4,9 @@ import com.example.javacohort3.ZipCodeBank.domains.Bill;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface BillRepository extends CrudRepository<Bill,Long> {
-
-
-//        Bill findBillByAccountId(Bill bill, Long id);
-//        Bill getBillById(Long id);
-//        ArrayList<Bill> getAllBill();
-//        ArrayList<Bill> getBillsByCustomerId(Long id);
-//        Bill updateBill(Bill bill);
-//        void deleteBill(Long id);
-
+        List<Bill> findByCustomerId(Long customerId);
+        List<Bill> findByAccountId(Long accountId);
 }

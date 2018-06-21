@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 
+import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Bill;
 import com.example.javacohort3.ZipCodeBank.services.BillService;
 import org.slf4j.Logger;
@@ -27,60 +28,56 @@ public class BillController {
     }
 
     @RequestMapping(value = "/accounts/{accountId}/bills",method = RequestMethod.GET)
-    public ResponseEntity<?> getBillByAccountId(@PathVariable Long id) {
-        log.info("Getting Bill By Account Id : " + id);
-        return new ResponseEntity<>(billService.getAllBillByAccountId(id), HttpStatus.OK);
+    public ResponseEntity<?> getBillByAccountId(@PathVariable Long accountId) {
+        log.info("Getting Bill By Account Id : " + accountId);
+        return new ResponseEntity<>(billService.getAllBillByAccountId(accountId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customers/{customerId}/bills",method = RequestMethod.GET)
-    public ResponseEntity<?> getBillByCustomerId(@PathVariable Long id) {
-        log.info("Getting Bill By Customer Id : " + id);
-        return new ResponseEntity<>(billService.getBillsByCustomerId(id), HttpStatus.OK);
+    public ResponseEntity<?> getBillByCustomerId(@PathVariable Long customerId) {
+        log.info("Getting Bill By Customer Id : " + customerId);
+        return new ResponseEntity<>(billService.getBillsByCustomerId(customerId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getBillById(@PathVariable Long id){
-        log.info("Getting Bill By Bill Id : " + id);
-        return new ResponseEntity<>(billService.getBillById(id),HttpStatus.OK);
+    public ResponseEntity<?> getBillById(@PathVariable Long billId){
+        log.info("Getting Bill By Bill Id : " + billId);
+        return new ResponseEntity<>(billService.getBillById(billId),HttpStatus.OK);
     }
 
     @RequestMapping(value = "/accounts/{accountId}/bills",method = RequestMethod.POST)
-    public ResponseEntity<?> createBill (@RequestBody Bill bill,@PathVariable Long id){
+    public ResponseEntity<?> createBill (@RequestBody Bill bill,@PathVariable Long accountId ){
+        bill.setAccountId(new Account(accountId,null,null,null,null,null));
+        bill = billService.createBill(bill,accountId);
 
-        bill = billService.createBill(bill,id);
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        URI newUri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{accountId}/bills")
-                .buildAndExpand(bill.getId())
-                .toUri();
-
-        httpHeaders.setLocation(newUri);
         log.info("Creating a bill : " + bill);
-        return new ResponseEntity<>(bill,httpHeaders,HttpStatus.OK);
+        return new ResponseEntity<>(bill,HttpStatus.OK);
 
     }
 
-    @RequestMapping(value = "/bills/{billId}",method = RequestMethod.PUT)
-    public ResponseEntity<?> updateBill(@RequestBody Bill bill, @PathVariable Long id){
+    @RequestMapping(value = "/accounts/{accountId}/bills/{id}",method = RequestMethod.PUT)
+    public ResponseEntity<?> updateBill(@RequestBody Bill bill, @PathVariable Long id,@PathVariable Long accountId ){
         HttpStatus status;
         Bill oldBill = billService.getBillById(id);
+        bill.setAccountId(new Account(accountId,null,null,null,null,null));
 
-        billService.updateBill(bill);
 
-        if (oldBill != null){
+        if (billService.updateBill(bill).equals(oldBill)){
+            billService.updateBill(bill);
             log.info("Bill consist of  : ",oldBill);
             status = HttpStatus.OK;
+            return new ResponseEntity<>(status);
         }else {
+            billService.updateBill(bill);
             log.info("Bill didn't exist so created");
             status = HttpStatus.CREATED;
+            log.info("Creating a updating Bill : " + bill);
+            return new ResponseEntity<>(status);
         }
-        log.info("Creating a updating Bill : " + bill);
-        return new ResponseEntity<>(bill,status);
+
     }
 
-    @RequestMapping(value = "/bills/{billId}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/bills/{id}",method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteBill (@PathVariable Long id){
         HttpStatus status;
 
