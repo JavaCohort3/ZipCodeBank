@@ -1,6 +1,7 @@
-package io.elitejava3.BankAPI.repositories;
+package com.example.javacohort3.ZipCodeBank.repositories;
 
-import io.elitejava3.BankAPI.domains.Account;
+
+import com.example.javacohort3.ZipCodeBank.domains.Account;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AccountRepository extends CrudRepository<Account, Long> {

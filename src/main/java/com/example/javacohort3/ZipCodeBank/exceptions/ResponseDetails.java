@@ -1,4 +1,4 @@
-package io.elitejava3.BankAPI.exceptions;
+package com.example.javacohort3.ZipCodeBank.exceptions;
 
 public class ResponseDetails {
     private int status;

@@ -1,10 +1,10 @@
-package io.elitejava3.BankAPI.services;
+package com.example.javacohort3.ZipCodeBank.services;
 
-import io.elitejava3.BankAPI.domains.Account;
-import io.elitejava3.BankAPI.domains.Customer;
-import io.elitejava3.BankAPI.exceptions.ResourceNotFoundException;
-import io.elitejava3.BankAPI.repositories.AccountRepository;
-import io.elitejava3.BankAPI.repositories.CustomerRepository;
+import com.example.javacohort3.ZipCodeBank.domains.Account;
+import com.example.javacohort3.ZipCodeBank.domains.Customer;
+import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
+import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
+import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

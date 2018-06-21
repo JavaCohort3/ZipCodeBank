@@ -1,7 +1,6 @@
-package io.elitejava3.BankAPI.exceptions;
+package com.example.javacohort3.ZipCodeBank.exceptions;
 
-import io.elitejava3.BankAPI.exceptions.ResourceNotFoundException;
-import io.elitejava3.BankAPI.exceptions.ResponseDetails;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

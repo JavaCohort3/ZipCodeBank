@@ -1,7 +1,9 @@
-package io.elitejava3.BankAPI.domains;
+package com.example.javacohort3.ZipCodeBank.domains;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.TreeSet;
+
 @Entity
 public class Customer {
     @Id
@@ -12,7 +14,7 @@ public class Customer {
     private String last_name;
     @ElementCollection
     @Transient
-    private Set<Address> addresses;
+    private Set<Address> addresses = new TreeSet<>();
 
     public Customer(){}
 

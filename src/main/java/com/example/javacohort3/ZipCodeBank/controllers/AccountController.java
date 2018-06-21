@@ -1,8 +1,8 @@
-package io.elitejava3.BankAPI.controllers;
+package com.example.javacohort3.ZipCodeBank.controllers;
 
-import io.elitejava3.BankAPI.domains.Account;
-import io.elitejava3.BankAPI.domains.Customer;
-import io.elitejava3.BankAPI.services.AccountService;
+import com.example.javacohort3.ZipCodeBank.domains.Account;
+
+import com.example.javacohort3.ZipCodeBank.services.AccountService;
 import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
