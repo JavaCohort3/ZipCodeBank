@@ -1,7 +1,21 @@
-package com.example.javacohort3.ZipCodeBank.exceptions;
+package io.elitejava3.BankAPI.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException() {}
-    public ResourceNotFoundException(String message) {}
-    public ResourceNotFoundException(String message, Throwable throwable) {};
+
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+
+    public ResourceNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public ResourceNotFoundException(Throwable cause) {
+        super(cause);
+    }
+
+    public ResourceNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

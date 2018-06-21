@@ -1,33 +1,25 @@
-package com.example.javacohort3.ZipCodeBank.domains;
+package io.elitejava3.BankAPI.domains;
 
-
-import com.example.javacohort3.ZipCodeBank.enums.AccountType;
+import io.elitejava3.BankAPI.enums.AccountType;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-public class Account implements Serializable {
-
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long accountId;
-
-    @Transient // not sure if i'm using this 100% correct yet.
-    private AccountType type;
-
+    private Long id;
+    private AccountType type;//ENUM serialized as a string
     private String nickname;
     private Integer rewards;
     private Double balance;
-
     @ManyToOne
     private Customer customer;
 
     public Account(){}
 
-
     public Account(Long id, AccountType type, String nickname, Integer rewards, Double balance, Customer customer) {
-        this.accountId = id;
+        this.id = id;
         this.type = type;
         this.nickname = nickname;
         this.rewards = rewards;
@@ -35,64 +27,34 @@ public class Account implements Serializable {
         this.customer = customer;
     }
 
-    public Long getAccountId() {
-        return accountId;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
-
-    public AccountType getType() {
-        return type;
-    }
-
+    public AccountType getType() { return type; }
     public void setType(AccountType type) {
         this.type = type;
     }
 
-    //serialization method
-    public String getTypeValue(AccountType type){
-        return type.toValue();
-    }
-    public void setTypeValue(){}
-
-    public String getNickname() {
-        return nickname;
-    }
-
+    public String getNickname() { return nickname; }
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    public Integer getRewards() {
-        return rewards;
-    }
-
+    public Integer getRewards() { return rewards; }
     public void setRewards(Integer rewards) {
         this.rewards = rewards;
     }
 
-    public Double getBalance() {
-        return balance;
-    }
+    public Double getBalance() { return balance; }
+    public void setBalance(Double balance) { this.balance = balance; }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
 
     @Override
     public String toString() {
         return "Account{" +
-                "accountId=" + accountId +
+                "id=" + id +
                 ", type=" + type +
                 ", nickname='" + nickname + '\'' +
                 ", rewards=" + rewards +

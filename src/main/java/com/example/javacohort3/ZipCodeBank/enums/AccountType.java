@@ -1,11 +1,9 @@
-package com.example.javacohort3.ZipCodeBank.enums;
-
+package io.elitejava3.BankAPI.enums;
 
 public enum AccountType {
     SAVINGS("Savings"),
     CHECKING("Checking"),
     CREDIT("Credit");
-
 
     private final String value;
 
@@ -34,4 +32,5 @@ public enum AccountType {
     public static AccountType getDefault() {
         return CHECKING;
     }
+
 }

@@ -1,34 +1,30 @@
-package com.example.javacohort3.ZipCodeBank.domains;
+package io.elitejava3.BankAPI.domains;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Integer street_number;
+    private String street_number;
     private String street_name;
     private String city;
     private String state;
-    private Integer zipCode;
-    @ManyToOne
-    private Customer customer;
+    private String zipCode;
 
-    public Address() { }
+    public Address(){}
 
-    public Address(Long id, Integer street_number, String street_name,
-                   String city, String state, Integer zipCode, Customer customer) {
+    public Address(Long id, String street_number, String street_name, String city, String state, String zipCode) {
         this.id = id;
         this.street_number = street_number;
         this.street_name = street_name;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
-        this.customer = customer;
     }
 
     public Long getId() {
@@ -39,11 +35,11 @@ public class Address {
         this.id = id;
     }
 
-    public Integer getStreet_number() {
+    public String getStreet_number() {
         return street_number;
     }
 
-    public void setStreet_number(Integer street_number) {
+    public void setStreet_number(String street_number) {
         this.street_number = street_number;
     }
 
@@ -71,33 +67,23 @@ public class Address {
         this.state = state;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     @Override
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", street_number=" + street_number +
+                ", street_number='" + street_number + '\'' +
                 ", street_name='" + street_name + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
-                ", zipCode=" + zipCode +
-                ", customer=" + customer +
+                ", zipCode='" + zipCode + '\'' +
                 '}';
     }
-
 }

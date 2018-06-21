@@ -1,8 +1,10 @@
-package com.example.javacohort3.ZipCodeBank.services;
+package io.elitejava3.BankAPI.services;
 
-import com.example.javacohort3.ZipCodeBank.domains.Account;
-import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
-import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
+import io.elitejava3.BankAPI.domains.Account;
+import io.elitejava3.BankAPI.domains.Customer;
+import io.elitejava3.BankAPI.exceptions.ResourceNotFoundException;
+import io.elitejava3.BankAPI.repositories.AccountRepository;
+import io.elitejava3.BankAPI.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,52 +15,39 @@ import java.util.List;
 public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
+    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
-    public AccountService(AccountRepository accountRepository) {
+    public AccountService(AccountRepository accountRepository, CustomerRepository customerRepository, CustomerService customerService) {
         this.accountRepository = accountRepository;
+        this.customerRepository = customerRepository;
+        this.customerService = customerService;
     }
 
-    public AccountService() {
-
-    }
-
-
-    public void verifyAccountById(Long accountId){
-        if(accountRepository.existsByAccountId(accountId)){
-            getAccountById(accountId);
-        }
-        else {
-            throw new ResourceNotFoundException();
-        }
+    public void verifyAccountById(Long id){
+        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException();
     }
 
     public Account createAccount(Account account){
         return accountRepository.save(account);
     }
 
-    public Account getAccountByCustomerId (Long customerId){
-        return accountRepository.findAccountByCustomerId(customerId);
-    }
-
-    public List<Account> getAllAccountsByCustomerFirst_Name(String customerFirst_Name){
-        List<Account> accountsList = new ArrayList<>();
-        accountRepository.findByCustomerFirstName(customerFirst_Name).forEach(accountsList::add);
-
-        return accountsList;
+    public Account getAccountsByCustomerId(Long customerId){
+        customerService.verifyCustomer(customerId);
+        Customer c = customerRepository.findCustomerById(customerId);
+        ArrayList<Account> accounts = (ArrayList<Account>) accountRepository.findAll();
+        return accounts.stream().filter(x -> x.getCustomer().getId().equals(customerId)).findFirst().get();
     }
 
     public Account getAccountById (Long id){
-        return accountRepository.findById(id).orElse(null);
-
+        return accountRepository.findAccountById(id);
     }
 
     public Account updateAccount(Account account){
         return accountRepository.save(account);
     }
 
-
     public void deleteAccount(Long id){
-        accountRepository.deleteById(id);
+        accountRepository.deleteAccountById(id);
     }
-
 }

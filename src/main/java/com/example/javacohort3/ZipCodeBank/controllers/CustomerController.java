@@ -1,8 +1,7 @@
-package com.example.javacohort3.ZipCodeBank.controllers;
+package io.elitejava3.BankAPI.controllers;
 
-import com.example.javacohort3.ZipCodeBank.domains.Customer;
-import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
-import com.example.javacohort3.ZipCodeBank.services.CustomerService;
+import io.elitejava3.BankAPI.domains.Customer;
+import io.elitejava3.BankAPI.services.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +18,21 @@ import java.util.List;
 
 @RestController
 public class CustomerController {
-
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     @Autowired
     private CustomerService customerService;
 
 
 
-    // Get a Customer by their Account ID
-    @RequestMapping(value ="/accounts/{accountId}/customer", method = RequestMethod.GET)
-    public ResponseEntity<?> getCustomerByAccountId(@PathVariable Long accountId) {
-        HttpStatus status = HttpStatus.OK;
-        Customer customer = customerService.getCustomerByAccountId(accountId);
-
-        log.info("[GET BY ACCOUNT ID]: " + customer);
-        return new ResponseEntity<>(customer, status);
-    }
+//    // Get a Customer by their Account ID
+//    @RequestMapping(value ="/accounts/{accountId}/customer", method = RequestMethod.GET)
+//    public ResponseEntity<?> getCustomerByAccountId(@PathVariable Long accountId) {
+//        HttpStatus status = HttpStatus.OK;
+//        Customer customer = customerService.getCustomerByAccountId(accountId);
+//
+//        log.info("[GET BY ACCOUNT ID]: " + customer);
+//        return new ResponseEntity<>(customer, status);
+//    }
 
     // Get all Customers
     @RequestMapping(value = "/customers", method = RequestMethod.GET)

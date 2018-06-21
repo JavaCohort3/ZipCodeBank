@@ -1,12 +1,13 @@
-package com.example.javacohort3.ZipCodeBank.repositories;
+package io.elitejava3.BankAPI.repositories;
 
-import com.example.javacohort3.ZipCodeBank.domains.Customer;
+import io.elitejava3.BankAPI.domains.Customer;
 import org.springframework.data.repository.CrudRepository;
 
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
-
-    Customer findByAccountId(Long accountId);
-    
+    Customer findCustomerById(Long id);
+    void deleteCustomerById(Long id);
 }

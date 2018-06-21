@@ -1,99 +1,47 @@
-package com.example.javacohort3.ZipCodeBank.domains;
+package io.elitejava3.BankAPI.domains;
 
 import javax.persistence.*;
 import java.util.Set;
-
 @Entity
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Account accountId;
-    private String firstName;
-    private String lastName;
-    @ManyToOne
-    private Address address;
 
-    public Customer() { }
+    private String first_name;
+    private String last_name;
+    @ElementCollection
+    @Transient
+    private Set<Address> addresses;
 
-    public Customer(String firstName){
-        this.firstName = firstName;
-    }
+    public Customer(){}
 
-    public Customer(Long id){
+    public Customer(Long id, String first_name, String last_name, Set<Address> addresses) {
         this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.addresses = addresses;
     }
 
-    public Customer(Long id,String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Customer(Long id, Account accountId, String firstName, String lastName) {
-        this.id = id;
-        this.accountId = accountId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    public String getFirst_name() { return first_name; }
+    public void setFirst_name(String first_name) { this.first_name = first_name; }
 
-    public Customer(Long id, Account accountId, String firstName, String lastName, Address address) {
-        this.id = id;
-        this.accountId = accountId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-    }
+    public String getLast_name() { return last_name; }
+    public void setLast_name(String last_name) { this.last_name = last_name; }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Account getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Account accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
+    public Set<Address> getAddresses() { return addresses; }
+    public void setAddresses(Set<Address> addresses) { this.addresses = addresses; }
 
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
-                ", accountId=" + accountId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address=" + address +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", addresses=" + addresses +
                 '}';
     }
 }
