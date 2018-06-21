@@ -22,7 +22,6 @@ import java.util.List;
 
 @RestController
 public class AccountController {
-
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private AccountService accountService;
 
@@ -43,19 +42,24 @@ public class AccountController {
 
     @RequestMapping(value = "customers/{customerId}/accounts/{accountId}", method = RequestMethod.GET)
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
+        HttpStatus status;
+        Object response;
+        Account account = accountService.getAccountById(accountId);
+
+        accountService.verifyAccountById(accountId);
+
         log.info("[Get]" + account);
         status = HttpStatus.OK;
         response = account;
 
-        return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
+        return new ResponseEntity<>(response, status);
     }
 
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
         HttpStatus status = HttpStatus.OK;
-      
         Account customerInfo = accountService.getAccountByCustomerId(customerId);
-            log.info("[Get]" + customerId);
+        log.info("[Get]" + customerId);
         return new ResponseEntity<>(customerInfo, status);
     }
 
@@ -102,4 +106,5 @@ public class AccountController {
 
         return new ResponseEntity<> (status);
     }
+
 }
