@@ -1,7 +1,7 @@
-package io.elitejava3.BankAPI.controllers;
+package com.example.javacohort3.ZipCodeBank.controllers;
 
-import io.elitejava3.BankAPI.domains.Customer;
-import io.elitejava3.BankAPI.services.CustomerService;
+import com.example.javacohort3.ZipCodeBank.domains.Customer;
+import com.example.javacohort3.ZipCodeBank.services.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

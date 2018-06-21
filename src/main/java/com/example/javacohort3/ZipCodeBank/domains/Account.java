@@ -1,6 +1,8 @@
-package io.elitejava3.BankAPI.domains;
+package com.example.javacohort3.ZipCodeBank.domains;
 
-import io.elitejava3.BankAPI.enums.AccountType;
+
+
+import com.example.javacohort3.ZipCodeBank.enums.AccountType;
 
 import javax.persistence.*;
 

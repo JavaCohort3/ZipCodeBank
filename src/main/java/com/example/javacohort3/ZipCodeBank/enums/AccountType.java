@@ -1,4 +1,4 @@
-package io.elitejava3.BankAPI.enums;
+package com.example.javacohort3.ZipCodeBank.enums;
 
 public enum AccountType {
     SAVINGS("Savings"),

@@ -1,15 +1,14 @@
-package io.elitejava3.BankAPI.services;
+package com.example.javacohort3.ZipCodeBank.services;
 
-import io.elitejava3.BankAPI.domains.Account;
-import io.elitejava3.BankAPI.domains.Customer;
-import io.elitejava3.BankAPI.exceptions.ResourceNotFoundException;
-import io.elitejava3.BankAPI.repositories.AccountRepository;
-import io.elitejava3.BankAPI.repositories.CustomerRepository;
+import com.example.javacohort3.ZipCodeBank.domains.Account;
+
+import com.example.javacohort3.ZipCodeBank.domains.Customer;
+import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
+import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class AccountService {
@@ -25,7 +24,7 @@ public class AccountService {
     }
 
     public void verifyAccountById(Long id){
-        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException();
+        if (accountRepository.findAccountById(id) == null) throw new io.elitejava3.BankAPI.exceptions.ResourceNotFoundException();
     }
 
     public Account createAccount(Account account){

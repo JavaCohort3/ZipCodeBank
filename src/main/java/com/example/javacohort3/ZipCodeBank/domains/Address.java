@@ -1,4 +1,4 @@
-package io.elitejava3.BankAPI.domains;
+package com.example.javacohort3.ZipCodeBank.domains;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

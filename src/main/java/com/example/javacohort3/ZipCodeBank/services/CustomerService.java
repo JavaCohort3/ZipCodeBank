@@ -1,9 +1,9 @@
-package io.elitejava3.BankAPI.services;
+package com.example.javacohort3.ZipCodeBank.services;
 
-import io.elitejava3.BankAPI.domains.Customer;
-import io.elitejava3.BankAPI.exceptions.ResourceNotFoundException;
-import io.elitejava3.BankAPI.repositories.AddressRepository;
-import io.elitejava3.BankAPI.repositories.CustomerRepository;
+import com.example.javacohort3.ZipCodeBank.domains.Customer;
+
+import com.example.javacohort3.ZipCodeBank.repositories.AddressRepository;
+import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class CustomerService {
 
     // Verify
     public void verifyCustomer(Long id) {
-        if (customerRepository.findCustomerById(id) == null) throw new ResourceNotFoundException();
+        if (customerRepository.findCustomerById(id) == null) throw new io.elitejava3.BankAPI.exceptions.ResourceNotFoundException();
     }
 
     // Create
