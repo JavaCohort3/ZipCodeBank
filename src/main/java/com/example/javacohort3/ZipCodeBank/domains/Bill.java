@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.SimpleDateFormat;
 
 @Entity
 public class Bill {
@@ -14,23 +15,24 @@ public class Bill {
     private String status;
     private String payee;
     private String nickname;
-    private String creationDate;
-    private String paymentDate;
-    private Integer recurringDate;
-    private String upcomingPaymentDate;
+    private SimpleDateFormat creationDate = new SimpleDateFormat("YYYY-MM-DD");
+    private SimpleDateFormat paymentDate = new SimpleDateFormat("YYYY-MM-DD");
+    private SimpleDateFormat recurringDate = new SimpleDateFormat("DD");
+    private SimpleDateFormat upcomingPaymentDate = new SimpleDateFormat("YYYY-MM-DD");
     private Double paymentAmount;
-    private String accountId;
+    private Long accountId;
 
     Bill() {}
 
-    Bill(Long id, String status, String payee, String nickname, String creationDate,
-         String paymentDate, Integer recurringDate, String upcomingPaymentDate, Double paymentAmount, String accountId) {
+    public Bill(Long id, String status, String payee, String nickname, SimpleDateFormat creationDate,
+                SimpleDateFormat paymentDate, SimpleDateFormat recurringDate, SimpleDateFormat upcomingPaymentDate,
+                Double paymentAmount, Long accountId) {
         this.id = id;
         this.status = status;
         this.payee = payee;
         this.nickname = nickname;
         this.creationDate = creationDate;
-        this.paymentAmount = paymentAmount;
+        this.paymentDate = paymentDate;
         this.recurringDate = recurringDate;
         this.upcomingPaymentDate = upcomingPaymentDate;
         this.paymentAmount = paymentAmount;
@@ -69,35 +71,35 @@ public class Bill {
         this.nickname = nickname;
     }
 
-    public String getCreationDate() {
+    public SimpleDateFormat getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(SimpleDateFormat creationDate) {
         this.creationDate = creationDate;
     }
 
-    public String getPaymentDate() {
+    public SimpleDateFormat getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(String paymentDate) {
+    public void setPaymentDate(SimpleDateFormat paymentDate) {
         this.paymentDate = paymentDate;
     }
 
-    public Integer getRecurringDate() {
+    public SimpleDateFormat getRecurringDate() {
         return recurringDate;
     }
 
-    public void setRecurringDate(Integer recurringDate) {
+    public void setRecurringDate(SimpleDateFormat recurringDate) {
         this.recurringDate = recurringDate;
     }
 
-    public String getUpcomingPaymentDate() {
+    public SimpleDateFormat getUpcomingPaymentDate() {
         return upcomingPaymentDate;
     }
 
-    public void setUpcomingPaymentDate(String upcomingPaymentDate) {
+    public void setUpcomingPaymentDate(SimpleDateFormat upcomingPaymentDate) {
         this.upcomingPaymentDate = upcomingPaymentDate;
     }
 
@@ -109,11 +111,11 @@ public class Bill {
         this.paymentAmount = paymentAmount;
     }
 
-    public String getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
