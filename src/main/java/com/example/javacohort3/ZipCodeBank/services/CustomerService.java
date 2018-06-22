@@ -2,6 +2,7 @@ package com.example.javacohort3.ZipCodeBank.services;
 
 import com.example.javacohort3.ZipCodeBank.domains.Customer;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
+import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.AddressRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +14,23 @@ import java.util.List;
 @Service
 public class CustomerService {
     private CustomerRepository customerRepository;
+    private AccountRepository accountRepository;
     private AddressRepository addressRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository) {
+    public CustomerService(CustomerRepository customerRepository, AccountRepository accountRepository, AddressRepository addressRepository) {
         this.customerRepository = customerRepository;
+        this.accountRepository = accountRepository;
         this.addressRepository = addressRepository;
     }
 
     // Verify
     public void verifyCustomer(Long id) {
         if (customerRepository.findCustomerById(id) == null) throw new ResourceNotFoundException();
+    }
+
+    public void verifyAccount(Long id) {
+        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException();
     }
 
     // Create
@@ -36,10 +43,11 @@ public class CustomerService {
         return customerRepository.findCustomerById(id);
     }
 
-//    // Get
-//    public Customer getCustomerByAccountId(Long accountId) {
-//        return customerRepository.findCustomerByAccountId(accountId);
-//    }
+    // Get By Account ID
+    public Customer getCustomerByAccountId(Long accountId) {
+        // re-work
+        return new Customer();
+    }
 
     // Get All
     public List<Customer> getAllCustomers() {

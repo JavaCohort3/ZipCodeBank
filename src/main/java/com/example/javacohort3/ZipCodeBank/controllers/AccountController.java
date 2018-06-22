@@ -27,44 +27,53 @@ public class AccountController {
     @Autowired
     public AccountController(AccountService accountService) { this.accountService = accountService; }
 
-    @RequestMapping(value = "customers/{customerId}/accounts/{accountId}", method = RequestMethod.GET)
+    // Get all accounts
+    @RequestMapping("/accounts")
+    public ResponseEntity<?> getAllAccounts() {
+        accountService.verifyAccountById(new Long(1));
+        ArrayList<Account> accounts = (ArrayList<Account>) accountService.getAllAccounts();
+
+        log.info("[GET ALL] " + accounts);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
+
+    // Get account by its ID
+    @RequestMapping("/accounts/{accountId}")
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
-        HttpStatus status;
-        Object response;
+        accountService.verifyAccountById(accountId);
         Account account = accountService.getAccountById(accountId);
 
-        accountService.verifyAccountById(accountId);
-
-        log.info("[Get]" + account);
-        status = HttpStatus.OK;
-        response = account;
-
-        return new ResponseEntity<>(response, status);
+        log.info("[GET] " + account);
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
+    // Get accounts by customer ID
+    @RequestMapping("/customers/{customerId}/accounts")
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
-        HttpStatus status = HttpStatus.OK;
-        Account customerInfo = accountService.getAccountsByCustomerId(customerId);
-        log.info("[Get]" + customerId);
-        return new ResponseEntity<>(customerInfo, status);
+        ArrayList<Account> accounts = (ArrayList<Account>) accountService.getAccountsByCustomerId(customerId);
+
+        log.info("[GET] " + customerId);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
+    // Create account
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
-        HttpStatus status = HttpStatus.CREATED;
-        // account.setCustomer(new Customer(customerId,null,"","",null));
-        Account a = accountService.createAccount(account);
+        account.setCustomer(accountService.getCustomerById(customerId));
 
+        Account newAccount = accountService.createAccount(account);
+        accountService.verifyAccountById(newAccount.getId());
 
-        log.info("[POST] " + a);
-        return new ResponseEntity<>(a, status);
+        log.info("[POST] " + newAccount);
+        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/customers/{customerId}/accounts/{accountId}", method = RequestMethod.PUT)
-    public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long customerId ,@PathVariable Long accountId) {
+    // Update Account
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
+    public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {
         HttpStatus status;
 
+        // needs work
 
         Account oldAccount = accountService.updateAccount(account);
 
@@ -84,12 +93,13 @@ public class AccountController {
 
     }
 
-    @RequestMapping(value = "/customers/{customerId}/accounts/{accountId}", method = RequestMethod.DELETE)
+    // Delete account
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
         HttpStatus status = HttpStatus.NO_CONTENT;
 
         accountService.deleteAccount(accountId);
-        log.info("Deleted" + accountId);
+        log.info("[DELETE] " + accountId);
 
         return new ResponseEntity<> (status);
     }

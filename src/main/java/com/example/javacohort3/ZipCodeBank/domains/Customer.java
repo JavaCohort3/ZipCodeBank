@@ -7,13 +7,15 @@ import java.util.TreeSet;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String first_name;
     private String last_name;
-    @ElementCollection
-    @Transient
+
+    // @ElementCollection
+    // @Transient
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Address> addresses = new TreeSet<>();
 
     public Customer(){}
@@ -22,6 +24,7 @@ public class Customer {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
+
         this.addresses = addresses;
     }
 

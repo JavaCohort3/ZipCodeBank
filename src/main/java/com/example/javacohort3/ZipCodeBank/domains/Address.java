@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String street_number;
     private String street_name;
@@ -30,7 +30,6 @@ public class Address {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -38,7 +37,6 @@ public class Address {
     public String getStreet_number() {
         return street_number;
     }
-
     public void setStreet_number(String street_number) {
         this.street_number = street_number;
     }
@@ -46,7 +44,6 @@ public class Address {
     public String getStreet_name() {
         return street_name;
     }
-
     public void setStreet_name(String street_name) {
         this.street_name = street_name;
     }
@@ -54,7 +51,6 @@ public class Address {
     public String getCity() {
         return city;
     }
-
     public void setCity(String city) {
         this.city = city;
     }
@@ -62,7 +58,6 @@ public class Address {
     public String getState() {
         return state;
     }
-
     public void setState(String state) {
         this.state = state;
     }
@@ -70,7 +65,6 @@ public class Address {
     public String getZipCode() {
         return zipCode;
     }
-
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
