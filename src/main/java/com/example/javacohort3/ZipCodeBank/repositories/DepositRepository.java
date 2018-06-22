@@ -7,4 +7,6 @@ import java.util.ArrayList;
 
 public interface DepositRepository extends CrudRepository<Deposit, Long> {
      ArrayList<Deposit>findDepositByAccountId(Long accountId);
+     void deleteDepositById(Long accountId);
+
 }
