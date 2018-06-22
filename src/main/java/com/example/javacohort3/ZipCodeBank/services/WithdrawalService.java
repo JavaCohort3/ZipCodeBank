@@ -36,7 +36,7 @@ public class WithdrawalService {
 
     //Get by Id
     public Withdrawal getWithdrawalById (Long id){
-        return withdrawalRepository.getWithdrawalById(id);
+        return withdrawalRepository.findWithdrawalById(id);
     }
 
     //Get all by Account Id
@@ -51,7 +51,7 @@ public class WithdrawalService {
 
     //Delete
     public void deleteWithdrawal (Long id){
-        withdrawalRepository.deleteById(id);
+        withdrawalRepository.deleteWithdrawalById(id);
     }
 
 }
