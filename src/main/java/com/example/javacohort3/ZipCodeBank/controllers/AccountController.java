@@ -50,7 +50,10 @@ public class AccountController {
     // Get accounts by customer ID
     @RequestMapping("/customers/{customerId}/accounts")
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
+        accountService.verifyCustomerById(customerId);
         ArrayList<Account> accounts = (ArrayList<Account>) accountService.getAccountsByCustomerId(customerId);
+
+        accountService.verifyAccountById(new Long(accounts.size()));
 
         log.info("[GET] " + customerId);
         return new ResponseEntity<>(accounts, HttpStatus.OK);
