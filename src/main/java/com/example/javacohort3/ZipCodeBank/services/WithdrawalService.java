@@ -1,5 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
+import com.example.javacohort3.ZipCodeBank.domains.Withdrawal;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.WithdrawalRepository;
