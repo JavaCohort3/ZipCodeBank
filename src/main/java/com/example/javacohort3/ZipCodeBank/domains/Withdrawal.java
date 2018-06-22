@@ -12,26 +12,26 @@ public class Withdrawal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
-    private String transaction_date;
+    private String transactionDate;
     private String status;
-    private Long payer_id;
+    private Long payerId;
     private String medium;
     private Double amount;
     private String description;
-    private Long account_id;
+    private Long accountId;
 
     public Withdrawal(){}
 
-    public Withdrawal(Long id, String type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description, Long account_id) {
+    public Withdrawal(Long id, String type, String transactionDate, String status, Long payerId, String medium, Double amount, String description, Long accountId) {
         this.id = id;
         this.type = type;
-        this.transaction_date = transaction_date;
+        this.transactionDate = transactionDate;
         this.status = status;
-        this.payer_id = payer_id;
+        this.payerId = payerId;
         this.medium = medium;
         this.amount = amount;
         this.description = description;
-        this.account_id = account_id;
+        this.accountId = accountId;
     }
 
     public Long getId() {
@@ -50,12 +50,12 @@ public class Withdrawal {
         this.type = type;
     }
 
-    public String getTransaction_date() {
-        return transaction_date;
+    public String getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setTransaction_date(String transaction_date) {
-        this.transaction_date = transaction_date;
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
     public String getStatus() {
@@ -66,12 +66,12 @@ public class Withdrawal {
         this.status = status;
     }
 
-    public Long getPayer_id() {
-        return payer_id;
+    public Long getPayerId() {
+        return payerId;
     }
 
-    public void setPayer_id(Long payer_id) {
-        this.payer_id = payer_id;
+    public void setPayerId(Long payerId) {
+        this.payerId = payerId;
     }
 
     public String getMedium() {
@@ -98,12 +98,12 @@ public class Withdrawal {
         this.description = description;
     }
 
-    public Long getAccount_id() {
-        return account_id;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     @Override
@@ -111,13 +111,13 @@ public class Withdrawal {
         return "Withdrawal{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
-                ", transaction_date='" + transaction_date + '\'' +
+                ", transactionDate='" + transactionDate + '\'' +
                 ", status='" + status + '\'' +
-                ", payer_id=" + payer_id +
+                ", payerId=" + payerId +
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
-                ", account_id=" + account_id +
+                ", accountId=" + accountId +
                 '}';
     }
 }

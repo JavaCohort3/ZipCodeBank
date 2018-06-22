@@ -4,9 +4,7 @@ public class ResponseDetails {
     private int status;
     private String message;
 
-
-    public ResponseDetails() {
-    }
+    public ResponseDetails() {}
 
     public ResponseDetails(int status, String message) {
         this.status = status;
