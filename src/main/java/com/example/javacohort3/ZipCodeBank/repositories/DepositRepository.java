@@ -6,5 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.ArrayList;
 
 public interface DepositRepository extends CrudRepository<Deposit, Long> {
-     ArrayList<Deposit>findDepositByAccountId(Long accountId);
+     ArrayList<Deposit>findDepositsByAccountId(Long accountId);
+     void deleteDepositById(Long depositId);
+
 }
