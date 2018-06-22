@@ -13,15 +13,17 @@ import java.util.List;
 
 @Service
 public class AccountService {
-    @Autowired
     private AccountRepository accountRepository;
     private CustomerRepository customerRepository;
-    private CustomerService customerService;
 
-    public AccountService(AccountRepository accountRepository, CustomerRepository customerRepository, CustomerService customerService) {
+    @Autowired
+    public AccountService(AccountRepository accountRepository, CustomerRepository customerRepository) {
         this.accountRepository = accountRepository;
         this.customerRepository = customerRepository;
-        this.customerService = customerService;
+    }
+
+    public void verifyCustomerById(Long id) {
+        if (customerRepository.findCustomerById(id) == null) throw new ResourceNotFoundException();
     }
 
     public void verifyAccountById(Long id){
@@ -32,11 +34,21 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Account getAccountsByCustomerId(Long customerId){
-        customerService.verifyCustomer(customerId);
-        Customer c = customerRepository.findCustomerById(customerId);
+    public Customer getCustomerById(Long customerId) {
+        return customerRepository.findCustomerById(customerId);
+    }
+
+    public List<Account> getAllAccounts() {
+        return (ArrayList<Account>) accountRepository.findAll();
+    }
+
+    public List<Account> getAccountsByCustomerId(Long customerId){
+        verifyCustomerById(customerId);
+
         ArrayList<Account> accounts = (ArrayList<Account>) accountRepository.findAll();
-        return accounts.stream().filter(x -> x.getCustomer().getId().equals(customerId)).findFirst().get();
+        accounts.removeIf(a -> !a.getCustomer().getId().equals(customerId));
+
+        return accounts;
     }
 
     public Account getAccountById (Long id){

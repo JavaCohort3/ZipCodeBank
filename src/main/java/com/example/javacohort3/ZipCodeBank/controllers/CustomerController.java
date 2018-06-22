@@ -21,20 +21,20 @@ import java.util.List;
 @RestController
 public class CustomerController {
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
-    @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    public CustomerController(CustomerService customerService) { this.customerService = customerService; }
 
+    // Get a Customer by their Account ID
+    @RequestMapping(value ="/accounts/{accountId}/customer", method = RequestMethod.GET)
+    public ResponseEntity<?> getCustomerByAccountId(@PathVariable Long accountId) {
+        customerService.verifyAccount(accountId);
+        Customer customer = customerService.getCustomerByAccountId(accountId);
 
-//    // Get a Customer by their Account ID
-//    @RequestMapping(value ="/accounts/{accountId}/customer", method = RequestMethod.GET)
-//    public ResponseEntity<?> getCustomerByAccountId(@PathVariable Long accountId) {
-//        HttpStatus status = HttpStatus.OK;
-//        Customer customer = customerService.getCustomerByAccountId(accountId);
-//
-//        log.info("[GET BY ACCOUNT ID]: " + customer);
-//        return new ResponseEntity<>(customer, status);
-//    }
+        log.info("[GET BY ACCOUNT ID]: " + customer);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
+    }
 
     // Get all Customers
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
@@ -43,7 +43,7 @@ public class CustomerController {
 
         List<Customer> customers = customerService.getAllCustomers();
 
-        log.info("[GET ALL PEOPLE]: " + customers);
+        log.info("[GET ALL CUSTOMERS]: " + customers);
         return new ResponseEntity<>(customers, status);
     }
 
