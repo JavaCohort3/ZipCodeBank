@@ -3,7 +3,6 @@ package com.example.javacohort3.ZipCodeBank.services;
 import com.example.javacohort3.ZipCodeBank.domains.Customer;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
-import com.example.javacohort3.ZipCodeBank.repositories.AddressRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +14,11 @@ import java.util.List;
 public class CustomerService {
     private CustomerRepository customerRepository;
     private AccountRepository accountRepository;
-    private AddressRepository addressRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, AccountRepository accountRepository, AddressRepository addressRepository) {
+    public CustomerService(CustomerRepository customerRepository, AccountRepository accountRepository) {
         this.customerRepository = customerRepository;
         this.accountRepository = accountRepository;
-        this.addressRepository = addressRepository;
     }
 
     // Verify
