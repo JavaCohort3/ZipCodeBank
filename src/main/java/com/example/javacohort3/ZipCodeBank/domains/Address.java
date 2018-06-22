@@ -10,18 +10,18 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String street_number;
-    private String street_name;
+    private String streetNumber;
+    private String streetName;
     private String city;
     private String state;
     private String zipCode;
 
     public Address(){}
 
-    public Address(Long id, String street_number, String street_name, String city, String state, String zipCode) {
+    public Address(Long id, String streetNumber, String streetName, String city, String state, String zipCode) {
         this.id = id;
-        this.street_number = street_number;
-        this.street_name = street_name;
+        this.streetNumber = streetNumber;
+        this.streetName = streetName;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
@@ -34,18 +34,18 @@ public class Address {
         this.id = id;
     }
 
-    public String getStreet_number() {
-        return street_number;
+    public String getStreetNumber() {
+        return streetNumber;
     }
-    public void setStreet_number(String street_number) {
-        this.street_number = street_number;
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
-    public String getStreet_name() {
-        return street_name;
+    public String getStreetName() {
+        return streetName;
     }
-    public void setStreet_name(String street_name) {
-        this.street_name = street_name;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
 
     public String getCity() {
@@ -73,8 +73,8 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", street_number='" + street_number + '\'' +
-                ", street_name='" + street_name + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
+                ", streetName='" + streetName + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zipCode='" + zipCode + '\'' +
