@@ -54,8 +54,7 @@ public class CustomerController {
         ResponseDetails responseDetails = new ResponseDetails();
         customerService.verifyCustomer(id);
         Customer customer = customerService.getCustomerById(id);
-
-
+        
         log.info("[GET BY ID]: " + customer);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customer),HttpStatus.OK);
     }
@@ -73,7 +72,6 @@ public class CustomerController {
                 .buildAndExpand(c.getId())
                 .toUri();
         httpHeaders.setLocation(newUri);
-
 
         log.info("[POST]: " + c);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Customer created.", customer), HttpStatus.CREATED);
@@ -97,5 +95,4 @@ public class CustomerController {
         log.info("[DELETE]: customer with id: " + customerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }
