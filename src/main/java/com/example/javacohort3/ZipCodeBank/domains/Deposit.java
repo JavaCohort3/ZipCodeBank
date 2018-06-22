@@ -12,9 +12,9 @@ public class Deposit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Enum type;
-    private String transaction_date;
+    private String transactionDate;
     private String status;
-    private Long payee_id;
+    private Long payeeId;
     private String medium;
     private Double amount;
     private String description;
@@ -22,12 +22,12 @@ public class Deposit {
 
     public Deposit(){}
 
-    public Deposit(Long id, Enum type, String transaction_date, String status, Long payee_id, String medium, Double amount, String description, Long accountId) {
+    public Deposit(Long id, Enum type, String transactionDate, String status, Long payeeId, String medium, Double amount, String description, Long accountId) {
         this.id = id;
         this.type = type;
-        this.transaction_date = transaction_date;
+        this.transactionDate = transactionDate;
         this.status = status;
-        this.payee_id = payee_id;
+        this.payeeId = payeeId;
         this.medium = medium;
         this.amount = amount;
         this.description = description;
@@ -50,12 +50,12 @@ public class Deposit {
         this.type = type;
     }
 
-    public String getTransaction_date() {
-        return transaction_date;
+    public String getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setTransaction_date(String transaction_date) {
-        this.transaction_date = transaction_date;
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
     public String getStatus() {
@@ -66,12 +66,12 @@ public class Deposit {
         this.status = status;
     }
 
-    public Long getPayee_id() {
-        return payee_id;
+    public Long getPayeeId() {
+        return payeeId;
     }
 
-    public void setPayee_id(Long payee_id) {
-        this.payee_id = payee_id;
+    public void setPayeeId(Long payeeId) {
+        this.payeeId = payeeId;
     }
 
     public String getMedium() {
@@ -98,11 +98,11 @@ public class Deposit {
         this.description = description;
     }
 
-    public Long getAccount_id() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccount_id(Long accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
@@ -111,9 +111,9 @@ public class Deposit {
         return "Deposit{" +
                 "id=" + id +
                 ", type=" + type +
-                ", transaction_date='" + transaction_date + '\'' +
+                ", transactionDate='" + transactionDate + '\'' +
                 ", status='" + status + '\'' +
-                ", payee_id=" + payee_id +
+                ", payeeId=" + payeeId +
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +

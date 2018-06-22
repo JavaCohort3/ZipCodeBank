@@ -18,7 +18,7 @@ public class Withdrawal {
     private String medium;
     private Double amount;
     private String description;
-    private Long account_id;
+    private Long accountId;
 
     public Withdrawal(){}
 
@@ -31,7 +31,7 @@ public class Withdrawal {
         this.medium = medium;
         this.amount = amount;
         this.description = description;
-        this.account_id = account_id;
+        this.accountId = account_id;
     }
 
     public Long getId() {
@@ -98,12 +98,12 @@ public class Withdrawal {
         this.description = description;
     }
 
-    public Long getAccount_id() {
-        return account_id;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     @Override
@@ -117,7 +117,7 @@ public class Withdrawal {
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
-                ", account_id=" + account_id +
+                ", accountId=" + accountId +
                 '}';
     }
 }

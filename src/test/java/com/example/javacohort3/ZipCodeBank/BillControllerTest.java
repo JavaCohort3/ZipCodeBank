@@ -53,9 +53,9 @@
 //        BillController controller = new BillController(new BillService());
 //        Bill bill = new Bill();
 //        ReflectionTestUtils.setField(controller, "billService", billService);
-//        when(billService.getAllBillByAccountId(bill.getAccount_id())).thenReturn(new ArrayList<>());
-//        ResponseEntity<?> accountBill = controller.getBillByAccountId(bill.getAccount_id());
-//        verify(billService,times(1)).getAllBillByAccountId(bill.getAccount_id());
+//        when(billService.getAllBillByAccountId(bill.getAccountId())).thenReturn(new ArrayList<>());
+//        ResponseEntity<?> accountBill = controller.getBillByAccountId(bill.getAccountId());
+//        verify(billService,times(1)).getAllBillByAccountId(bill.getAccountId());
 //        Assert.assertEquals(HttpStatus.OK,accountBill.getStatusCode());
 //
 //    }
@@ -89,9 +89,9 @@
 //        BillController controller = new BillController(new BillService());
 //        Bill bill = new Bill();
 //        ReflectionTestUtils.setField(controller, "billService", billService);
-//        when(billService.createBill(bill,bill.getAccount_id())).thenReturn(bill);
-//        ResponseEntity<?> personList = controller.createBill(bill,bill.getAccount_id());
-//        verify(billService,times(1)).createBill(bill,bill.getAccount_id());
+//        when(billService.createBill(bill,bill.getAccountId())).thenReturn(bill);
+//        ResponseEntity<?> personList = controller.createBill(bill,bill.getAccountId());
+//        verify(billService,times(1)).createBill(bill,bill.getAccountId());
 //        Assert.assertEquals(HttpStatus.CREATED,personList.getStatusCode());
 //
 //    }
