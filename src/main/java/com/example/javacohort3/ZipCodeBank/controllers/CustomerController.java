@@ -32,29 +32,19 @@ public class CustomerController {
 
         customerService.verifyAccount(accountId);
         Customer customer = customerService.getCustomerByAccountId(accountId);
-        ResponseDetails responseDetails = new ResponseDetails();
-
-        responseDetails.setCode(HttpStatus.OK.value());
-        responseDetails.setMessage("Success");
-        responseDetails.setData(customer);
 
         log.info("[GET BY ACCOUNT ID]: " + customer);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customer),HttpStatus.OK);
     }
 
     // Get all Customers
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ResponseEntity<?> getAllCustomers() {
 
-        ResponseDetails responseDetails = new ResponseDetails();
         List<Customer> customers = customerService.getAllCustomers();
 
-        responseDetails.setCode(HttpStatus.OK.value());
-        responseDetails.setMessage("Success");
-        responseDetails.setData(customers);
-
         log.info("[GET ALL CUSTOMERS]: " + customers);
-        return new ResponseEntity<>(responseDetails, HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customers),HttpStatus.OK);
     }
 
     // Get Customer By their ID
@@ -65,19 +55,15 @@ public class CustomerController {
         customerService.verifyCustomer(id);
         Customer customer = customerService.getCustomerById(id);
 
-        responseDetails.setCode(HttpStatus.OK.value());
-        responseDetails.setMessage("Success");
-        responseDetails.setData(customer);
 
         log.info("[GET BY ID]: " + customer);
-        return new ResponseEntity<>(responseDetails, HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customer),HttpStatus.OK);
     }
 
     // Create a new Customer
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
     public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
 
-        ResponseDetails responseDetails = new ResponseDetails();
         Customer c = customerService.createCustomer(customer);
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -88,12 +74,9 @@ public class CustomerController {
                 .toUri();
         httpHeaders.setLocation(newUri);
 
-        responseDetails.setCode(HttpStatus.CREATED.value());
-        responseDetails.setMessage("Customer created");
-        responseDetails.setData(customer);
 
         log.info("[POST]: " + c);
-        return new ResponseEntity<>(responseDetails, HttpStatus.CREATED);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Customer created.", customer), HttpStatus.CREATED);
     }
 
     // Update a Customer by their ID
@@ -101,14 +84,9 @@ public class CustomerController {
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
         customerService.verifyCustomer(id);
         Customer c = customerService.updateCustomer(customer);
-        ResponseDetails responseDetails = new ResponseDetails();
-
-        responseDetails.setCode(HttpStatus.OK.value());
-        responseDetails.setMessage("Customer account updated");
-        responseDetails.setData(customer);
 
         log.info("[PUT]: " + c);
-        return new ResponseEntity<>(responseDetails, HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Customer account updated",customer), HttpStatus.OK);
 
     }
 
