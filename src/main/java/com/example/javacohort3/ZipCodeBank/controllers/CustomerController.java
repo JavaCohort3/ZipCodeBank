@@ -33,7 +33,7 @@ public class CustomerController {
         Customer customer = customerService.getCustomerByAccountId(accountId);
 
         log.info("[GET BY ACCOUNT ID]: " + customer);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customer),HttpStatus.OK);
     }
 
     // Get all Customers
@@ -44,7 +44,8 @@ public class CustomerController {
         List<Customer> customers = customerService.getAllCustomers();
 
         log.info("[GET ALL CUSTOMERS]: " + customers);
-        return new ResponseEntity<>(customers, status);
+
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customers),HttpStatus.OK);
     }
 
     // Get Customer By their ID
@@ -54,18 +55,15 @@ public class CustomerController {
         // throw error if (customer == null)
         customerService.verifyCustomer(id);
         Customer customer = customerService.getCustomerById(id);
-
-
-        //if they do exist
+        
         log.info("[GET BY ID]: " + customer);
-
-        return new ResponseEntity<>(customer, status);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customer),HttpStatus.OK);
     }
 
     // Create a new Customer
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
     public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
-        HttpStatus status = HttpStatus.CREATED;
+
         Customer c = customerService.createCustomer(customer);
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -76,8 +74,8 @@ public class CustomerController {
                 .toUri();
         httpHeaders.setLocation(newUri);
 
-        log.info("[POST " + c);
-        return new ResponseEntity<>(c,httpHeaders, status);
+        log.info("[POST]: " + c);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Customer created.", c), HttpStatus.CREATED);
     }
 
     // Update a Customer by their ID
@@ -85,23 +83,17 @@ public class CustomerController {
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
         HttpStatus status;
         Customer c = customerService.updateCustomer(customer);
-        if (customerService.updateCustomer(customer).equals(customerService.getCustomerById(id))){
-            status = HttpStatus.OK;
-            log.info("[PUT-UPDATE]: " + customer);
-            return new ResponseEntity<>(c,status);
-        }else {
-            status = HttpStatus.CREATED;
-            log.info("[PUT-UPDATE(CREATED)]: " + customer);
-            return new ResponseEntity<>(c,status);
-        }
+
+        log.info("[PUT]: " + c);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Customer account updated",c), HttpStatus.OK);
 
 
     }
-
+    //Delete a customer
     @RequestMapping(value = "/customers/{customerId}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long customerId){
+        customerService.verifyCustomer(customerId);
         customerService.deleteCustomer(customerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

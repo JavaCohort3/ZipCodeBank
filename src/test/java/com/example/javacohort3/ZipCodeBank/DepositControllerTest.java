@@ -42,7 +42,7 @@
 //        Deposit deposit = new Deposit();
 //        account.setId(new Long(3));
 //        Long accountId = account.getId();
-//        deposit.setAccount_id(accountId);
+//        deposit.setAccountId(accountId);
 //
 //        depositService.createDepositByFromAccountId(deposit, accountId);
 //        when(depositService.getAllDepositsForAccountId(accountId).get(0)).thenReturn(deposit);
@@ -75,7 +75,7 @@
 //        Deposit deposit = new Deposit();
 //        account.setId(new Long(3));
 //        Long accountId = account.getId();
-//        deposit.setAccount_id(accountId);
+//        deposit.setAccountId(accountId);
 //
 //        when(depositService.createDepositByFromAccountId(deposit, accountId)).thenReturn(deposit);
 //        ResponseEntity<?> depositCreated = controller.createDepositFromAccountId(deposit, accountId);

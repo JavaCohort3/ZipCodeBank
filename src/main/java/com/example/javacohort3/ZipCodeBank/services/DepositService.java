@@ -1,13 +1,9 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
-import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Deposit;
-import com.example.javacohort3.ZipCodeBank.domains.Customer;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
-import com.example.javacohort3.ZipCodeBank.repositories.depositRepository;
-import com.example.javacohort3.ZipCodeBank.repositories.depositRepository;
-
+import com.example.javacohort3.ZipCodeBank.repositories.DepositRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +30,10 @@ public class DepositService {
     }
 
     public Deposit createDeposit(Deposit deposit){
-        return depositRepository.save(Deposit);
+        return depositRepository.save(deposit);
     }
 
     public List<Deposit> getDepositsByAccountId(Long accountId) {
-        Account account = accountRepository.findAccountById(accountId);
-        
         ArrayList<Deposit> deposits = (ArrayList<Deposit>) depositRepository.findAll();
         deposits.removeIf(d -> !d.getPayeeId().equals(accountId));
         return deposits;
@@ -50,7 +44,7 @@ public class DepositService {
     }
 
     public Deposit updateDeposit(Deposit deposit){
-        return depositRepository.save(Deposit);
+        return depositRepository.save(deposit);
     }
 
     public void deleteDeposit(Long id){
