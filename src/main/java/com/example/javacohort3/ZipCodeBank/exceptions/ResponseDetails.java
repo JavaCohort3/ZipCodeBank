@@ -1,22 +1,38 @@
 package com.example.javacohort3.ZipCodeBank.exceptions;
 
 public class ResponseDetails {
-    private int status;
+    private Integer code;
     private String message;
+    private Object data;
+
 
     public ResponseDetails() {}
 
-    public ResponseDetails(int status, String message) {
-        this.status = status;
+    public ResponseDetails(Integer code, String message) {
+        this.code = code;
         this.message = message;
     }
 
-    public int getStatus() {
-        return status;
+    public ResponseDetails(Integer code, String message, Object data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public String getMessage() {
@@ -25,5 +41,14 @@ public class ResponseDetails {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseDetails{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }
