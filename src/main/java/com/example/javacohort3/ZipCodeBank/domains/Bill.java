@@ -17,7 +17,7 @@ public class Bill {
     private String payee;
     private String nickname;
     private String creationDate;
-    private Integer paymentDate;
+    private String paymentDate;
     private Integer recurringDate;
     private String upcomingPaymentDate;
     private Double paymentAmount;
@@ -25,7 +25,7 @@ public class Bill {
 
     public Bill(){}
 
-    public Bill(Long id, Status status, String payee, String nickname, String creationDate, Integer paymentDate, Integer recurringDate, String upcomingPaymentDate, Double paymentAmount, Long accountId) {
+    public Bill(Long id, Status status, String payee, String nickname, String creationDate, String paymentDate, Integer recurringDate, String upcomingPaymentDate, Double paymentAmount, Long accountId) {
         this.id = id;
         this.status = status;
         this.payee = payee;
@@ -78,11 +78,11 @@ public class Bill {
         this.creationDate = creationDate;
     }
 
-    public Integer getPaymentDate() {
+    public String getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Integer paymentDate) {
+    public void setPaymentDate(String paymentDate) {
         this.paymentDate = paymentDate;
     }
 
