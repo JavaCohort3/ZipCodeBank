@@ -1,20 +1,25 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Bill {
 
-private Long id;
-private Enum status;
-private String payee;
-private String nickname;
-private String creationDate;
-private Integer paymentDate;
-private Integer recurringDate;
-private String upcomingPaymentDate;
-private Double paymentAmount;
-private Long accountId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Enum status;
+    private String payee;
+    private String nickname;
+    private String creationDate;
+    private Integer paymentDate;
+    private Integer recurringDate;
+    private String upcomingPaymentDate;
+    private Double paymentAmount;
+    private Long accountId;
 
     public Bill(){}
 
