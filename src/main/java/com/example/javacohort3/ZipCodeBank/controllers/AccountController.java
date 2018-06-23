@@ -21,10 +21,10 @@ import java.util.ArrayList;
 public class AccountController {
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private AccountService accountService;
-    private CustomerService customerService; //injecting customer service such that I can verify customerIds when necessary.
+
 
     @Autowired
-    public AccountController(AccountService accountService, CustomerService customerService) { this.accountService = accountService; this.customerService = customerService; }
+    public AccountController(AccountService accountService, CustomerService customerService) { this.accountService = accountService; }
 
     // Get all accounts
     @RequestMapping("/accounts")
@@ -48,9 +48,10 @@ public class AccountController {
     // Get accounts by customer ID
     @RequestMapping("/customers/{customerId}/accounts")
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
-        customerService.verifyCustomer(customerId);
+        accountService.verifyCustomerById(customerId);
         ArrayList<Account> accounts = (ArrayList<Account>) accountService.getAccountsByCustomerId(customerId);
-
+        accountService.verifyAccountById(new Long(accounts.size()));
+        
         log.info("[GET] " + customerId);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", accounts), HttpStatus.OK);
     }
@@ -80,6 +81,7 @@ public class AccountController {
     // Delete account
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
+        accountService.verifyAccountById(accountId);
         accountService.deleteAccount(accountId);
 
         log.info("[DELETE] " + accountId);
