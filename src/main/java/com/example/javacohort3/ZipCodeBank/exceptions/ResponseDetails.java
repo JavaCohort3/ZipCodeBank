@@ -7,18 +7,17 @@ public class ResponseDetails {
     private String message;
     private Object data;
 
-    public ResponseDetails() {
-    }
+    public ResponseDetails() {}
 
     public ResponseDetails(HttpStatus status, String message) {
         this.code = status.value();
         this.message = message;
     }
-    public ResponseDetails(HttpStatus status, String message, Object data) {
-        this.code = status.value();
+ 
+    public ResponseDetails(HttpStatus httpStatus, String message, Object data) {
+        this.code = httpStatus.value();
         this.message = message;
         this.data = data;
-
     }
 
     public Integer getCode() {
@@ -29,14 +28,6 @@ public class ResponseDetails {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public Object getData() {
         return data;
     }
@@ -45,12 +36,20 @@ public class ResponseDetails {
         this.data = data;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     public String toString() {
         return "ResponseDetails{" +
                 "code=" + code +
                 ", message='" + message + '\'' +
-                ", data='" + data + '\'' +
+                ", data=" + data +
                 '}';
     }
 }

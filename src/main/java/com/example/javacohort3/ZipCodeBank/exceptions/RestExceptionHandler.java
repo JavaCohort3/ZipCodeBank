@@ -12,7 +12,7 @@ public class RestExceptionHandler {
     public ResponseEntity<?> handleAccountNotFoundException(ResourceNotFoundException anfe){
         ResponseDetails responseDetails = new ResponseDetails();
         responseDetails.setStatus(HttpStatus.NOT_FOUND.value());
-        responseDetails.setMessage("“error fetching accounts”");
+        responseDetails.setMessage("\"error fetching accounts\"");
 
         return new ResponseEntity<>(responseDetails,HttpStatus.NOT_FOUND);
     }
