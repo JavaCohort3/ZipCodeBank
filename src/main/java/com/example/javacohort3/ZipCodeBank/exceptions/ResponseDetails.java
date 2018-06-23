@@ -15,8 +15,8 @@ public class ResponseDetails {
         this.message = message;
     }
 
-    public ResponseDetails(HttpStatus code, String message, Object data) {
-        this.code = code.value();
+    public ResponseDetails(HttpStatus httpStatus, String message, Object data) {
+        this.code = httpStatus.value();
         this.message = message;
         this.data = data;
     }
