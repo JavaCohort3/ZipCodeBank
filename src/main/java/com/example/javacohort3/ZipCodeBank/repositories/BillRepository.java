@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface BillRepository extends CrudRepository<Bill, Long> {
 
-    ArrayList<Bill> findBillsByAccountId(Long AccountId);
+    ArrayList<Bill> findBillsByAccountId(Long accountId);
     void deleteBillByBillId(Long billId);
 }
