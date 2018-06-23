@@ -9,10 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 
@@ -59,13 +62,22 @@ public class AccountController {
     // Create account
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
+
         account.setCustomer(accountService.getCustomerById(customerId));
 
         Account newAccount = accountService.createAccount(account);
         accountService.verifyAccountById(newAccount.getId());
 
+        HttpHeaders httpHeaders = new HttpHeaders();
+        URI newUri = ServletUriComponentsBuilder
+                .fromCurrentRequestUri()
+                .path("/{accountId}")
+                .buildAndExpand(newAccount.getId())
+                .toUri();
+        httpHeaders.setLocation(newUri);
+
         log.info("[POST] " + newAccount);
-        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Account successfully created",newAccount), httpHeaders,HttpStatus.CREATED);
     }
 
     // Update Account
@@ -80,7 +92,7 @@ public class AccountController {
 
     // Delete account
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleAccountById(@PathVariable Long accountId){
+    public ResponseEntity<?> deleteAccountById(@PathVariable Long accountId){
         accountService.verifyAccountById(accountId);
         accountService.deleteAccount(accountId);
 
