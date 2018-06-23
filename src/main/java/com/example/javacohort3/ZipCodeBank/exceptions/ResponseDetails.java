@@ -1,5 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 public class ResponseDetails {
     private Integer code;
     private String message;
@@ -8,12 +10,12 @@ public class ResponseDetails {
     public ResponseDetails() {
     }
 
-    public ResponseDetails(Integer status, String message) {
-        this.code = status;
+    public ResponseDetails(HttpStatus status, String message) {
+        this.code = status.value();
         this.message = message;
     }
-    public ResponseDetails(Integer status, String message, Object data) {
-        this.code = status;
+    public ResponseDetails(HttpStatus status, String message, Object data) {
+        this.code = status.value();
         this.message = message;
         this.data = data;
 
