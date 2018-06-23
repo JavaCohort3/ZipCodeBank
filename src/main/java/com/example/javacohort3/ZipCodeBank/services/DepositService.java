@@ -1,6 +1,5 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
-import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Deposit;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
@@ -35,8 +34,6 @@ public class DepositService {
     }
 
     public List<Deposit> getDepositsByAccountId(Long accountId) {
-        Account account = accountRepository.findAccountById(accountId);
-        
         ArrayList<Deposit> deposits = (ArrayList<Deposit>) depositRepository.findAll();
         deposits.removeIf(d -> !d.getPayeeId().equals(accountId));
         return deposits;
