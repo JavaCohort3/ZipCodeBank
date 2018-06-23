@@ -3,6 +3,7 @@ package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Customer;
 
+import com.example.javacohort3.ZipCodeBank.exceptions.ResponseDetails;
 import com.example.javacohort3.ZipCodeBank.services.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,78 +24,85 @@ import java.util.List;
 public class CustomerController {
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private CustomerService customerService;
+    private HttpStatus status;
+    private String response;
 
     @Autowired
     public CustomerController(CustomerService customerService) { this.customerService = customerService; }
 
     // Get a Customer by their Account ID
-    @RequestMapping(value ="/accounts/{accountId}/customer", method = RequestMethod.GET)
+    @RequestMapping(value ="/accounts/{accountId}/customer")
     public ResponseEntity<?> getCustomerByAccountId(@PathVariable Long accountId) {
         customerService.verifyAccount(accountId);
         Customer customer = customerService.getCustomerByAccountId(accountId);
+        customerService.verifyCustomer(customer.getId());
+
+        status = HttpStatus.OK;
+        response = "Success";
 
         log.info("[GET BY ACCOUNT ID]: " + customer);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customer),HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(status, response, customer), status);
     }
 
     // Get all Customers
-    @RequestMapping(value = "/customers", method = RequestMethod.GET)
+    @RequestMapping(value = "/customers")
     public ResponseEntity<?> getAllCustomers() {
-        HttpStatus status = HttpStatus.OK;
-
         List<Customer> customers = customerService.getAllCustomers();
+        customerService.verifyCustomer(new Long(customers.size()));
+
+        status = HttpStatus.OK;
+        response = "Success";
 
         log.info("[GET ALL CUSTOMERS]: " + customers);
-
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customers),HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(status, response, customers), status);
     }
 
     // Get Customer By their ID
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/customers/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
-        HttpStatus status = HttpStatus.OK;
-        // throw error if (customer == null)
         customerService.verifyCustomer(id);
         Customer customer = customerService.getCustomerById(id);
-        
+
+        status = HttpStatus.OK;
+        response = "Success";
+
         log.info("[GET BY ID]: " + customer);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",customer),HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(status, response, customer), status);
     }
 
     // Create a new Customer
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
-    public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
-
+    public ResponseEntity<?> createCustomer(@RequestBody @Valid Customer customer) {
         Customer c = customerService.createCustomer(customer);
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        URI newUri = ServletUriComponentsBuilder
-                .fromCurrentRequestUri()
-                .path("/id")
-                .buildAndExpand(c.getId())
-                .toUri();
-        httpHeaders.setLocation(newUri);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/id").buildAndExpand(c.getId()).toUri();
+        httpHeaders.setLocation(uri);
+
+        status = HttpStatus.CREATED;
+        response = "Customer account created.";
 
         log.info("[POST]: " + c);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Customer created.", c), HttpStatus.CREATED);
+        return new ResponseEntity<>(new ResponseDetails(status, response, customer), httpHeaders, status);
     }
 
     // Update a Customer by their ID
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
-        HttpStatus status;
+        customerService.verifyCustomer(id);
+        if (customer.getId() != null && !customer.getId().equals(customerService.getCustomerById(id).getId())) {
+            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(new ResponseDetails(status, "Tried to assign incorrect ID to Customer object."), status);
+        }
+
         Customer c = customerService.updateCustomer(customer);
 
+        status = HttpStatus.OK;
+        response = "Customer account updated.";
+
         log.info("[PUT]: " + c);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Customer account updated",c), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(status, response, customer), status);
 
 
-    }
-    //Delete a customer
-    @RequestMapping(value = "/customers/{customerId}")
-    public ResponseEntity<?> deleteCustomer(@PathVariable Long customerId){
-        customerService.verifyCustomer(customerId);
-        customerService.deleteCustomer(customerId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
