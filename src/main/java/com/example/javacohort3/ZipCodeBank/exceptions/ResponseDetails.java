@@ -7,14 +7,13 @@ public class ResponseDetails {
     private String message;
     private Object data;
 
-
     public ResponseDetails() {}
 
-    public ResponseDetails(Integer code, String message) {
-        this.code = code;
+    public ResponseDetails(HttpStatus status, String message) {
+        this.code = status.value();
         this.message = message;
     }
-
+ 
     public ResponseDetails(HttpStatus httpStatus, String message, Object data) {
         this.code = httpStatus.value();
         this.message = message;
