@@ -34,77 +34,32 @@ public class Withdrawal {
         this.accountId = accountId;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Enum getType() { return type; }
+    public void setType(Enum type) { this.type = type; }
 
-    public String getType() {
-        return type;
-    }
+    public String getTransactionDate() { return transactionDate; }
+    public void setTransactionDate(String transactionDate) { this.transactionDate = transactionDate; }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public String getTransactionDate() {
-        return transactionDate;
-    }
+    public Long getPayerId() { return payerId; }
+    public void setPayerId(Long payerId) { this.payerId = payerId; }
 
-    public void setTransactionDate(String transactionDate) {
-        this.transactionDate = transactionDate;
-    }
+    public String getMedium() { return medium; }
+    public void setMedium(String medium) { this.medium = medium; }
 
-    public String getStatus() {
-        return status;
-    }
+    public Double getAmount() { return amount; }
+    public void setAmount(Double amount) { this.amount = amount; }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public Long getPayerId() {
-        return payerId;
-    }
-
-    public void setPayerId(Long payerId) {
-        this.payerId = payerId;
-    }
-
-    public String getMedium() {
-        return medium;
-    }
-
-    public void setMedium(String medium) {
-        this.medium = medium;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
+    public Long getAccountId() { return accountId; }
+    public void setAccountId(Long accountId) { this.accountId = accountId; }
 
     @Override
     public String toString() {
