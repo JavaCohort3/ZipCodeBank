@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +21,8 @@ public class DepositController {
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private DepositService depositService;
 
+    HttpStatus status;
+    ResponseDetails response;
     @Autowired
     public DepositController(DepositService depositService){
         this.depositService = depositService;
@@ -34,8 +35,13 @@ public class DepositController {
         List<Deposit> deposits = depositService.getDepositsByAccountId(accountId);
         depositService.verifyDepositById(new Long(1));
 
+        status = HttpStatus.OK;
+        response.setCode(status);
+        response.setMessage("Success");
+        response.setData(deposits);
+
         log.info("\n[GET] " + deposits);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",deposits),HttpStatus.OK);
+        return new ResponseEntity<>(response,status);
     }
 
     //Get deposit by id
@@ -44,8 +50,13 @@ public class DepositController {
         depositService.verifyDepositById(depositId);
         Deposit deposit = depositService.getDepositById(depositId);
 
+        status = HttpStatus.OK;
+        response.setCode(status);
+        response.setMessage("Success");
+        response.setData(deposit);
+
         log.info("\n[GET] " + deposit);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", deposit),HttpStatus.OK);
+        return new ResponseEntity<>(response,status);
     }
 
     //Create a deposit
@@ -62,8 +73,13 @@ public class DepositController {
                 .toUri();
         httpHeaders.setLocation(newUri);
 
-    log.info("\n[POST] " + deposit);
-    return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Success",newDeposit),HttpStatus.CREATED);
+        status = HttpStatus.CREATED;
+        response.setCode(status);
+        response.setMessage("Success");
+        response.setData(newDeposit);
+
+    log.info("\n[POST] " + newDeposit);
+    return new ResponseEntity<>(response, status);
     }
 
     //Update a specific existing deposit
@@ -72,8 +88,13 @@ public class DepositController {
         depositService.verifyDepositById(depositId);
         Deposit updatedDeposit = depositService.updateDeposit(deposit);
 
+        status = HttpStatus.OK;
+        response.setCode(status);
+        response.setMessage("Success");
+        response.setData(updatedDeposit);
+
         log.info("\n[UPDATED] " + updatedDeposit);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",updatedDeposit),HttpStatus.OK);
+        return new ResponseEntity<>(response, status);
     }
 
     //Delete deposit  -----NEEDS WORKD
@@ -81,8 +102,12 @@ public class DepositController {
     public ResponseEntity<?> deleteDeposit(@PathVariable Long depositId){
         depositService.deleteDeposit(depositId);
 
+        status = HttpStatus.NO_CONTENT;
+        response.setCode(HttpStatus.NO_CONTENT);
+        response.setMessage("Deposit successfully deleted");
+
         log.info("\n{DELETED]" + depositId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(response, status);
     }
 
 }
