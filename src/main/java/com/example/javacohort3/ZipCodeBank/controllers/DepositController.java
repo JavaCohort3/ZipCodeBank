@@ -80,7 +80,6 @@ public class DepositController {
     public ResponseEntity<?> deleteDeposit(@PathVariable Long depositId){
         depositService.verifyDepositById(depositId);
         depositService.deleteDeposit(depositId);
-
         log.info("\n{DELETED]" + depositId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
