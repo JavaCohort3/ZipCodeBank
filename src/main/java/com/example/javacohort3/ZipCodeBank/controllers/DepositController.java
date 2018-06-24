@@ -21,27 +21,20 @@ public class DepositController {
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private DepositService depositService;
 
-    HttpStatus status;
-    ResponseDetails response;
     @Autowired
     public DepositController(DepositService depositService){
         this.depositService = depositService;
     }
 
-    //Get all deposits for an account ----- NEEDS WORK
+    //Get all deposits for an account
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
     public ResponseEntity<?> getAllDepositsByAccountId(@PathVariable Long accountId){
         depositService.verifyAccountById(accountId);
         List<Deposit> deposits = depositService.getDepositsByAccountId(accountId);
         depositService.verifyDepositById(new Long(1));
 
-        status = HttpStatus.OK;
-        response.setCode(status);
-        response.setMessage("Success");
-        response.setData(deposits);
-
         log.info("\n[GET] " + deposits);
-        return new ResponseEntity<>(response,status);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", deposits),HttpStatus.OK);
     }
 
     //Get deposit by id
@@ -50,20 +43,15 @@ public class DepositController {
         depositService.verifyDepositById(depositId);
         Deposit deposit = depositService.getDepositById(depositId);
 
-        status = HttpStatus.OK;
-        response.setCode(status);
-        response.setMessage("Success");
-        response.setData(deposit);
-
         log.info("\n[GET] " + deposit);
-        return new ResponseEntity<>(response,status);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",deposit), HttpStatus.OK);
     }
 
     //Create a deposit
-    @RequestMapping(value = "/accounts/{accountId}/deposits")
-    public ResponseEntity<?> createDepositFromCustomerId(@RequestBody Deposit deposit, @PathVariable Long accountId ){
-    depositService.getDepositsByAccountId(accountId);
-    Deposit newDeposit = depositService.createDeposit(deposit);
+    @RequestMapping(value = "/accounts/{accountId}/deposits",method = RequestMethod.POST)
+    public ResponseEntity<?> createDepositFromAccountId(@RequestBody Deposit deposit, @PathVariable Long accountId ){
+        depositService.verifyAccountById(accountId);
+        Deposit newDeposit = depositService.createDeposit(deposit);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         URI newUri = ServletUriComponentsBuilder
@@ -73,13 +61,8 @@ public class DepositController {
                 .toUri();
         httpHeaders.setLocation(newUri);
 
-        status = HttpStatus.CREATED;
-        response.setCode(status);
-        response.setMessage("Success");
-        response.setData(newDeposit);
-
-    log.info("\n[POST] " + newDeposit);
-    return new ResponseEntity<>(response, status);
+        log.info("\n[POST] " + newDeposit);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Success",newDeposit),HttpStatus.CREATED);
     }
 
     //Update a specific existing deposit
@@ -88,26 +71,18 @@ public class DepositController {
         depositService.verifyDepositById(depositId);
         Deposit updatedDeposit = depositService.updateDeposit(deposit);
 
-        status = HttpStatus.OK;
-        response.setCode(status);
-        response.setMessage("Success");
-        response.setData(updatedDeposit);
-
         log.info("\n[UPDATED] " + updatedDeposit);
-        return new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",updatedDeposit),HttpStatus.OK);
     }
 
-    //Delete deposit  -----NEEDS WORKD
+    //Delete deposit  -----NEEDS WORK
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteDeposit(@PathVariable Long depositId){
+        depositService.verifyDepositById(depositId);
         depositService.deleteDeposit(depositId);
 
-        status = HttpStatus.NO_CONTENT;
-        response.setCode(HttpStatus.NO_CONTENT);
-        response.setMessage("Deposit successfully deleted");
-
         log.info("\n{DELETED]" + depositId);
-        return new ResponseEntity<>(response, status);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
