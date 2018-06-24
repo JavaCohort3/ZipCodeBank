@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 @RestController
@@ -27,12 +27,12 @@ public class AccountController {
 
 
     @Autowired
-    public AccountController(AccountService accountService, CustomerService customerService) { this.accountService = accountService; }
+    public AccountController(AccountService accountService) { this.accountService = accountService; }
 
     // Get all accounts
     @RequestMapping("/accounts")
     public ResponseEntity<?> getAllAccounts() {
-        ArrayList<Account> accounts = (ArrayList<Account>) accountService.getAllAccounts();
+        List<Account> accounts = accountService.getAllAccounts();
 
         log.info("[GET ALL] " + accounts);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", accounts), HttpStatus.OK);
@@ -82,12 +82,11 @@ public class AccountController {
 
     // Update Account
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
-    public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId) {
+    public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId){
         accountService.verifyAccountById(accountId);
-
         accountService.updateAccount(account);
 
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",account));
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",account),HttpStatus.OK);
     }
 
     // Delete account
@@ -97,7 +96,7 @@ public class AccountController {
         accountService.deleteAccount(accountId);
 
         log.info("[DELETE] " + accountId);
-        return new ResponseEntity<> (new ResponseDetails(HttpStatus.NOT_FOUND,"Account successfully deleted"));
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NOT_FOUND,"Account successfully deleted"));
     }
 
 }
