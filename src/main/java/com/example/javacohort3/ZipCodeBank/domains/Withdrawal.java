@@ -13,7 +13,7 @@ public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private TransactionType type;
+    private TransactionMedium type;
     private String transactionDate;
     private String status;
     private Long payerId;
@@ -24,7 +24,7 @@ public class Withdrawal {
 
     public Withdrawal(){}
 
-    public Withdrawal(Long id, TransactionType type, String transactionDate, String status, Long payerId, String medium, Double amount, String description, Long accountId) {
+    public Withdrawal(Long id, TransactionMedium type, String transactionDate, String status, Long payerId, String medium, Double amount, String description, Long accountId) {
         this.id = id;
         this.type = type;
         this.transactionDate = transactionDate;
@@ -39,8 +39,8 @@ public class Withdrawal {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public TransactionType getType() { return type; }
-    public void setType(TransactionType type) { this.type = type; }
+    public TransactionMedium getType() { return type; }
+    public void setType(TransactionMedium type) { this.type = type; }
 
     public String getTransactionDate() { return transactionDate; }
     public void setTransactionDate(String transactionDate) { this.transactionDate = transactionDate; }
