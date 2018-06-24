@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
-import com.example.javacohort3.ZipCodeBank.enums.Status;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Status status;
+    private TransactionStatus status;
     private String payee;
     private String nickname;
     private String creationDate;
@@ -25,7 +26,7 @@ public class Bill {
 
     public Bill(){}
 
-    public Bill(Long id, Status status, String payee, String nickname, String creationDate, String paymentDate, Integer recurringDate, String upcomingPaymentDate, Double paymentAmount, Long accountId) {
+    public Bill(Long id, TransactionStatus status, String payee, String nickname, String creationDate, String paymentDate, Integer recurringDate, String upcomingPaymentDate, Double paymentAmount, Long accountId) {
         this.id = id;
         this.status = status;
         this.payee = payee;
@@ -46,11 +47,11 @@ public class Bill {
         this.id = id;
     }
 
-    public Status getStatus() {
+    public TransactionStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(TransactionStatus status) {
         this.status = status;
     }
 
