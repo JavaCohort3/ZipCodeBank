@@ -1,21 +1,21 @@
 package com.example.javacohort3.ZipCodeBank.enums;
 
-public enum Status {
+public enum TransactionStatus {
     PENDING("PENDING"),
     CANCELLED("CANCELLED"),
     COMPLETED("COMPLETED");
 
     private final String value;
 
-    Status(String value){
+    TransactionStatus(String value){
         this.value = value;
     }
 
-    public static Status fromValue(String value) {
+    public static TransactionStatus fromValue(String value) {
         if (value != null) {
-            for (Status status : values()) {
-                if (status.value.equals(value)) {
-                    return status;
+            for (TransactionStatus transactionStatus : values()) {
+                if (transactionStatus.value.equals(value)) {
+                    return transactionStatus;
                 }
             }
         }
@@ -26,7 +26,7 @@ public enum Status {
         return value;
     }
 
-    public static Status getDefault() {
+    public static TransactionStatus getDefault() {
         return PENDING;
     }
 
