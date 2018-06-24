@@ -7,17 +7,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.format.datetime.joda.ReadablePartialPrinter;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class DepositController {
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
-
     private DepositService depositService;
 
     @Autowired
@@ -25,14 +27,14 @@ public class DepositController {
         this.depositService = depositService;
     }
 
-    //Get all deposits for an account
-    @RequestMapping(value = "/accounts/{accountId}/deposits")
+    //Get all deposits for an account ----- NEEDS WORK
+    @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
     public ResponseEntity<?> getAllDepositsByAccountId(@PathVariable Long accountId){
         depositService.verifyAccountById(accountId);
-        ArrayList<Deposit> deposits = new ArrayList<>();
-        depositService.getDepositsByAccountId(new Long(deposits.size()));
+        List<Deposit> deposits = depositService.getDepositsByAccountId(accountId);
+        depositService.verifyDepositById(new Long(1));
 
-        log.info("[GET] " + accountId);
+        log.info("\n[GET] " + deposits);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",deposits),HttpStatus.OK);
     }
 
@@ -42,7 +44,7 @@ public class DepositController {
         depositService.verifyDepositById(depositId);
         Deposit deposit = depositService.getDepositById(depositId);
 
-        log.info("[GET] " + deposit);
+        log.info("\n[GET] " + deposit);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", deposit),HttpStatus.OK);
     }
 
@@ -52,8 +54,16 @@ public class DepositController {
     depositService.getDepositsByAccountId(accountId);
     Deposit newDeposit = depositService.createDeposit(deposit);
 
-    log.info("[POST] " + deposit);
-    return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",deposit),HttpStatus.OK);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        URI newUri = ServletUriComponentsBuilder
+                .fromCurrentRequestUri()
+                .path("/{depositId}")
+                .buildAndExpand(newDeposit.getId())
+                .toUri();
+        httpHeaders.setLocation(newUri);
+
+    log.info("\n[POST] " + deposit);
+    return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Success",newDeposit),HttpStatus.CREATED);
     }
 
     //Update a specific existing deposit
@@ -62,17 +72,16 @@ public class DepositController {
         depositService.verifyDepositById(depositId);
         Deposit updatedDeposit = depositService.updateDeposit(deposit);
 
-        log.info("[UPDATED] " + updatedDeposit);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",deposit),HttpStatus.OK);
+        log.info("\n[UPDATED] " + updatedDeposit);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",updatedDeposit),HttpStatus.OK);
     }
 
-    //Delete deposit
+    //Delete deposit  -----NEEDS WORKD
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteDeposit(@PathVariable Long depositId){
-        depositService.verifyDepositById(depositId);
         depositService.deleteDeposit(depositId);
 
-        log.info("{DELETED]" + depositId);
+        log.info("\n{DELETED]" + depositId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
