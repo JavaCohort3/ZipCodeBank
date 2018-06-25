@@ -46,7 +46,7 @@ public class BillService {
     }
 
     public Bill getBillsByCustomerId(Long customerId){
-        return  billRepository.findBillById(customerId);
+        return billRepository.findAllById(customerId);
     }
 
     public Bill updateBill(Bill bill){
