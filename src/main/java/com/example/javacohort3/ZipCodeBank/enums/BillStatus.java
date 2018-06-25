@@ -1,5 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.enums;
 
+
 public enum BillStatus {
     PENDING("PENDING"),
     CANCELLED("CANCELLED"),

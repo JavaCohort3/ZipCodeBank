@@ -1,7 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
 import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

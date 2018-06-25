@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 
 public interface BillRepository extends CrudRepository<Bill, Long> {
-
     Bill findBillById(Long accountId);
     void deleteBillById(Long id);
 }

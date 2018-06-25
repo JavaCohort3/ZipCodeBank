@@ -22,7 +22,6 @@ public class BillController {
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private BillService billService;
 
-
     @Autowired
     public  BillController(BillService billService){
         this.billService = billService;
