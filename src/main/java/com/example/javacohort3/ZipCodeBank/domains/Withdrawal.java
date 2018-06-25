@@ -1,6 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
-import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionMedium;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
