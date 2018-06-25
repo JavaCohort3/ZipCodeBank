@@ -23,10 +23,12 @@ public class Bill {
     private String upcomingPaymentDate;
     private Double paymentAmount;
     private Long accountId;
+    private Long customerId;
 
-    public Bill(){}
+    public Bill() {
+    }
 
-    public Bill(Long id, TransactionStatus status, String payee, String nickname, String creationDate, String paymentDate, Integer recurringDate, String upcomingPaymentDate, Double paymentAmount, Long accountId) {
+    public Bill(Long id, TransactionStatus status, String payee, String nickname, String creationDate, String paymentDate, Integer recurringDate, String upcomingPaymentDate, Double paymentAmount, Long accountId, Long customerId) {
         this.id = id;
         this.status = status;
         this.payee = payee;
@@ -37,6 +39,7 @@ public class Bill {
         this.upcomingPaymentDate = upcomingPaymentDate;
         this.paymentAmount = paymentAmount;
         this.accountId = accountId;
+        this.customerId = customerId;
     }
 
     public Long getId() {
@@ -119,6 +122,14 @@ public class Bill {
         this.accountId = accountId;
     }
 
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
     @Override
     public String toString() {
         return "Bill{" +
@@ -127,11 +138,12 @@ public class Bill {
                 ", payee='" + payee + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", creationDate='" + creationDate + '\'' +
-                ", paymentDate=" + paymentDate +
+                ", paymentDate='" + paymentDate + '\'' +
                 ", recurringDate=" + recurringDate +
                 ", upcomingPaymentDate='" + upcomingPaymentDate + '\'' +
                 ", paymentAmount=" + paymentAmount +
                 ", accountId=" + accountId +
+                ", customerId=" + customerId +
                 '}';
     }
 }
