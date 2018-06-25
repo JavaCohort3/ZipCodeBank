@@ -97,7 +97,7 @@ public class AccountController {
         accountService.deleteAccount(accountId);
 
         log.info("[DELETE] " + accountId);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NOT_FOUND,"Account successfully deleted"));
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NOT_FOUND,"Account successfully deleted"), HttpStatus.OK);
     }
 
 }
