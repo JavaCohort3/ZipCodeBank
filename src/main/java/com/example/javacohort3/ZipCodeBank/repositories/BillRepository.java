@@ -9,5 +9,4 @@ public interface BillRepository extends CrudRepository<Bill, Long> {
 
     Bill findBillById(Long accountId);
     void deleteBillByBillId(Long billId);
-    Bill findAllById(Long customerId);
 }

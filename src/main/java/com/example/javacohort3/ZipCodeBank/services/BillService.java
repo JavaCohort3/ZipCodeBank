@@ -45,9 +45,11 @@ public class BillService {
         return bills;
     }
 
-    public Bill getBillsByCustomerId(Long customerId){
-        return billRepository.findAllById(customerId);
-    }
+    public ArrayList<Bill> getBillsByCustomerId(Long customerId){
+        ArrayList<Bill>  bills = (ArrayList<Bill>) billRepository.findAll();
+        bills.removeIf(b -> !b.getCustomerId().equal(customerId));
+        return bills;
+        }
 
     public Bill updateBill(Bill bill){
         return billRepository.save(bill);
