@@ -62,11 +62,10 @@ public class AccountController {
     // Create account
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
-
+        accountService.verifyCustomerById(customerId);
         account.setCustomer(accountService.getCustomerById(customerId));
 
         Account newAccount = accountService.createAccount(account);
-        accountService.verifyAccountById(newAccount.getId());
 
         HttpHeaders httpHeaders = new HttpHeaders();
         URI newUri = ServletUriComponentsBuilder
@@ -96,7 +95,7 @@ public class AccountController {
         accountService.deleteAccount(accountId);
 
         log.info("[DELETE] " + accountId);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NOT_FOUND,"Account successfully deleted"));
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NOT_FOUND,"Account successfully deleted"),HttpStatus.OK);
     }
 
 }
