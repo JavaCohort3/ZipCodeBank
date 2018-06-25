@@ -7,7 +7,9 @@ public class ErrorDetails {
     private String message;
 
 
-    public ErrorDetails() {
+    public ErrorDetails(Integer status, String message) {
+        this.code = status;
+        this.message = message;
     }
 
     public ErrorDetails(HttpStatus httpStatus, String message) {
