@@ -1,5 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
+import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Customer;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
@@ -7,6 +8,7 @@ import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +44,12 @@ public class CustomerService {
 
     // Get By Account ID
     public Customer getCustomerByAccountId(Long accountId) {
-        // re-work
-        return new Customer();
+        ArrayList<Account> accounts = (ArrayList<Account>) accountRepository.findAll();
+        for (Account account : accounts) {
+            if (account.getId().equals(accountId)) return account.getCustomer();
+        }
+
+        throw new ResourceNotFoundException();
     }
 
     // Get All
