@@ -34,7 +34,7 @@ public class BillController {
 
         billService.verifyBillById(new Long(bills.size()));
 
-        log.info("[Grt]" + accountId);
+        log.info("[GET]" + accountId);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "success", bills), HttpStatus.OK);
     }
 
@@ -52,7 +52,7 @@ public class BillController {
         Bill bill = billService.getBillsByCustomerId(customerId);
 
 
-        log.info("[GET BY CUSTOMER ID" + bill);
+        log.info("[GET BY CUSTOMER ID]" + bill);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", bill), HttpStatus.OK);
     }
 
@@ -69,7 +69,7 @@ public class BillController {
                 .toUri();
         httpHeaders.setLocation(newUri);
 
-        log.info("\n[Post] " + newBill);
+        log.info("\n[POST] " + newBill);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED, "Bill Successfully created", newBill ), httpHeaders, HttpStatus.CREATED);
     }
 
