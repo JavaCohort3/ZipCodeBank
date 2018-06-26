@@ -18,11 +18,10 @@ public class Deposit {
     private String medium;
     private Double amount;
     private String description;
-    private Long accountId;
 
     public Deposit(){}
 
-    public Deposit(Long id, Enum type, String transactionDate, String status, Long payeeId, String medium, Double amount, String description, Long accountId) {
+    public Deposit(Long id, Enum type, String transactionDate, String status, Long payeeId, String medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transactionDate = transactionDate;
@@ -31,7 +30,6 @@ public class Deposit {
         this.medium = medium;
         this.amount = amount;
         this.description = description;
-        this.accountId = accountId;
     }
 
     public Long getId() { return id; }
@@ -58,9 +56,6 @@ public class Deposit {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Long getAccountId() { return accountId; }
-    public void setAccountId(Long accountId) { this.accountId = accountId; }
-
     @Override
     public String toString() {
         return "Deposit{" +
@@ -72,7 +67,6 @@ public class Deposit {
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
-                ", accountId=" + accountId +
                 '}';
     }
 }
