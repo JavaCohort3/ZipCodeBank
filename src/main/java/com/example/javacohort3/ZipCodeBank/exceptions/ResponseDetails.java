@@ -9,6 +9,11 @@ public class ResponseDetails {
 
     public ResponseDetails() {}
 
+    public ResponseDetails(HttpStatus status, Object data){
+        this.code = status.value();
+        this.data = data;
+    }
+
     public ResponseDetails(HttpStatus status, String message) {
         this.code = status.value();
         this.message = message;
