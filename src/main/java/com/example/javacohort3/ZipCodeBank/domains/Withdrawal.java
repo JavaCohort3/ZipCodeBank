@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
-import com.example.javacohort3.ZipCodeBank.enums.TransactionMedium;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +14,9 @@ public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private TransactionMedium type;
+    private TransactionType type;
     private String transactionDate;
-    private String status;
+    private TransactionStatus status;
     private Long payerId;
     private String medium;
     private Double amount;
@@ -24,7 +25,7 @@ public class Withdrawal {
 
     public Withdrawal(){}
 
-    public Withdrawal(Long id, TransactionMedium type, String transactionDate, String status, Long payerId, String medium, Double amount, String description, Long accountId) {
+    public Withdrawal(Long id, TransactionType type, String transactionDate, TransactionStatus status, Long payerId, String medium, Double amount, String description, Long accountId) {
         this.id = id;
         this.type = type;
         this.transactionDate = transactionDate;
@@ -39,14 +40,14 @@ public class Withdrawal {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public TransactionMedium getType() { return type; }
-    public void setType(TransactionMedium type) { this.type = type; }
+    public TransactionType getType() { return type; }
+    public void setType(TransactionType type) { this.type = type; }
 
     public String getTransactionDate() { return transactionDate; }
     public void setTransactionDate(String transactionDate) { this.transactionDate = transactionDate; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public TransactionStatus getStatus() { return status; }
+    public void setStatus(TransactionStatus status) { this.status = status; }
 
     public Long getPayerId() { return payerId; }
     public void setPayerId(Long payerId) { this.payerId = payerId; }

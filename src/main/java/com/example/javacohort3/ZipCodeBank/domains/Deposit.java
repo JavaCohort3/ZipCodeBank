@@ -1,5 +1,8 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
+import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,9 +14,9 @@ public class Deposit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Enum type;
+    private TransactionType type;
     private String transactionDate;
-    private String status;
+    private TransactionStatus status;
     private Long payeeId;
     private String medium;
     private Double amount;
@@ -21,7 +24,7 @@ public class Deposit {
 
     public Deposit(){}
 
-    public Deposit(Long id, Enum type, String transactionDate, String status, Long payeeId, String medium, Double amount, String description) {
+    public Deposit(Long id, TransactionType type, String transactionDate, TransactionStatus status, Long payeeId, String medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transactionDate = transactionDate;
@@ -35,14 +38,14 @@ public class Deposit {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Enum getType() { return type; }
-    public void setType(Enum type) { this.type = type; }
+    public TransactionType getType() { return type; }
+    public void setType(TransactionType type) { this.type = type; }
 
     public String getTransactionDate() { return transactionDate; }
     public void setTransactionDate(String transactionDate) { this.transactionDate = transactionDate; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public TransactionStatus getStatus() { return status; }
+    public void setStatus(TransactionStatus status) { this.status = status; }
 
     public Long getPayeeId() { return payeeId; }
     public void setPayeeId(Long payeeId) { this.payeeId = payeeId; }
