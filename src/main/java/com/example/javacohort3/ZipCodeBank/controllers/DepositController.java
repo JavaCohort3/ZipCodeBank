@@ -79,10 +79,10 @@ public class DepositController {
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteDeposit(@PathVariable Long depositId){
         depositService.verifyDepositById(depositId);
-        depositService.deleteDeposit(depositId);
+        depositService.deleteDepositById(depositId);
 
         log.info("\n{DELETED]" + depositId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NO_CONTENT, "Deposit successfully Deleted", new Object()), HttpStatus.NO_CONTENT);
     }
 
 }
