@@ -89,19 +89,14 @@ public class CustomerController {
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
         customerService.verifyCustomer(id);
-        if (customer.getId() != null && !customer.getId().equals(customerService.getCustomerById(id).getId())) {
-            status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(new ResponseDetails(status, "Tried to assign incorrect ID to Customer object."), status);
-        }
-
+        customer.setId(id);
         Customer c = customerService.updateCustomer(customer);
 
         status = HttpStatus.OK;
         response = "Customer account updated.";
 
+        
         log.info("[PUT]: " + c);
         return new ResponseEntity<>(new ResponseDetails(status, response, customer), status);
-
-
     }
 }
