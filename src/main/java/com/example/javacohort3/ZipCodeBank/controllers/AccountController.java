@@ -54,8 +54,6 @@ public class AccountController {
         accountService.verifyCustomerById(customerId);
         ArrayList<Account> accounts = (ArrayList<Account>) accountService.getAccountsByCustomerId(customerId);
 
-        accountService.verifyAccountById(new Long(accounts.size()));
-
         log.info("[GET] " + customerId);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", accounts), HttpStatus.OK);
     }

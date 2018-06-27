@@ -33,8 +33,6 @@ public class BillController {
         billService.verifyAccountById(accountId);
         ArrayList<Bill> bills = (ArrayList<Bill>) billService.getAllBillsByAccountId(accountId);
 
-        billService.verifyBillById(new Long(bills.size()));
-
         log.info("[GET]" + accountId);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "success", bills), HttpStatus.OK);
     }
@@ -51,7 +49,6 @@ public class BillController {
     @RequestMapping("/customers/{customerId}/bills")
     public ResponseEntity<?> getBillsByCustomerId(@PathVariable Long customerId){
         List<Bill> bill = billService.getBillsByCustomerId(customerId);
-
 
         log.info("[GET BY CUSTOMER ID]" + bill);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", bill), HttpStatus.OK);
@@ -77,8 +74,9 @@ public class BillController {
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateBillById(@RequestBody Bill bill, @PathVariable Long billId){
         billService.verifyBillById(billId);
-        Bill updatedBill = billService.updateBill(bill);
+        bill.setId(billId);
 
+        Bill updatedBill = billService.updateBill(bill);
 
         log.info("\n[UPDATED] " + updatedBill);
 
