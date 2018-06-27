@@ -33,8 +33,6 @@ public class BillController {
         billService.verifyAccountById(accountId);
         ArrayList<Bill> bills = (ArrayList<Bill>) billService.getAllBillsByAccountId(accountId);
 
-        billService.verifyBillById(new Long(bills.size()));
-
         log.info("[GET]" + accountId);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "success", bills), HttpStatus.OK);
     }
