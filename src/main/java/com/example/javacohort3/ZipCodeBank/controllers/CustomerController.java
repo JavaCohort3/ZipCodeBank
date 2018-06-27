@@ -96,7 +96,7 @@ public class CustomerController {
             return new ResponseEntity<>(new ResponseDetails(status, "Tried to assign incorrect ID to Customer object."), status);
         }
       
-        if (customer.getAddresses() == null) customer.setAddresses(customerService.getCustomerById(id).getAddresses());
+        if (customer.getAddresses().isEmpty()) customer.setAddresses(customerService.getCustomerById(id).getAddresses());
       
         customerService.updateCustomer(customer);
 
