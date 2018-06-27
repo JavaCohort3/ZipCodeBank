@@ -62,13 +62,13 @@ public class Withdrawal {
     public String toString() {
         return "Withdrawal{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 ", transactionDate='" + transactionDate + '\'' +
                 ", status='" + status + '\'' +
                 ", payerId=" + payerId +
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
-                ", description='" + description +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
