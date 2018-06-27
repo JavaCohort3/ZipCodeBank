@@ -47,7 +47,6 @@ public class CustomerController {
     @RequestMapping(value = "/customers")
     public ResponseEntity<?> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomers();
-        customerService.verifyCustomer(new Long(customers.size()));
 
         status = HttpStatus.OK;
         response = "Success";
