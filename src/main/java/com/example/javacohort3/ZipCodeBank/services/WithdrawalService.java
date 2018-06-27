@@ -5,6 +5,7 @@ import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.WithdrawalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,12 +23,13 @@ public class WithdrawalService {
     }
 
     public void verifyWithdrawalById(Long id){
-        if (withdrawalRepository.findWithdrawalById(id) == null) throw new ResourceNotFoundException();
+        if (withdrawalRepository.findWithdrawalById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND," error fetching withdrawal with id ");
     }
 
     public void verifyAccountById(Long id) {
-        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException();
+        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND,"Account Not Found");
     }
+
 
     public Withdrawal createWithdrawal(Withdrawal Withdrawal){
         return withdrawalRepository.save(Withdrawal);
