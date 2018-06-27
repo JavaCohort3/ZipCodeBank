@@ -84,6 +84,7 @@ public class AccountController {
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId){
         accountService.verifyAccountById(accountId);
+        account.setId(accountId);
         accountService.updateAccount(account);
 
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",account),HttpStatus.OK);
