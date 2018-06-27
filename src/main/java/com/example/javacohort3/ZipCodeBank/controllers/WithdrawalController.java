@@ -83,6 +83,6 @@ public class WithdrawalController {
         status = HttpStatus.NO_CONTENT;
 
         log.info("[Deleted] This is deleting  : " + withdrawalService.getWithdrawalById(withdrawalId));
-        return new ResponseEntity<>(status);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NO_CONTENT,"",new Object()),HttpStatus.NO_CONTENT);
     }
 }
