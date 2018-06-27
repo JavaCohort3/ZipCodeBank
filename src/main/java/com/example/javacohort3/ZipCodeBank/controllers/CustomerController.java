@@ -90,7 +90,7 @@ public class CustomerController {
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
         customerService.verifyCustomer(id);
 
-        if(customer.getAddresses()== null) customer.setAddresses(customerService.getCustomerById(id).getAddresses());
+        if(customer.getAddresses() == null) customer.setAddresses(customerService.getCustomerById(id).getAddresses());
 
         if (customer.getId() != null && !customer.getId().equals(customerService.getCustomerById(id).getId())) {
             status = HttpStatus.BAD_REQUEST;
