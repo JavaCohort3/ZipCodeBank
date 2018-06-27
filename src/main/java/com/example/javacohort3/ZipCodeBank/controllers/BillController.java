@@ -74,8 +74,9 @@ public class BillController {
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateBillById(@RequestBody Bill bill, @PathVariable Long billId){
         billService.verifyBillById(billId);
-        Bill updatedBill = billService.updateBill(bill);
+        bill.setId(billId);
 
+        Bill updatedBill = billService.updateBill(bill);
 
         log.info("\n[UPDATED] " + updatedBill);
 
