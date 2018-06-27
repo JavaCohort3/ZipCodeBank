@@ -45,8 +45,7 @@ public class AccountService {
 
     public List<Account> getAccountsByCustomerId(Long customerId){
         ArrayList<Account> accounts = (ArrayList<Account>) accountRepository.findAll();
-        accounts.removeIf(a -> !a.getCustomer().getId().equals(customerId));
-
+        verifyAccountById((long) accounts.size());
         return accounts;
     }
 

@@ -58,7 +58,9 @@ public class CustomerService {
 
     // Get All
     public List<Customer> getAllCustomers() {
-        return (ArrayList<Customer>) customerRepository.findAll();
+        List<Customer> customers = (List<Customer>) customerRepository.findAll();
+        verifyCustomer((long) customers.size());
+        return customers;
     }
 
     // Update
