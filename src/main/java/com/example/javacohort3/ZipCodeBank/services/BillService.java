@@ -56,7 +56,7 @@ public class BillService {
         return billRepository.save(bill);
     }
 
-    public void deleteBill(Long id){
+    public void deleteBillById(Long id){
         billRepository.deleteById(id);
     }
 }
