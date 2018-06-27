@@ -1,8 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Withdrawal;
-import com.example.javacohort3.ZipCodeBank.exceptions.ErrorDetails;
-import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResponseDetails;
 import com.example.javacohort3.ZipCodeBank.services.WithdrawalService;
 import org.slf4j.Logger;
@@ -78,7 +76,7 @@ public class WithdrawalController {
     @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteWithdrawal(@PathVariable Long withdrawalId){
         withdrawalService.verifyWithdrawalById(withdrawalId);
-        withdrawalService.deleteWithdrawal(withdrawalId);
+        withdrawalService.deleteWithdrawalById(withdrawalId);
 
         status = HttpStatus.NO_CONTENT;
 

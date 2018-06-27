@@ -93,7 +93,7 @@ public class AccountController {
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteAccountById(@PathVariable Long accountId){
         accountService.verifyAccountById(accountId);
-        accountService.deleteAccount(accountId);
+        accountService.deleteAccountById(accountId);
 
         log.info("[DELETE] " + accountId);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.NOT_FOUND,"Account successfully deleted"),HttpStatus.OK);
