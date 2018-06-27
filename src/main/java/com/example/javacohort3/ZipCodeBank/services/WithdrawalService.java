@@ -38,6 +38,7 @@ public class WithdrawalService {
     public List<Withdrawal> getWithdrawalsByAccountId(Long accountId) {
         ArrayList<Withdrawal> withdrawals = (ArrayList<Withdrawal>) withdrawalRepository.findAll();
         withdrawals.removeIf(d -> !d.getPayerId().equals(accountId));
+        verifyWithdrawalById(accountId);
         return withdrawals;
     }
 

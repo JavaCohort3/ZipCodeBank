@@ -35,20 +35,25 @@ public class DepositService {
     }
 
     public List<Deposit> getDepositsByAccountId(Long accountId) {
+        verifyAccountById(accountId);
         ArrayList<Deposit> deposits = (ArrayList<Deposit>) depositRepository.findAll();
         deposits.removeIf(d -> !d.getPayeeId().equals(accountId));
+        verifyDepositById(new Long(1));
         return deposits;
     }
 
     public Deposit getDepositById (Long id){
+        verifyAccountById(id);
         return depositRepository.findDepositById(id);
     }
 
     public Deposit updateDeposit(Deposit deposit){
+        verifyDepositById(deposit.getId());
         return depositRepository.save(deposit);
     }
 
     public void deleteDepositById(Long id){
+        verifyDepositById(id);
         depositRepository.deleteById(id);
     }
 }
