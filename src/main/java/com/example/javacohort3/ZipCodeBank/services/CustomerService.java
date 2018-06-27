@@ -26,13 +26,13 @@ public class CustomerService {
 
     // Verify
     public void verifyCustomer(Long id) {
-        if (customerRepository.findCustomerById(id).getId() == null) {
+        if (customerRepository.findCustomerById(id) == null) {
             throw new ResourceNotFoundException(HttpStatus.NOT_FOUND, "error fetching customer");
         }
     }
 
     public void verifyAccount(Long id) {
-        if (accountRepository.findAccountById(id).getId() == null) {
+        if (accountRepository.findAccountById(id) == null) {
             throw new ResourceNotFoundException(HttpStatus.NOT_FOUND, "error fetching account");
         }
     }
