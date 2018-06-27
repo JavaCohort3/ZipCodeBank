@@ -47,6 +47,8 @@ public class BillService {
     public List<Bill> getBillsByCustomerId(Long customerId){
         //        ArrayList<Account>  accounts = (ArrayList<Account>) accountRepository.findAll();
         ArrayList<Bill> bills = (ArrayList<Bill>) billRepository.findAll();
+        verifyBillById((long) bills.size());
+
         //        accounts.removeIf(account -> account.getCustomer().getId().equals(customerId));
         //        bills.removeIf(bill -> !bill.getAccountId().equals());
         return bills;
