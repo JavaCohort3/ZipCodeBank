@@ -92,6 +92,7 @@ public class CustomerController {
         customer.setId(id);
         Customer c = customerService.updateCustomer(customer);
 
+        
         status = HttpStatus.OK;
         response = "Customer account updated.";
 
