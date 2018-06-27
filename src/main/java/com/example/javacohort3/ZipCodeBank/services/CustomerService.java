@@ -6,6 +6,7 @@ import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
@@ -25,11 +26,15 @@ public class CustomerService {
 
     // Verify
     public void verifyCustomer(Long id) {
-        if (customerRepository.findCustomerById(id) == null) throw new ResourceNotFoundException();
+        if (customerRepository.findCustomerById(id) == null) {
+            throw new ResourceNotFoundException(HttpStatus.NOT_FOUND, "error fetching customer");
+        }
     }
 
     public void verifyAccount(Long id) {
-        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException();
+        if (accountRepository.findAccountById(id) == null) {
+            throw new ResourceNotFoundException(HttpStatus.NOT_FOUND, "error fetching account");
+        }
     }
 
     // Create
