@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class BillController {
@@ -49,7 +50,7 @@ public class BillController {
 
     @RequestMapping("/customers/{customerId}/bills")
     public ResponseEntity<?> getBillsByCustomerId(@PathVariable Long customerId){
-        Bill bill = billService.getBillsByCustomerId(customerId);
+        List<Bill> bill = billService.getBillsByCustomerId(customerId);
 
 
         log.info("[GET BY CUSTOMER ID]" + bill);
