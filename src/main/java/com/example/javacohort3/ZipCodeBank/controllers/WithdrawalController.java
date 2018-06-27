@@ -81,6 +81,6 @@ public class WithdrawalController {
         status = HttpStatus.NO_CONTENT;
 
         log.info("[Deleted] This is deleting  : " + withdrawalService.getWithdrawalById(withdrawalId));
-        return new ResponseEntity<>(status);
+        return new ResponseEntity<>(new ResponseDetails(status, "Bill successfully Deleted", new Object()), status);
     }
 }
