@@ -14,10 +14,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class BillController {
-
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private BillService billService;
 
@@ -49,22 +49,21 @@ public class BillController {
 
     @RequestMapping("/customers/{customerId}/bills")
     public ResponseEntity<?> getBillsByCustomerId(@PathVariable Long customerId){
-        Bill bill = billService.getBillsByCustomerId(customerId);
+        List<Bill> bills = billService.getBillsByCustomerId(customerId);
 
-
-        log.info("[GET BY CUSTOMER ID]" + bill);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", bill), HttpStatus.OK);
+        log.info("[GET BY CUSTOMER ID]" + bills);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", bills), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.POST)
     public ResponseEntity<?> createBillFromAccountld(@RequestBody Bill bill, @PathVariable Long accountId){
-        billService.getAllBillsByAccountId(accountId);
+        bill.setAccountId(accountId);
         Bill newBill = billService.createBill(bill);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         URI newUri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
-                .path("/{billId}")
+                .path("/{accountId}")
                 .buildAndExpand(newBill.getId())
                 .toUri();
         httpHeaders.setLocation(newUri);
@@ -76,16 +75,18 @@ public class BillController {
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateBillById(@RequestBody Bill bill, @PathVariable Long billId){
         billService.verifyBillById(billId);
+        bill.setId(billId);
         Bill updatedBill = billService.updateBill(bill);
 
 
         log.info("\n[UPDATED] " + updatedBill);
 
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", updatedBill), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.ACCEPTED, "Success"), HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteBillById(@PathVariable Long billId){
+        billService.verifyBillById(billId);
         billService.deleteBill(billId);
 
         log.info("\n[DELETED] " + billId);
