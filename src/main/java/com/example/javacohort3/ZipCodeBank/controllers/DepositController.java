@@ -82,7 +82,7 @@ public class DepositController {
         depositService.deleteDeposit(depositId);
 
         log.info("\n{DELETED]" + depositId);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NO_CONTENT,"",new Object()),HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.ACCEPTED,"Deposit deleted Successfully",new Object()),HttpStatus.ACCEPTED);
     }
 
 }
