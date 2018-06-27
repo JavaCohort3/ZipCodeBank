@@ -1,5 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
+import com.example.javacohort3.ZipCodeBank.enums.TransactionMedium;
 import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
 import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
 
@@ -18,14 +19,14 @@ public class Withdrawal {
     private String transactionDate;
     private TransactionStatus status;
     private Long payerId;
-    private String medium;
+    private TransactionMedium medium;
     private Double amount;
     private String description;
     private Long accountId;
 
     public Withdrawal(){}
 
-    public Withdrawal(Long id, TransactionType type, String transactionDate, TransactionStatus status, Long payerId, String medium, Double amount, String description, Long accountId) {
+    public Withdrawal(Long id, TransactionType type, String transactionDate, TransactionStatus status, Long payerId, TransactionMedium medium, Double amount, String description, Long accountId) {
         this.id = id;
         this.type = type;
         this.transactionDate = transactionDate;
@@ -52,8 +53,8 @@ public class Withdrawal {
     public Long getPayerId() { return payerId; }
     public void setPayerId(Long payerId) { this.payerId = payerId; }
 
-    public String getMedium() { return medium; }
-    public void setMedium(String medium) { this.medium = medium; }
+    public TransactionMedium getMedium() { return medium; }
+    public void setMedium(TransactionMedium medium) { this.medium = medium; }
 
     public Double getAmount() { return amount; }
     public void setAmount(Double amount) { this.amount = amount; }
