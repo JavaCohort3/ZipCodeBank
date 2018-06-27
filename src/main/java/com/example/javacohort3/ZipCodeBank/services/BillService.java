@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
 
+import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Bill;
 import com.example.javacohort3.ZipCodeBank.exceptions.ErrorDetails;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
@@ -25,7 +26,7 @@ public class BillService {
         this.accountRepository = accountRepository; }
 
     public void verifyAccountById(Long id){
-        if(accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND,"");
+        if(accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND," error fetching bills ");
     }
 
     public void verifyBillById(Long id){
@@ -47,8 +48,11 @@ public class BillService {
     }
 
     public List<Bill> getBillsByCustomerId(Long customerId){
-        ArrayList<Bill>  bills = (ArrayList<Bill>) billRepository.findAll();
-        return bills;
+        //        ArrayList<Account>  accounts = (ArrayList<Account>) accountRepository.findAll();
+               ArrayList<Bill> bills = (ArrayList<Bill>) billRepository.findAll();
+        //        accounts.removeIf(account -> account.getCustomer().getId().equals(customerId));
+        //        bills.removeIf(bill -> !bill.getAccountId().equals());
+                return bills;
     }
 
     public Bill updateBill(Bill bill){
