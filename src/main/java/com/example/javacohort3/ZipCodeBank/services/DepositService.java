@@ -46,8 +46,4 @@ public class DepositService {
     public Deposit updateDeposit(Deposit deposit){
         return depositRepository.save(deposit);
     }
-
-    public void deleteDeposit(Long id){
-        depositRepository.deleteDepositById(id);
-    }
 }

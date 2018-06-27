@@ -46,8 +46,4 @@ public class WithdrawalService {
     public Withdrawal updateWithdrawal(Withdrawal Withdrawal){
         return withdrawalRepository.save(Withdrawal);
     }
-
-    public void deleteWithdrawal(Long id){
-        withdrawalRepository.deleteWithdrawalById(id);
-    }
 }
