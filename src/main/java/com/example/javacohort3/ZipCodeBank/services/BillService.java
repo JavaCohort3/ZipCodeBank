@@ -48,7 +48,6 @@ public class BillService {
 
     public List<Bill> getBillsByCustomerId(Long customerId){
         ArrayList<Bill>  bills = (ArrayList<Bill>) billRepository.findAll();
-        bills.removeIf(b -> !b.getAccountId().equals(customerId));
         return bills;
     }
 

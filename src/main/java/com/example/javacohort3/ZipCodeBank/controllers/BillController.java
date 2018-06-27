@@ -57,13 +57,13 @@ public class BillController {
 
     @RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.POST)
     public ResponseEntity<?> createBillFromAccountld(@RequestBody Bill bill, @PathVariable Long accountId){
-
+        bill.setAccountId(accountId);
         Bill newBill = billService.createBill(bill);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         URI newUri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
-                .path("/{billId}")
+                .path("/{accountId}")
                 .buildAndExpand(newBill.getId())
                 .toUri();
         httpHeaders.setLocation(newUri);
