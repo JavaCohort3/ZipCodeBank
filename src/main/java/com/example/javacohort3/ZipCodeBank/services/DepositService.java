@@ -5,6 +5,7 @@ import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.DepositRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ public class DepositService {
     }
 
     public void verifyDepositById(Long id){
-        if (depositRepository.findDepositById(id) == null) throw new ResourceNotFoundException();
+        if (depositRepository.findDepositById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND," error fetching deposit with id ");
     }
 
     public void verifyAccountById(Long id) {
-        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException();
+        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND,"Account Not Found");
     }
 
     public Deposit createDeposit(Deposit deposit){
