@@ -92,10 +92,10 @@ public class CustomerController {
         customer.setId(id);
         Customer c = customerService.updateCustomer(customer);
 
-        
         status = HttpStatus.OK;
         response = "Customer account updated.";
 
+        
         log.info("[PUT]: " + c);
         return new ResponseEntity<>(new ResponseDetails(status, response, customer), status);
     }
