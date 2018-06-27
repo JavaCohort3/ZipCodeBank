@@ -5,5 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface DepositRepository extends CrudRepository<Deposit, Long> {
      Deposit findDepositById(Long accountId);
-
 }
