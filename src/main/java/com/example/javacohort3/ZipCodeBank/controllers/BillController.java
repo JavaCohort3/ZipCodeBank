@@ -86,7 +86,7 @@ public class BillController {
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteBillById(@PathVariable Long billId){
-        billService.deleteBill(billId);
+        billService.deleteBillById(billId);
 
         log.info("\n[DELETED] " + billId);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.NO_CONTENT, "Bill successfully Deleted"), HttpStatus.NO_CONTENT);
