@@ -47,7 +47,7 @@ public class WithdrawalService {
         return withdrawalRepository.save(Withdrawal);
     }
 
-    public void deleteWithdrawal(Long id){
+    public void deleteWithdrawalById(Long id){
         withdrawalRepository.deleteById(id);
     }
 }
