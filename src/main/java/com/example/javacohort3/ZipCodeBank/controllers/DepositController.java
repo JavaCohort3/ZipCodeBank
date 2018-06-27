@@ -31,7 +31,7 @@ public class DepositController {
     public ResponseEntity<?> getAllDepositsByAccountId(@PathVariable Long accountId){
         depositService.verifyAccountById(accountId);
         List<Deposit> deposits = depositService.getDepositsByAccountId(accountId);
-        depositService.verifyDepositById(new Long(1));
+
 
         log.info("\n[GET] " + deposits);
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", deposits),HttpStatus.OK);
