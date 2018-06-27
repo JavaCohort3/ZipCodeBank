@@ -47,6 +47,7 @@ public class CustomerController {
     @RequestMapping(value = "/customers")
     public ResponseEntity<?> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomers();
+        customerService.verifyCustomer((long) customers.size());
 
         status = HttpStatus.OK;
         response = "Success";
@@ -88,14 +89,21 @@ public class CustomerController {
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
         customerService.verifyCustomer(id);
-        customer.setId(id);
-        Customer c = customerService.updateCustomer(customer);
+        customer.setId(id);    
+
+        if (customer.getId() != null && !customer.getId().equals(customerService.getCustomerById(id).getId())) {
+            status = HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(new ResponseDetails(status, "Tried to assign incorrect ID to Customer object."), status);
+        }
+      
+        if (customer.getAddresses() == null) customer.setAddresses(customerService.getCustomerById(id).getAddresses());
+      
+        customerService.updateCustomer(customer);
 
         status = HttpStatus.OK;
         response = "Customer account updated.";
 
-        
-        log.info("[PUT]: " + c);
+        log.info("[PUT]: " + customer);
         return new ResponseEntity<>(new ResponseDetails(status, response, customer), status);
     }
 }
