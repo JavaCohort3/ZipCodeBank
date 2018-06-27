@@ -22,11 +22,10 @@ public class Withdrawal {
     private TransactionMedium medium;
     private Double amount;
     private String description;
-    private Long accountId;
 
     public Withdrawal(){}
 
-    public Withdrawal(Long id, TransactionType type, String transactionDate, TransactionStatus status, Long payerId, TransactionMedium medium, Double amount, String description, Long accountId) {
+    public Withdrawal(Long id, TransactionType type, String transactionDate, TransactionStatus status, Long payerId, TransactionMedium medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transactionDate = transactionDate;
@@ -35,7 +34,6 @@ public class Withdrawal {
         this.medium = medium;
         this.amount = amount;
         this.description = description;
-        this.accountId = accountId;
     }
 
     public Long getId() { return id; }
@@ -62,9 +60,6 @@ public class Withdrawal {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Long getAccountId() { return accountId; }
-    public void setAccountId(Long accountId) { this.accountId = accountId; }
-
     @Override
     public String toString() {
         return "Withdrawal{" +
@@ -75,8 +70,7 @@ public class Withdrawal {
                 ", payerId=" + payerId +
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
-                ", description='" + description + '\'' +
-                ", accountId=" + accountId +
+                ", description='" + description +
                 '}';
     }
 }
