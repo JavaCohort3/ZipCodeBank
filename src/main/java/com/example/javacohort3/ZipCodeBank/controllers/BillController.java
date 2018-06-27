@@ -56,9 +56,8 @@ public class BillController {
 
     @RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.POST)
     public ResponseEntity<?> createBillFromAccountld(@RequestBody Bill bill, @PathVariable Long accountId){
-        billService.getAllBillsByAccountId(accountId);
+        bill.setAccountId(accountId);
         Bill newBill = billService.createBill(bill);
-
         HttpHeaders httpHeaders = new HttpHeaders();
         URI newUri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
@@ -75,11 +74,9 @@ public class BillController {
     public ResponseEntity<?> updateBillById(@RequestBody Bill bill, @PathVariable Long billId){
         billService.verifyBillById(billId);
         bill.setId(billId);
-
+        bill.setAccountId(billService.getBillById(billId).getAccountId());
         Bill updatedBill = billService.updateBill(bill);
-
         log.info("\n[UPDATED] " + updatedBill);
-
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", updatedBill), HttpStatus.OK);
     }
 
