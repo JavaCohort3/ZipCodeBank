@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +67,7 @@ public class CustomerService {
     }
 
     // Delete
-    public void deleteCustomer(Long id) {
-        customerRepository.deleteCustomerById(id);
+    public void deleteCustomerById(Long id) {
+        customerRepository.deleteById(id);
     }
 }
