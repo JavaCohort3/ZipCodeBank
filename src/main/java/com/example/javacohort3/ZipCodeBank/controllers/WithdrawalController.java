@@ -17,7 +17,6 @@ import java.util.List;
 public class WithdrawalController {
     private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
     private WithdrawalService withdrawalService;
-    private String response;
     private HttpStatus status;
 
     @Autowired
@@ -26,15 +25,14 @@ public class WithdrawalController {
     }
 
     @RequestMapping("/accounts/{accountId}/withdrawals")
-    public ResponseEntity<?> getWithdrawalByAccountId(@PathVariable Long accountId){
+    public ResponseEntity<?> getWithdrawalsByAccountId(@PathVariable Long accountId){
         withdrawalService.verifyAccountById(accountId);
         List<Withdrawal> withdrawals = withdrawalService.getWithdrawalsByAccountId(accountId);
 
         status = HttpStatus.OK;
 
-        log.info("{GET} :" + withdrawals);
-
-      return new ResponseEntity<>(new ResponseDetails(status,withdrawals), status);
+        log.info("\n[GET]: " + withdrawals);
+        return new ResponseEntity<>(new ResponseDetails(status,"Success",withdrawals), status);
     }
 
     @RequestMapping("/withdrawals/{withdrawalId}")
@@ -43,20 +41,19 @@ public class WithdrawalController {
         Withdrawal withdrawal = withdrawalService.getWithdrawalById(withdrawalId);
 
         status = HttpStatus.OK;
-        log.info("[GET]" + withdrawal);
-       return new ResponseEntity<>(new ResponseDetails(status,withdrawal),status);
+        log.info("\n[GET]: " + withdrawal);
+       return new ResponseEntity<>(new ResponseDetails(status,"Success",withdrawal),status);
     }
 
 
     @RequestMapping(value = "/accounts/{accountsId}/withdrawals",method = RequestMethod.POST)
     public ResponseEntity<?> createWithdrawlByAccountId(@RequestBody Withdrawal withdrawal, @PathVariable Long accountsId){
         withdrawalService.verifyAccountById(accountsId);
-        withdrawal = withdrawalService.createWithdrawal(withdrawal);
-
+        withdrawalService.createWithdrawal(withdrawal);
         status =   HttpStatus.CREATED;
 
-        log.info("[POST]" + withdrawal);
-        return new ResponseEntity<>(new ResponseDetails(status,withdrawal), status);
+        log.info("\n[POST]: " + withdrawal);
+        return new ResponseEntity<>(new ResponseDetails(status,"Created withdrawal and subtracted it from the account",withdrawal), status);
     }
 
 
@@ -64,11 +61,11 @@ public class WithdrawalController {
     public ResponseEntity<?> updateWithdrawl(@PathVariable Long withdrawalId, @RequestBody Withdrawal withdrawal){
         withdrawalService.verifyWithdrawalById(withdrawalId);
         withdrawal.setId(withdrawalId);
-        withdrawal = withdrawalService.updateWithdrawal(withdrawal);
+        withdrawalService.updateWithdrawal(withdrawal);
 
         status = HttpStatus.OK;
 
-        log.info("[PUT]" + withdrawal);
+        log.info("\n[PUT]" + withdrawal);
         return new ResponseEntity<>(new ResponseDetails(status,"Accepted withdrawal modification",withdrawal), status);
     }
 
@@ -80,7 +77,7 @@ public class WithdrawalController {
 
         status = HttpStatus.NO_CONTENT;
 
-        log.info("[Deleted] This is deleting  : " + withdrawalService.getWithdrawalById(withdrawalId));
-        return new ResponseEntity<>(new ResponseDetails(status, "Bill successfully Deleted", new Object()), status);
+        log.info("\n[Deleted]: Withdrawal object");
+        return new ResponseEntity<>(new ResponseDetails(status, "Withdrawal successfully Deleted"), status);
     }
 }

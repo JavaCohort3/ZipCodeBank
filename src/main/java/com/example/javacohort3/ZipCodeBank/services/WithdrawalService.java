@@ -23,7 +23,7 @@ public class WithdrawalService {
     }
 
     public void verifyWithdrawalById(Long id){
-        if (withdrawalRepository.findWithdrawalById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND," error fetching withdrawal with id ");
+        if (withdrawalRepository.findWithdrawalById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND," error fetching withdrawal with id " + id);
     }
 
     public void verifyAccountById(Long id) {
@@ -39,7 +39,7 @@ public class WithdrawalService {
         verifyAccountById(accountId);
         ArrayList<Withdrawal> withdrawals = (ArrayList<Withdrawal>) withdrawalRepository.findAll();
         verifyWithdrawalById(((long) withdrawals.size()));
-        withdrawals.removeIf(d -> !d.getPayerId().equals(accountId));
+        withdrawals.removeIf(w -> !w.getPayerId().equals(accountId));
         return withdrawals;
     }
 
