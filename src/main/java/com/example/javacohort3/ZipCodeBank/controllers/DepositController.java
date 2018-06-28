@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Deposit;
+import com.example.javacohort3.ZipCodeBank.exceptions.DeleteResponse;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResponseDetails;
 import com.example.javacohort3.ZipCodeBank.services.DepositService;
 import org.slf4j.Logger;
@@ -83,7 +84,7 @@ public class DepositController {
         depositService.deleteDepositById(depositId);
 
         log.info("\n{DELETED]" + depositId);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NO_CONTENT, "Deposit successfully Deleted", new Object()), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Deposit successfully deleted."),HttpStatus.ACCEPTED);
     }
 
 }

@@ -2,9 +2,9 @@ package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Account;
 
+import com.example.javacohort3.ZipCodeBank.exceptions.DeleteResponse;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResponseDetails;
 import com.example.javacohort3.ZipCodeBank.services.AccountService;
-import com.example.javacohort3.ZipCodeBank.services.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,7 +95,7 @@ public class AccountController {
         accountService.deleteAccountById(accountId);
 
         log.info("[DELETE] " + accountId);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NOT_FOUND,"Account successfully deleted",new Object()),HttpStatus.OK);
+        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Account successfully deleted."), HttpStatus.ACCEPTED);
     }
 
 }
