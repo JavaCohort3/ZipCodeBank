@@ -4,7 +4,7 @@ public enum BillStatus {
     PENDING("PENDING"),
     CANCELLED("CANCELLED"),
     COMPLETED("COMPLETED"),
-    RECURRING("RECCURRING");
+    RECURRING("RECURRING");
 
     private final String value;
 

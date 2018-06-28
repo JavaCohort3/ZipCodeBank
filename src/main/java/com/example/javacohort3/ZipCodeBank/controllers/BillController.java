@@ -1,5 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 import com.example.javacohort3.ZipCodeBank.domains.Bill;
+import com.example.javacohort3.ZipCodeBank.exceptions.DeleteResponse;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResponseDetails;
 import com.example.javacohort3.ZipCodeBank.services.BillService;
 import org.slf4j.Logger;
@@ -85,7 +86,7 @@ public class BillController {
         billService.deleteBillById(billId);
 
         log.info("\n[DELETED] " + billId);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.NO_CONTENT, "Bill successfully Deleted", new Object()), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Bill successfully deleted."),HttpStatus.NO_CONTENT);
     }
 
 }

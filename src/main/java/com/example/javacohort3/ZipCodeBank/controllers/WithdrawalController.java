@@ -1,6 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.controllers;
 
 import com.example.javacohort3.ZipCodeBank.domains.Withdrawal;
+import com.example.javacohort3.ZipCodeBank.exceptions.DeleteResponse;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResponseDetails;
 import com.example.javacohort3.ZipCodeBank.services.WithdrawalService;
 import org.slf4j.Logger;
@@ -78,6 +79,6 @@ public class WithdrawalController {
         status = HttpStatus.NO_CONTENT;
 
         log.info("\n[Deleted]: Withdrawal object");
-        return new ResponseEntity<>(new ResponseDetails(status, "Withdrawal successfully Deleted"), status);
+        return new ResponseEntity<>(new DeleteResponse(status, "Withdrawal successfully deleted."),status);
     }
 }
