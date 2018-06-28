@@ -84,7 +84,7 @@ public class DepositController {
         depositService.deleteDepositById(depositId);
 
         log.info("\n{DELETED]" + depositId);
-        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Deposit successfully deleted."),HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Deposit successfully deleted."),HttpStatus.ACCEPTED);
     }
 
 }

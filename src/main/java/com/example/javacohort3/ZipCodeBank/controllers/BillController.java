@@ -86,7 +86,7 @@ public class BillController {
         billService.deleteBillById(billId);
 
         log.info("\n[DELETED] " + billId);
-        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Bill successfully deleted."),HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Bill successfully deleted."),HttpStatus.ACCEPTED);
     }
 
 }

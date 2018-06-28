@@ -76,9 +76,9 @@ public class WithdrawalController {
         withdrawalService.verifyWithdrawalById(withdrawalId);
         withdrawalService.deleteWithdrawalById(withdrawalId);
 
-        status = HttpStatus.NO_CONTENT;
+        status = HttpStatus.ACCEPTED;
 
         log.info("\n[Deleted]: Withdrawal object");
-        return new ResponseEntity<>(new DeleteResponse(status, "Withdrawal successfully deleted."),status);
+        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Withdrawal successfully deleted."),status);
     }
 }
