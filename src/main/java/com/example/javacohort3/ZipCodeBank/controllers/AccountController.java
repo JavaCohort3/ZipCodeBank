@@ -63,7 +63,6 @@ public class AccountController {
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
         accountService.verifyCustomerById(customerId);
         account.setCustomer(accountService.getCustomerById(customerId));
-
         Account newAccount = accountService.createAccount(account);
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -83,6 +82,7 @@ public class AccountController {
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId){
         accountService.verifyAccountById(accountId);
         account.setId(accountId);
+        account.setCustomer(accountService.getAccountById(accountId).getCustomer());
         accountService.updateAccount(account);
 
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",account),HttpStatus.OK);
