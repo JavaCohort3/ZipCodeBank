@@ -1,7 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.enums;
 
 public enum TransactionType {
-    P2R("P2P"),
+    P2P("P2P"),
     DEPOSIT("DEPOSIT"),
     WITHDRAWAL("WITHDRAWAL");
 
