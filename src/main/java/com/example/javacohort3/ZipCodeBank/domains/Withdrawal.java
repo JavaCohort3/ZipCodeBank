@@ -4,10 +4,7 @@ import com.example.javacohort3.ZipCodeBank.enums.TransactionMedium;
 import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
 import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Withdrawal {
@@ -15,10 +12,13 @@ public class Withdrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private TransactionType type;
     private String transactionDate;
+    @Enumerated(EnumType.STRING)
     private TransactionStatus status;
     private Long payerId;
+    @Enumerated(EnumType.STRING)
     private TransactionMedium medium;
     private Double amount;
     private String description;

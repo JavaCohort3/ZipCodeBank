@@ -3,10 +3,7 @@ package com.example.javacohort3.ZipCodeBank.domains;
 import com.example.javacohort3.ZipCodeBank.enums.TransactionStatus;
 import com.example.javacohort3.ZipCodeBank.enums.TransactionType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Bill {
@@ -14,6 +11,7 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private TransactionStatus status;
     private String payee;
     private String nickname;
