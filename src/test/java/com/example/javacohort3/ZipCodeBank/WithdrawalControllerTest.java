@@ -47,7 +47,7 @@ public class WithdrawalControllerTest {
         Long accountId = account.getId();
 
         when(withdrawalService.getWithdrawalsByAccountId(accountId)).thenReturn(new ArrayList<>());
-        ResponseEntity<?> depositsReturned = controller.getWithdrawalByAccountId(accountId);
+        ResponseEntity<?> depositsReturned = controller.getWithdrawalsByAccountId(accountId);
         verify(withdrawalService, times(1)).getWithdrawalsByAccountId(accountId);
         Assert.assertEquals(HttpStatus.OK, depositsReturned.getStatusCode());
     }

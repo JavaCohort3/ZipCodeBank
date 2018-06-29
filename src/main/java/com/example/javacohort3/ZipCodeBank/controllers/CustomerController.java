@@ -26,6 +26,9 @@ public class CustomerController {
     private HttpStatus status;
     private String response;
 
+    public CustomerController() {
+    }
+
     @Autowired
     public CustomerController(CustomerService customerService) { this.customerService = customerService; }
 
