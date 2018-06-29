@@ -29,6 +29,7 @@ public class CustomerController {
     @Autowired
     public CustomerController(CustomerService customerService) { this.customerService = customerService; }
 
+    // TODO - WORKS
     // Get a Customer by their Account ID
     @RequestMapping(value ="/accounts/{accountId}/customer")
     public ResponseEntity<?> getCustomerByAccountId(@PathVariable Long accountId) {
@@ -43,6 +44,7 @@ public class CustomerController {
         return new ResponseEntity<>(new ResponseDetails(status, response, customer), status);
     }
 
+    // TODO - WORKS!
     // Get all Customers
     @RequestMapping(value = "/customers")
     public ResponseEntity<?> getAllCustomers() {
@@ -56,6 +58,7 @@ public class CustomerController {
         return new ResponseEntity<>(new ResponseDetails(status, response, customers), status);
     }
 
+    //TODO - WORKS!
     // Get Customer By their ID
     @RequestMapping(value = "/customers/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
@@ -69,6 +72,7 @@ public class CustomerController {
         return new ResponseEntity<>(new ResponseDetails(status, response, customer), status);
     }
 
+    // TODO - WORKS!
     // Create a new Customer
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
     public ResponseEntity<?> createCustomer(@RequestBody @Valid Customer customer) {
@@ -85,6 +89,7 @@ public class CustomerController {
         return new ResponseEntity<>(new ResponseDetails(status, response, customer), httpHeaders, status);
     }
 
+    // TODO - WORKS! (must put ID in EndPath AND in the JSON field Or Else will Return Null)
     // Update a Customer by their ID
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {

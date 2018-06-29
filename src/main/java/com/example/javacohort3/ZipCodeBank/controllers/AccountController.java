@@ -29,6 +29,7 @@ public class AccountController {
     @Autowired
     public AccountController(AccountService accountService) { this.accountService = accountService; }
 
+    // TODO - WORKS!
     // Get all accounts
     @RequestMapping("/accounts")
     public ResponseEntity<?> getAllAccounts() {
@@ -38,6 +39,7 @@ public class AccountController {
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", accounts), HttpStatus.OK);
     }
 
+    // TODO - WORKS!
     // Get account by its ID
     @RequestMapping("/accounts/{accountId}")
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
@@ -48,6 +50,7 @@ public class AccountController {
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", account), HttpStatus.OK);
     }
 
+    // TODO - WORKS!
     // Get accounts by customer ID
     @RequestMapping("/customers/{customerId}/accounts")
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
@@ -58,6 +61,9 @@ public class AccountController {
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success", accounts), HttpStatus.OK);
     }
 
+    // TODO - WORKS!
+    // TODO - for the customer object just add the {}'s and leave them empty
+    // todo -    (will return object on its own if you did the EndPath right
     // Create account
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
@@ -77,6 +83,7 @@ public class AccountController {
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.CREATED,"Account successfully created",newAccount), httpHeaders,HttpStatus.CREATED);
     }
 
+    // TODO - WORKS!
     // Update Account
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId){
@@ -88,7 +95,8 @@ public class AccountController {
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",account),HttpStatus.OK);
     }
 
-    // Delete account
+    // TODO - Does not work -- returns an error status: 500 (internal Server Error - saved in Notes)
+    // Delete account // TODO - IT DID DELETE BUT THREW A 500 ERROR !?!?
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteAccountById(@PathVariable Long accountId){
         accountService.verifyAccountById(accountId);
