@@ -20,6 +20,9 @@ public class WithdrawalController {
     private WithdrawalService withdrawalService;
     private HttpStatus status;
 
+    public WithdrawalController() {
+    }
+
     @Autowired
     public WithdrawalController(WithdrawalService withdrawalService) {
         this.withdrawalService = withdrawalService;
