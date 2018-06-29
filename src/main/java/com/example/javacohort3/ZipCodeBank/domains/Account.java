@@ -9,6 +9,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private AccountType type;//ENUM serialized as a string
     private String nickname;
     private Integer rewards;

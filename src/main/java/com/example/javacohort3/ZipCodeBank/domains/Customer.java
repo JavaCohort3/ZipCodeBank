@@ -1,8 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.domains;
 
 import javax.persistence.*;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 @Entity
 public class Customer {
@@ -16,11 +15,11 @@ public class Customer {
     // @ElementCollection
     // @Transient
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Address> addresses = new TreeSet<>();
+    private List<Address> addresses = new ArrayList<>();
 
     public Customer(){}
 
-    public Customer(Long id, String firstName, String lastName, Set<Address> addresses) {
+    public Customer(Long id, String firstName, String lastName, ArrayList<Address> addresses) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,8 +36,8 @@ public class Customer {
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public Set<Address> getAddresses() { return addresses; }
-    public void setAddresses(Set<Address> addresses) { this.addresses = addresses; }
+    public List<Address> getAddresses() { return addresses; }
+    public void setAddresses(List<Address> addresses) { this.addresses = addresses; }
 
     @Override
     public String toString() {
