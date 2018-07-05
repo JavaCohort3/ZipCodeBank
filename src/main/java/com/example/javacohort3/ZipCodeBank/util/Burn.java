@@ -13,7 +13,7 @@ public class Burn {
         return object != null && Map.class.isAssignableFrom(object.getClass());
     }
 
-    public static Object updateObjectFields(Object oldObject, Object newObject) {
+    public static Object updateObjectFields(Object newObject, Object oldObject) {
         Field[] fields = oldObject.getClass().getDeclaredFields();
 
         try {

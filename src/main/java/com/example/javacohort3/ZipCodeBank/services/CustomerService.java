@@ -72,8 +72,8 @@ public class CustomerService {
         // sets old customer to variable
         Customer oldCustomer = getCustomerById(customer.getId());
 
-        // casts Burn.updateObjectFields return method to Customer
-        customer = (Customer) Burn.updateObjectFields(oldCustomer, customer);
+        // casts Burn.updateObjectFields return value to Customer
+        customer = (Customer) Burn.updateObjectFields(customer, oldCustomer);
 
         // saves and returns customer
         return customerRepository.save(customer);
