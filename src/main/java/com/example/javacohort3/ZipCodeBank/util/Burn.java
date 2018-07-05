@@ -1,5 +1,7 @@
 package com.example.javacohort3.ZipCodeBank.util;
 
+import org.hibernate.TypeMismatchException;
+
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Map;
@@ -15,6 +17,10 @@ public class Burn {
 
     public static Object updateObjectFields(Object newObject, Object oldObject) {
         Field[] fields = oldObject.getClass().getDeclaredFields();
+
+        if (!oldObject.getClass().equals(newObject.getClass())) throw new TypeMismatchException(
+                "Objects passed through com.example.javacohort3.ZipCodeBank.util.Burn.updateObjectFields() are not of the same type!"
+        );
 
         try {
             for (Field field : fields) {
