@@ -5,6 +5,7 @@ import com.example.javacohort3.ZipCodeBank.domains.Customer;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
+import com.example.javacohort3.ZipCodeBank.util.Burn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -65,6 +66,16 @@ public class CustomerService {
 
     // Update
     public Customer updateCustomer(Customer customer) {
+        // verifies customer before proceeding
+        verifyCustomer(customer.getId());
+
+        // sets old customer to variable
+        Customer oldCustomer = getCustomerById(customer.getId());
+
+        // casts Burn.updateObjectFields return value to Customer
+        customer = (Customer) Burn.updateObjectFields(customer, oldCustomer);
+
+        // saves and returns customer
         return customerRepository.save(customer);
     }
 
