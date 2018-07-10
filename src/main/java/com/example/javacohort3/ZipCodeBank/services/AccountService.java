@@ -57,6 +57,7 @@ public class AccountService {
     }
 
     public Account getAccountById (Long id){
+        verifyAccountById(id);
         return accountRepository.findAccountById(id);
     }
 
