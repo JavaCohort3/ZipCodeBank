@@ -60,10 +60,10 @@ public class BillService {
     	verifyBillById(bill.getId());
     Bill oldBill = getBillById(bill.getId());
     
-    Burn.updateObjectFields(bill, oldBill);
+    bill = (Bill) Burn.updateObjectFields(bill, oldBill);
     	
     	
-        return billRepository.save(bill);
+    return billRepository.save(bill);
     }
 
     public void deleteBillById(Long id){
