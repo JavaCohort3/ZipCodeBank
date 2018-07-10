@@ -30,7 +30,6 @@ public class DepositController {
     //Get all deposits for an account
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
     public ResponseEntity<?> getAllDepositsByAccountId(@PathVariable Long accountId){
-        depositService.verifyAccountById(accountId);
         List<Deposit> deposits = depositService.getDepositsByAccountId(accountId);
 
 
@@ -41,7 +40,6 @@ public class DepositController {
     //Get deposit by id
     @RequestMapping(value = "/deposits/{depositId}")
     public ResponseEntity<?> getDepositById(@PathVariable Long depositId){
-        depositService.verifyDepositById(depositId);
         Deposit deposit = depositService.getDepositById(depositId);
 
         log.info("\n[GET] " + deposit);
@@ -51,8 +49,7 @@ public class DepositController {
     //Create a deposit
     @RequestMapping(value = "/accounts/{accountId}/deposits",method = RequestMethod.POST)
     public ResponseEntity<?> createDepositFromAccountId(@RequestBody Deposit deposit, @PathVariable Long accountId ){
-        depositService.verifyAccountById(accountId);
-        Deposit newDeposit = depositService.createDeposit(deposit);
+        Deposit newDeposit = depositService.createDeposit(deposit, accountId);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         URI newUri = ServletUriComponentsBuilder
@@ -69,7 +66,6 @@ public class DepositController {
     //Update a specific existing deposit
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeposit(@RequestBody Deposit deposit, @PathVariable Long depositId){
-        depositService.verifyDepositById(depositId);
         deposit.setId(depositId);
         Deposit updatedDeposit = depositService.updateDeposit(deposit);
 
@@ -80,7 +76,6 @@ public class DepositController {
     //Delete deposit  -----NEEDS WORK
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteDeposit(@PathVariable Long depositId){
-        depositService.verifyDepositById(depositId);
         depositService.deleteDepositById(depositId);
 
         log.info("\n{DELETED]" + depositId);
