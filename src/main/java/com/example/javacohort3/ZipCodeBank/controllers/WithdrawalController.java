@@ -20,9 +20,6 @@ public class WithdrawalController {
     private WithdrawalService withdrawalService;
     private HttpStatus status;
 
-    public WithdrawalController() {
-    }
-
     @Autowired
     public WithdrawalController(WithdrawalService withdrawalService) {
         this.withdrawalService = withdrawalService;
@@ -30,58 +27,53 @@ public class WithdrawalController {
 
     @RequestMapping("/accounts/{accountId}/withdrawals")
     public ResponseEntity<?> getWithdrawalsByAccountId(@PathVariable Long accountId){
-        withdrawalService.verifyAccountById(accountId);
         List<Withdrawal> withdrawals = withdrawalService.getWithdrawalsByAccountId(accountId);
 
         status = HttpStatus.OK;
 
         log.info("\n[GET]: " + withdrawals);
-        return new ResponseEntity<>(new ResponseDetails(status,"Success",withdrawals), status);
+        return new ResponseEntity<>(new ResponseDetails(status, "Success", withdrawals), status);
     }
 
-    @RequestMapping("/withdrawals/{withdrawalId}")
-    public ResponseEntity<?> getWithdrawlById(@PathVariable Long withdrawalId){
-        withdrawalService.verifyWithdrawalById(withdrawalId);
-        Withdrawal withdrawal = withdrawalService.getWithdrawalById(withdrawalId);
+    @RequestMapping("/withdrawals/{id}")
+    public ResponseEntity<?> getWithdrawalById(@PathVariable Long id){
+        Withdrawal withdrawal = withdrawalService.getWithdrawalById(id);
 
         status = HttpStatus.OK;
         log.info("\n[GET]: " + withdrawal);
-       return new ResponseEntity<>(new ResponseDetails(status,"Success",withdrawal),status);
+       return new ResponseEntity<>(new ResponseDetails(status, "Success", withdrawal), status);
     }
 
-
-    @RequestMapping(value = "/accounts/{accountsId}/withdrawals",method = RequestMethod.POST)
-    public ResponseEntity<?> createWithdrawlByAccountId(@RequestBody Withdrawal withdrawal, @PathVariable Long accountsId){
-        withdrawalService.verifyAccountById(accountsId);
+    @RequestMapping(value = "/accounts/{accountId}/withdrawals",method = RequestMethod.POST)
+    public ResponseEntity<?> createWithdrawalByAccountId(@RequestBody Withdrawal withdrawal, @PathVariable Long accountId){
+        withdrawal.setPayerId(accountId);
         withdrawalService.createWithdrawal(withdrawal);
+
         status =   HttpStatus.CREATED;
 
         log.info("\n[POST]: " + withdrawal);
-        return new ResponseEntity<>(new ResponseDetails(status,"Created withdrawal and subtracted it from the account",withdrawal), status);
+        return new ResponseEntity<>(new ResponseDetails(status,"Created withdrawal and subtracted it from the account", withdrawal), status);
     }
 
-
-    @RequestMapping(value = "/withdrawals/{withdrawalId}",method = RequestMethod.PUT)
-    public ResponseEntity<?> updateWithdrawl(@PathVariable Long withdrawalId, @RequestBody Withdrawal withdrawal){
-        withdrawalService.verifyWithdrawalById(withdrawalId);
-        withdrawal.setId(withdrawalId);
+    @RequestMapping(value = "/withdrawals/{id}",method = RequestMethod.PUT)
+    public ResponseEntity<?> updateWithdrawal(@PathVariable Long id, @RequestBody Withdrawal withdrawal){
+        withdrawalService.verifyWithdrawalById(id);
+        withdrawal.setId(id);
         withdrawalService.updateWithdrawal(withdrawal);
 
         status = HttpStatus.OK;
 
         log.info("\n[PUT]" + withdrawal);
-        return new ResponseEntity<>(new ResponseDetails(status,"Accepted withdrawal modification",withdrawal), status);
+        return new ResponseEntity<>(new ResponseDetails(status, "Accepted withdrawal modification", withdrawal), status);
     }
 
-
-    @RequestMapping(value = "/withdrawals/{withdrawalId}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteWithdrawal(@PathVariable Long withdrawalId){
-        withdrawalService.verifyWithdrawalById(withdrawalId);
-        withdrawalService.deleteWithdrawalById(withdrawalId);
+    @RequestMapping(value = "/withdrawals/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteWithdrawal(@PathVariable Long id){
+        withdrawalService.deleteWithdrawalById(id);
 
         status = HttpStatus.ACCEPTED;
 
         log.info("\n[Deleted]: Withdrawal object");
-        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Withdrawal successfully deleted."),status);
+        return new ResponseEntity<>(new DeleteResponse(HttpStatus.NO_CONTENT, "Withdrawal successfully deleted."), status);
     }
 }

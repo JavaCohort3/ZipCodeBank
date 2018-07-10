@@ -1,5 +1,6 @@
 package com.example.javacohort3.ZipCodeBank.services;
 
+import com.example.javacohort3.ZipCodeBank.domains.Account;
 import com.example.javacohort3.ZipCodeBank.domains.Withdrawal;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
@@ -30,9 +31,15 @@ public class WithdrawalService {
         if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND,"Account Not Found");
     }
 
+    public Withdrawal createWithdrawal(Withdrawal withdrawal){
+        verifyAccountById(withdrawal.getPayerId());
+        Account account = accountRepository.findAccountById(withdrawal.getPayerId());
 
-    public Withdrawal createWithdrawal(Withdrawal Withdrawal){
-        return withdrawalRepository.save(Withdrawal);
+        if (account.getBalance() - withdrawal.getAmount() < 0) {
+            throw new ResourceNotFoundException(HttpStatus.OK, "Insufficient funds to make withdrawal.");
+        }
+
+        return withdrawalRepository.save(withdrawal);
     }
 
     public List<Withdrawal> getWithdrawalsByAccountId(Long accountId) {
@@ -40,10 +47,12 @@ public class WithdrawalService {
         ArrayList<Withdrawal> withdrawals = (ArrayList<Withdrawal>) withdrawalRepository.findAll();
         verifyWithdrawalById(((long) withdrawals.size()));
         withdrawals.removeIf(w -> !w.getPayerId().equals(accountId));
+        verifyWithdrawalById((long) withdrawals.size());
         return withdrawals;
     }
 
     public Withdrawal getWithdrawalById (Long id){
+        verifyWithdrawalById(id);
         return withdrawalRepository.findWithdrawalById(id);
     }
 
@@ -52,6 +61,7 @@ public class WithdrawalService {
     }
 
     public void deleteWithdrawalById(Long id){
+        verifyWithdrawalById(id);
         withdrawalRepository.deleteById(id);
     }
 }

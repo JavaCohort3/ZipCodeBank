@@ -44,14 +44,19 @@ public class CustomerService {
 
     // Get
     public Customer getCustomerById(Long id) {
+        verifyCustomer(id);
         return customerRepository.findCustomerById(id);
     }
 
     // Get By Account ID
     public Customer getCustomerByAccountId(Long accountId) {
+        verifyAccount(accountId);
         ArrayList<Account> accounts = (ArrayList<Account>) accountRepository.findAll();
         for (Account account : accounts) {
-            if (account.getId().equals(accountId)) return account.getCustomer();
+            if (account.getId().equals(accountId)) {
+                // verifyCustomer(account.getCustomer().getId());
+                return account.getCustomer();
+            }
         }
 
         throw new ResourceNotFoundException();
