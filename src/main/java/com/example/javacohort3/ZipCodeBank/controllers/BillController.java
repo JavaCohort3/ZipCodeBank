@@ -73,10 +73,12 @@ public class BillController {
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateBillById(@RequestBody Bill bill, @PathVariable Long billId){
+        billService.verifyBillById(billId);
         bill.setId(billId);
-       bill =  billService.updateBill(bill);
-        log.info("\n[UPDATED] " + bill);
-        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", bill), HttpStatus.OK);
+        bill.setAccountId(billService.getBillById(billId).getAccountId());
+        Bill updatedBill = billService.updateBill(bill);
+        log.info("\n[UPDATED] " + updatedBill);
+        return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK, "Success", updatedBill), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.DELETE)
