@@ -5,6 +5,7 @@ import com.example.javacohort3.ZipCodeBank.domains.Withdrawal;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.WithdrawalRepository;
+import com.example.javacohort3.ZipCodeBank.util.Burn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,15 @@ public class WithdrawalService {
     }
 
     public void verifyWithdrawalById(Long id){
-        if (withdrawalRepository.findWithdrawalById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND," error fetching withdrawal with id " + id);
+        if (withdrawalRepository.findWithdrawalById(id) == null){
+            throw new ResourceNotFoundException(HttpStatus.NOT_FOUND," error fetching withdrawal with id " + id);
+        }
     }
 
     public void verifyAccountById(Long id) {
-        if (accountRepository.findAccountById(id) == null) throw new ResourceNotFoundException(HttpStatus.NOT_FOUND,"Account Not Found");
+        if (accountRepository.findAccountById(id) == null) {
+            throw new ResourceNotFoundException(HttpStatus.NOT_FOUND,"Account Not Found");
+        }
     }
 
     public Withdrawal createWithdrawal(Withdrawal withdrawal){
@@ -56,8 +61,11 @@ public class WithdrawalService {
         return withdrawalRepository.findWithdrawalById(id);
     }
 
-    public Withdrawal updateWithdrawal(Withdrawal Withdrawal){
-        return withdrawalRepository.save(Withdrawal);
+    public Withdrawal updateWithdrawal(Withdrawal withdrawal){
+        verifyWithdrawalById(withdrawal.getId());
+        Withdrawal oldWithdrawal = getWithdrawalById(withdrawal.getId());
+        withdrawal = (Withdrawal) Burn.updateObjectFields(withdrawal, oldWithdrawal);
+        return withdrawalRepository.save(withdrawal);
     }
 
     public void deleteWithdrawalById(Long id){
