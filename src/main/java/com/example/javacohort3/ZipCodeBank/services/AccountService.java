@@ -52,7 +52,7 @@ public class AccountService {
         ArrayList<Account> accounts = (ArrayList<Account>) accountRepository.findAll();
         verifyAccountById((long) accounts.size());
         accounts.removeIf(a -> !a.getCustomer().getId().equals(customerId));
-
+        verifyCustomerById((long) accounts.size());
         return accounts;
     }
 
