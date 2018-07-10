@@ -45,6 +45,7 @@ public class DepositService {
         ArrayList<Deposit> deposits = (ArrayList<Deposit>) depositRepository.findAll();
         verifyDepositById((long)(deposits.size()));
         deposits.removeIf(d -> !d.getPayeeId().equals(accountId));
+        verifyDepositById((long)(deposits.size()));
         return deposits;
     }
 
