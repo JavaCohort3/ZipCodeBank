@@ -4,6 +4,8 @@ import com.example.javacohort3.ZipCodeBank.domains.Bill;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.BillRepository;
+import com.example.javacohort3.ZipCodeBank.util.Burn;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -55,6 +57,12 @@ public class BillService {
     }
 
     public Bill updateBill(Bill bill){
+    	verifyBillById(bill.getId());
+    Bill oldBill = getBillById(bill.getId());
+    
+    Burn.updateObjectFields(bill, oldBill);
+    	
+    	
         return billRepository.save(bill);
     }
 
