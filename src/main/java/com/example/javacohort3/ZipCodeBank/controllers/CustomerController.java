@@ -26,18 +26,13 @@ public class CustomerController {
     private HttpStatus status;
     private String response;
 
-    public CustomerController() {
-    }
-
     @Autowired
     public CustomerController(CustomerService customerService) { this.customerService = customerService; }
 
     // Get a Customer by their Account ID
     @RequestMapping(value ="/accounts/{accountId}/customer")
     public ResponseEntity<?> getCustomerByAccountId(@PathVariable Long accountId) {
-        customerService.verifyAccount(accountId);
         Customer customer = customerService.getCustomerByAccountId(accountId);
-        customerService.verifyCustomer(customer.getId());
 
         status = HttpStatus.OK;
         response = "Success";
@@ -50,7 +45,6 @@ public class CustomerController {
     @RequestMapping(value = "/customers")
     public ResponseEntity<?> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomers();
-        customerService.verifyCustomer((long) customers.size());
 
         status = HttpStatus.OK;
         response = "Success";
@@ -62,7 +56,6 @@ public class CustomerController {
     // Get Customer By their ID
     @RequestMapping(value = "/customers/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
-        customerService.verifyCustomer(id);
         Customer customer = customerService.getCustomerById(id);
 
         status = HttpStatus.OK;
@@ -91,9 +84,7 @@ public class CustomerController {
     // Update a Customer by their ID
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) {
-        customerService.verifyCustomer(id);
-        customer.setId(id);    
-
+        customer.setId(id);
         customerService.updateCustomer(customer);
 
         status = HttpStatus.OK;
