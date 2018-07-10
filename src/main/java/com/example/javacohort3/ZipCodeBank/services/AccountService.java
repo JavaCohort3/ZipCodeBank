@@ -5,6 +5,7 @@ import com.example.javacohort3.ZipCodeBank.domains.Customer;
 import com.example.javacohort3.ZipCodeBank.exceptions.ResourceNotFoundException;
 import com.example.javacohort3.ZipCodeBank.repositories.AccountRepository;
 import com.example.javacohort3.ZipCodeBank.repositories.CustomerRepository;
+import com.example.javacohort3.ZipCodeBank.util.Burn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -36,30 +37,46 @@ public class AccountService {
     }
 
     public Customer getCustomerById(Long customerId) {
+        verifyCustomerById(customerId);
         return customerRepository.findCustomerById(customerId);
     }
 
     public List<Account> getAllAccounts() {
-        return (ArrayList<Account>) accountRepository.findAll();
+        List<Account> accounts = (List<Account>) accountRepository.findAll();
+        verifyAccountById((long) accounts.size());
+        return accounts;
     }
 
     public List<Account> getAccountsByCustomerId(Long customerId){
+        verifyCustomerById(customerId);
         ArrayList<Account> accounts = (ArrayList<Account>) accountRepository.findAll();
         verifyAccountById((long) accounts.size());
         accounts.removeIf(a -> !a.getCustomer().getId().equals(customerId));
-
+        verifyCustomerById((long) accounts.size());
         return accounts;
     }
 
     public Account getAccountById (Long id){
+        verifyAccountById(id);
         return accountRepository.findAccountById(id);
     }
 
     public Account updateAccount(Account account){
+        // verifies account before proceeding
+        verifyAccountById(account.getId());
+
+        // sets old account to variable
+        Account oldAccount = getAccountById(account.getId());
+
+        // casts Burn.updateObjectFields return value to Account
+        account = (Account) Burn.updateObjectFields(account, oldAccount);
+
+        // saves and returns customer
         return accountRepository.save(account);
     }
 
     public void deleteAccountById(Long id){
+        verifyAccountById(id);
         accountRepository.deleteById(id);
     }
 }

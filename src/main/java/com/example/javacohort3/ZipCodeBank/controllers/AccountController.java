@@ -41,7 +41,6 @@ public class AccountController {
     // Get account by its ID
     @RequestMapping("/accounts/{accountId}")
     public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
-        accountService.verifyAccountById(accountId);
         Account account = accountService.getAccountById(accountId);
 
         log.info("[GET] " + account);
@@ -51,7 +50,6 @@ public class AccountController {
     // Get accounts by customer ID
     @RequestMapping("/customers/{customerId}/accounts")
     public ResponseEntity<?> getAllAccountsByCustomerId(@PathVariable Long customerId) {
-        accountService.verifyCustomerById(customerId);
         ArrayList<Account> accounts = (ArrayList<Account>) accountService.getAccountsByCustomerId(customerId);
 
         log.info("[GET] " + customerId);
@@ -61,7 +59,6 @@ public class AccountController {
     // Create account
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
-        accountService.verifyCustomerById(customerId);
         account.setCustomer(accountService.getCustomerById(customerId));
         Account newAccount = accountService.createAccount(account);
 
@@ -80,10 +77,8 @@ public class AccountController {
     // Update Account
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
     public  ResponseEntity<?> updateAccount(@RequestBody Account account, @PathVariable Long accountId){
-        accountService.verifyAccountById(accountId);
         account.setId(accountId);
-        account.setCustomer(accountService.getAccountById(accountId).getCustomer());
-        accountService.updateAccount(account);
+        account = accountService.updateAccount(account);
 
         return new ResponseEntity<>(new ResponseDetails(HttpStatus.OK,"Success",account),HttpStatus.OK);
     }
@@ -91,7 +86,6 @@ public class AccountController {
     // Delete account
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteAccountById(@PathVariable Long accountId){
-        accountService.verifyAccountById(accountId);
         accountService.deleteAccountById(accountId);
 
         log.info("[DELETE] " + accountId);
