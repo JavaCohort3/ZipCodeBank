@@ -57,7 +57,6 @@ public class WithdrawalController {
 
     @RequestMapping(value = "/withdrawals/{id}",method = RequestMethod.PUT)
     public ResponseEntity<?> updateWithdrawal(@PathVariable Long id, @RequestBody Withdrawal withdrawal){
-        withdrawalService.verifyWithdrawalById(id);
         withdrawal.setId(id);
         withdrawalService.updateWithdrawal(withdrawal);
 
