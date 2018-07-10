@@ -60,7 +60,6 @@ public class AccountController {
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccountFromCustomerId(@RequestBody Account account, @PathVariable Long customerId){
         account.setCustomer(accountService.getCustomerById(customerId));
-        account.setType(account.getType());
         Account newAccount = accountService.createAccount(account);
 
         HttpHeaders httpHeaders = new HttpHeaders();
