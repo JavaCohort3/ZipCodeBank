@@ -40,6 +40,7 @@ public class WithdrawalController {
         Withdrawal withdrawal = withdrawalService.getWithdrawalById(id);
 
         status = HttpStatus.OK;
+
         log.info("\n[GET]: " + withdrawal);
        return new ResponseEntity<>(new ResponseDetails(status, "Success", withdrawal), status);
     }
@@ -57,7 +58,6 @@ public class WithdrawalController {
 
     @RequestMapping(value = "/withdrawals/{id}",method = RequestMethod.PUT)
     public ResponseEntity<?> updateWithdrawal(@PathVariable Long id, @RequestBody Withdrawal withdrawal){
-        withdrawalService.verifyWithdrawalById(id);
         withdrawal.setId(id);
         withdrawalService.updateWithdrawal(withdrawal);
 
